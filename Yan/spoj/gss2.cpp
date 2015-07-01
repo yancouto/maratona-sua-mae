@@ -1,15 +1,24 @@
+// WROOOOOOOOOOOONG
 #include <cstdio>
+#include <cmath>
 #include <algorithm>
-#include <unordered_set>
+#include <unordered_map>
 using namespace std;
 
-int a[100003];
-unordered_multiset<int> seen;
+const int MAX = 100009;
+int n, q, sq_n;
+int a[MAX];
+int ql[MAX], qr[MAX];
+int qs[MAX];
 
-/////////////////////////////////////////////////////////////////////
-
+inline int bl(int i) { return i / sq_n; }
+inline int mx_bl(int b) { return (b + 1) * sq_n - 1; }
+bool cmp_r(int i, int j) { return qr[i] < qr[j]; }
+bool cmp_block(int i, int j) { return bl(ql[i]) < bl(ql[j]); }
+// ---------------------------------
 inline int l(int i) { return i << 1; }
 inline int r(int i) { return l(i) + 1; }
+int it[MAX], tempo; int it2[MAX];
 
 typedef pair<int, int> inter;
 #define sum first
@@ -17,7 +26,17 @@ typedef pair<int, int> inter;
 
 struct T {
 	inter all, from_beg, to_end, all_true;
-} tree[400009];
+} treel[4 * MAX], treer[4 * MAX], treeaux[4 * MAX], treeaux2[2][4 * MAX];
+T *tt, *tbak, *tl, *tr, *tbakr, *tbakl;
+struct {
+	inline T& operator [] (int i) {
+		if(tbak && it2[i] < tempo) {
+			it2[i] = tempo;
+			tt[i] = tbak[i];
+		}
+		return tt[i];
+	}
+} tree;
 
 inter operator +(const inter &a, const inter &b) {
 	return make_pair(a.sum + b.sum, a.sz + b.sz);
@@ -59,9 +78,8 @@ void join(T &t, T &s1, T &s2, int from, int mid, int to) {
 T& build_tree(int ind, int from, int to) {
 	T &t = tree[ind];
 	if(from == to) {
-		t.all.sum = 0;
 		t.all.sz = t.from_beg.sz = t.to_end.sz = t.all_true.sz = 1;
-		t.from_beg.sum = t.to_end.sum = t.all_true.sum = t.all.sum;
+		t.from_beg.sum = t.to_end.sum = t.all_true.sum = t.all.sum = 0;
 		return t;
 	}
 	int mid = (from + to) / 2;
@@ -87,7 +105,6 @@ T query_tree(int ind, int from, int to, int ql, int qr) {
 }
 
 T& update_tree(int ind, int from, int to, int i, int y) {
-	// if(ind == 1) printf("updating %d to %d\n", i, y);
 	T &t = tree[ind];
 	if(to < i || from > i) return t;
 	if(from == to) {
@@ -100,79 +117,117 @@ T& update_tree(int ind, int from, int to, int i, int y) {
 	join(t, s1, s2, from, mid, to);
 	return t;
 }
+// ---------------------------------
 
 
-/////////////////////////////////////////////////////////////////////
-int ll, rr;
-int n;
-void right_l() {
-	// printf("l(%d)++\n", ll);
-	if(ll > rr) { ll++; return; }
-	if(a[ll] && seen.count(a[ll]) == 1) update_tree(1, 0, n, ll, 0);
-	seen.erase(seen.find(a[ll++]));
+int *seen, *seen_bak;
+int Sseen[3][MAX];
+inline int& get(int i) { 
+	if(seen_bak && it[i] < tempo) { it[i] = tempo; seen[i] = seen_bak[i]; }
+	return seen[i];
 }
 
-void left_l() {
-	// printf("l(%d)--\n", ll);
-	ll--;
-	if(ll > rr) return;
-	if(a[ll] && seen.count(a[ll]) == 0) update_tree(1, 0, n, ll, a[ll]);
-	seen.insert(a[ll]);
-}
-
-void right_r() {
-	// printf("r(%d)++\n", rr);
-	rr++;
-	if(rr < ll) return;
-	if(a[rr] && seen.count(a[rr]) == 0) update_tree(1, 0, n, rr, a[rr]);
-	seen.insert(a[rr]);
-}
-
-void left_r() {
-	// printf("r(%d)--\n", rr);
-	if(rr < ll) { rr--; return; }
-	if(a[rr] && seen.count(a[ll]) == 1) update_tree(1, 0, n, rr, 0);
-	seen.erase(seen.find(a[rr--]));
-}
-
-
-int ql[100004];
-int qr[100004];
-int qs[100004];
-int sq_n;
-bool cmp_r(const int &i, const int &j) {
-	return qr[i] < qr[j];
-}
-bool cmp_block(const int &i, const int &j) {
-	return ((int) (ql[i] / sq_n)) < ((int) (ql[j] / sq_n));
-}
+int mp[MAX];
+struct sol {
+	int left, right, best, all;
+	sol() : left(0), right(0), best(0), all(0) {}
+	void add_right(int i) {
+		printf("before add_right(%d)\nleft = %d\nright"
+			"= %d\nbest = %d\nall = %d\n\n", i, left, right, best, all);
+		tt = tr; tbak = tbakr;  int x = mp[a[i]];
+		if(get(a[i]) != -1)
+			update_tree(1, 0, n - 1, seen[a[i]], 0);
+		else {
+			all += x;
+			tt = tl; tbak = tbakl;
+			update_tree(1, 0, n - 1, i, x);
+		}
+		tt = tr; tbak = tbakr;
+		seen[a[i]] = i;
+		printf("x %d i %d\n", x, i);
+		update_tree(1, 0, n - 1, i, x);
+		right = query_tree(1, 0, n - 1, 0, n - 1).to_end.sum;
+		for(int k = 0; k < n; k++) printf("%d ", query_tree(1, 0, n - 1, k, k).all_true.sum);
+		printf("\nright %d\n", right);
+		if(right < 0)
+			right = 0;
+		if(all > left) left = all;
+		best = max(max(best, left), right);
+		printf("after add_right(%d)\nleft = %d\nright"
+			"= %d\nbest = %d\nall = %d\n\n", i, left, right, best, all);
+	}
+	void add_left(int i) {
+		tt = tl; tbak = tbakl;  int x = mp[a[i]];
+		if(get(a[i]) != -1)
+			update_tree(1, 0, n - 1, seen[a[i]], 0);
+		else {
+			all += x;
+			tt = tr; tbak = tbakr;
+			update_tree(1, 0, n - 1, i, x);
+		}
+		tt = tl; tbak = tbakl;
+		seen[a[i]] = i;
+		update_tree(1, 0, n - 1, i, x);
+		left = query_tree(1, 0, n - 1, 0, n - 1).from_beg.sum;
+		for(int k = 0; k < n; k++) printf("%d ", query_tree(1, 0, n - 1, k, k).all_true.sum);
+		printf("\nleft %d\n", left);
+		if(left < 0)
+			left = 0;
+		if(all > right) right = all;
+		best = max(max(best, right), left);
+		printf("after add_left(%d)\nleft = %d\nright"
+			"= %d\nbest = %d\nall = %d\n\n", i, left, right, best, all);
+	}
+};
 
 int main() {
-	int q, x, y, i, j;
-	empty.all = empty.from_beg = empty.to_end = empty.all_true = make_pair(0, 0);
-	scanf("%d", &n);
-	for(i = 0; i < n; i++) 
+	int i, j, k;
+	scanf("%d", &n); sq_n = ceil(sqrt(n));
+	unordered_map<int, int> in; j = 0;
+	for(i = 0; i < n; i++) {
 		scanf("%d", &a[i]);
-	for(sq_n = 1; sq_n * sq_n <= n; sq_n++);
-	sq_n--;
+		Sseen[0][i] = -1;
+		if(in.count(a[i])) a[i] = in[a[i]];
+		else { mp[j] = a[i]; a[i] = in[a[i]] = j++; }
+	}
+	tt = treeaux;
+	build_tree(1, 0, n - 1);
+
 	scanf("%d", &q);
 	for(i = 0; i < q; i++) {
-		qs[i] = i;
 		scanf("%d %d", &ql[i], &qr[i]);
-		ql[i]--; qr[i]--;
+		qs[i] = i; ql[i]--; qr[i]--;
 	}
 	sort(qs, qs + q, cmp_r);
 	stable_sort(qs, qs + q, cmp_block);
-	ll = 0;
-	rr = -1;
-	build_tree(1, 0, n);
-	for(i = 0; i < q; i++) {
-		while(ll < ql[qs[i]]) right_l();
-		while(ll > ql[qs[i]]) left_l();
-		while(rr < qr[qs[i]]) right_r();
-		while(rr > qr[qs[i]]) left_r();
-		ql[qs[i]] = query_tree(1, 0, n, 0, n).all.sum; //resposta
-		// printf("got (%d) as %d\n", qs[i], ql[qs[i]]);
+	for(i = j = 0; j < q; i++) {
+		seen = Sseen[2]; seen_bak = Sseen[0];
+		for(; j < q && bl(qr[qs[j]]) == i; j++) {
+			printf("raça (%d, %d)\n", ql[qs[j]] + 1, qr[qs[j]] + 1);
+			sol resp; tempo++;
+			tr = treer; tl = treel; tbakr = tbakl = treeaux;
+			for(k = ql[qs[j]]; k <= qr[qs[j]]; k++)
+				resp.add_right(k);
+			ql[qs[j]] = resp.best;
+		}
+		for(k = 0; k < n; k++) Sseen[1][k] = -1;
+		tt = treeaux2[0];
+		build_tree(1, 0, n - 1);
+		tt = treeaux2[1];
+		build_tree(1, 0, n - 1);
+		int r = mx_bl(i); sol resp;
+		for(; j < q && bl(ql[qs[j]]) == i; j++) {
+			printf("nice (%d, %d)\n", ql[qs[j]] + 1, qr[qs[j]] + 1);
+			seen = Sseen[1]; seen_bak = NULL;
+			tl = treeaux2[0]; tr = treeaux2[1]; tbak = tbakl = tbakr = NULL;
+			while(r < qr[qs[j]]) resp.add_right(++r); 
+			tempo++;
+			seen = Sseen[2]; seen_bak = Sseen[1];
+			sol resp2 = resp;
+			tl = treel; tr = treer; tbakl = treeaux2[0]; tbakr = treeaux2[1];
+			for(k = mx_bl(i); k >= ql[qs[j]]; k--) resp2.add_left(k);
+			ql[qs[j]] = resp2.best;
+		}
 	}
 	for(i = 0; i < q; i++)
 		printf("%d\n", ql[i]);
