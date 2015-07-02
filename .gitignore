@@ -1,3 +1,6 @@
+# Mac ugly stuff
+*.DS_Store
+
 # I/O
 *in
 *out
