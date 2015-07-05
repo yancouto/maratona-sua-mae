@@ -1,4 +1,3 @@
-// WA???
 #include <cstdio> 
 #include <algorithm>
 using namespace std;
@@ -23,7 +22,7 @@ int main() {
 	while(t--) {
 		int l, r, i, j, k = 0;
 		scanf("%d %d", &l, &r);
-		int maxh = 0;
+		int maxh = 0; int big = 0;
 		for(i = l; i <= r; i++) {
 			int sz = 0, left = 0, right = 0;
 			bool stp_left = false;
@@ -31,6 +30,7 @@ int main() {
 				sz++;
 				right++;
 				if(!(i & j)) {
+					big = max(big, right - 1);
 					right = 0;
 					stp_left = true;
 				}
@@ -50,7 +50,7 @@ int main() {
 		partial_sort(rr, rr + 2, rr + k, cmp_r);
 		if(ll[0].i != rr[0].i) maxh += ll[0].l + rr[0].r;
 		else maxh += max(ll[0].l + rr[1].r, rr[0].r + ll[1].l);
-		printf("%d\n", maxh);
+		printf("%d\n", max(big, maxh));
 	}
 	return 0;
 }
