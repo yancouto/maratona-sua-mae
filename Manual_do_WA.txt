@@ -1,0 +1,9 @@
+Manual do WA:
+muitas queries
+	- dividir qualquer coisa em sqrt (q ou n)
+ull e mods
+	- usar mod em TUDO
+	- inteiros intermediários podem estourar (n * n) por exemplo.
+	- int * ull -> int
+outros
+	- border cases (0, 1, estado inicial, etc)
