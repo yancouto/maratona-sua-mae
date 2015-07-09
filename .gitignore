@@ -1,12 +1,21 @@
 # Mac ugly stuff
 *.DS_Store
 
+# Stuff
+**/*~
+**/.nfs*
+
 # I/O
-*in
-*out
-*err
-*test
-*sol
+**/in*
+!**/in*.*
+**/out*
+!**/out*.*
+**/err*
+!**/err*.*
+**/test*
+!**/test*.*
+**/sol*
+!**/sol*.*
 
 # Compiled Object files
 *.slo
