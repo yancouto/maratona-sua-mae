@@ -1,0 +1,9 @@
+Manual das Ideias
+muitas queries
+	- dividir qualquer coisa em sqrt (q ou n)
+pd
+	- fazer bottom up (mais eficiente) (dependendo da pd pode economizar espaço)
+	- pd em digitos?
+	- inverter retorno e argumento? (se for possivel e diminuir complexidade)
+	- bottom up + acumulada da pd para reduzir complexidade
+
