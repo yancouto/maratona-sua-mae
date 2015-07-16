@@ -18,3 +18,19 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 #endif
 const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
+
+int n, k;
+
+int main() {
+	int i, x, y;
+	scanf("%d %d", &n, &k);
+	int tot = 0;
+	for(i = 0; i < n; i++) {
+		scanf("%d %d", &x, &y);
+		tot += y - x + 1;
+	}
+	tot %= k;
+	if(tot == 0) puts("0");
+	else printf("%d\n", k - tot);
+	return 0;
+}
