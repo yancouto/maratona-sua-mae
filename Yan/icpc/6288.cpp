@@ -1,4 +1,3 @@
-// INCOMPLETO
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -29,9 +28,8 @@ inline char at(pos p) { return g[p.x][p.y]; }
 inline pos trans(pos p, int d) { return {p.x + ds[d][0], p.y + ds[d][1]}; }
 int side;
 void hand(int i, pos p, int look) {
-	printf("i %d (%d, %d) looking at %d (%d, %d)\n", i, p.x, p.y, look, ds[look][0], ds[look][1]);
 	seen[i][p.x][p.y] = 1;
-	if(p.x == h - 1 && p.y == w - 1) return;
+	if(p.x == h && p.y == w) return;
 	int r = (look + side + 4) % 4;
 	if(at(trans(p, r)) == '.') hand(i, trans(p, r), r);
 	else if(at(trans(p, look)) == '.') hand(i, trans(p, look), look);
@@ -40,6 +38,7 @@ void hand(int i, pos p, int look) {
 
 void acc() {
 	int i, j, k;
+
 	for(i = 0; i <= h + 1; i++)
 		for(j = 1; j <= w + 1; j++)
 			for(k = 0; k < 3; k++)
@@ -47,7 +46,7 @@ void acc() {
 	for(i = 1; i <= h + 1; i++)
 		for(j = 0; j <= w + 1; j++)
 			for(k = 0; k < 3; k++)
-				seen[k][i][j] = seen[k][i - 1][j];
+				seen[k][i][j] += seen[k][i - 1][j];
 }
 
 int get(int k, int x1, int y1, int x2, int y2) {
@@ -69,18 +68,20 @@ bool poss2(int i, int j, int m) {
 
 int main() {
 	int i, j;
-	while(scanf("%d %d", &h, &w) != EOF) {
-		for(i = 0; i < w; i++)
-			g[0][i] = g[h + 1][i] = '#';
-		for(i = 0; i < h; i++) {
+	while(scanf("%d %d", &w, &h) != EOF) {
+		for(i = 1; i <= h; i++) {
+			for(j = 1; j <= w; j++)
+				scanf(" %c", &g[i][j]);
 			g[i][0] = g[i][w + 1] = '#';
-			scanf(" %s", g[i + 1] + 1);
 		}
-		for(i = 0; i <= h + 1; i++)
+		for(i = 0; i <= w + 1; i++)
+			g[0][i] = g[h + 1][i] = '#';
+		for(i = 0; i <= h + 1; i++) {
 			for(j = 0; j <= w + 1; j++) {
 				seen[0][i][j] = (g[i][j] == '#');
 				seen[1][i][j] = seen[2][i][j] = 0;
 			}
+		}
 		seen[0][1][1] = seen[0][h][w] = 1;
 		side = 1; //direita
 		hand(1, {1, 1}, 1);
@@ -103,6 +104,6 @@ int main() {
 				}
 			}
 		if(mir == INT_MAX) puts("Impossible");
-		else printf("%d %d %d\n", mir, mi.x, mi.y);
+		else printf("%d %d %d\n", mir, mi.y, mi.x);
 	}
 }
