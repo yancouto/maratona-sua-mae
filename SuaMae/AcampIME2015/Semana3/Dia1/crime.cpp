@@ -1,65 +1,54 @@
 #include <bits/stdc++.h>
-
 using namespace std;
+#define fst first
+#define snd second
+typedef pair<int, int> pii;
+typedef unsigned long long ull;
+typedef long long ll;
+typedef long double ld;
+#define pb push_back
+#define for_tests(t, tt) int t; scanf("%d", &t); for(int tt = 1; tt <= t; tt++)
+inline int count_1s(int x) { return __builtin_popcount(x); }
+inline int count_1s(ull x) { return __builtin_popcountll(x); }
+template<typename T> inline T abs(T t) { return t < 0? -t : t; }
+#ifndef ONLINE_JUDGE
+#	define debug(args...) fprintf(stderr, "%3d| ", __LINE__); fprintf(stderr, args); fprintf(stderr, "\n");
+#else
+#	define debug(args...)
+#endif
+const ull modn = 1000000007;
+inline ull mod(ull x) { return x % modn; }
+int p, k, n;
 
-const int N = 10007;
-
-pair<int, int> chn[N];
-pair<int, int> acc[N];
-int ini, fim, mini, maxi, last, pss, a,b;
-int ss, n;
-
-int main () {
-	while (scanf("%d %d", &ini, &fim) != EOF) {
-		scanf("%d", &n);
-
-		for (int i = 0; i < n; i++) {
+int main() {
+	int i, j, t, a, b;
+	for(t = 0; t < 10; t++) {
+		map<int, int> mp;
+		if(scanf("%d %d %d", &p, &k, &n) == EOF) return 0;
+		p = 2*p;
+		k = 2*k + 1;
+		mp[p] = 0;
+		mp[k] = 0;
+		for(i = 0; i < n; i++) {
 			scanf("%d %d", &a, &b);
-			chn[2*i].first = a;
-			chn[2*i].second = 1;
-			chn[2*i+1].first = b+1;
-			chn[2*i+1].second = -1;
+			mp[2*a]++;
+			mp[2*b+1]--;
 		}
-
-		sort(chn, chn+2*n);
-
-		ss = 0;
-		acc[0].first = chn[0].first;
-		acc[0].second = chn[0].second;
-		for (int i = 1; i < 2*n; i++) {
-			if (acc[ss].first == chn[i].first)
-				acc[ss].second += chn[i].second;
-			else {
-				acc[++ss].first = chn[i].first;
-				acc[ss].second = chn[i].second;
+		int last = -1, ppl = 0;
+		int mxppl = 0, mnppl = INT_MAX;
+		bool onseq = false;
+		for(pii pp : mp) {
+			if(onseq) {
+				mxppl = max(ppl, mxppl);
+				mnppl = min(ppl, mnppl);
 			}
+			ppl += pp.snd;
+			last = pp.fst;
+			if(last == p) onseq = true;
+			if(last == k) onseq = false;
 		}
-		ss++;
-
-		pss = acc[0].second;
-		last = acc[0].first;
-
-		maxi = 0;
-		mini = INT_MAX;
-
-		for (int i = 1; i < ss; i++) {
-			if ((last <= ini && ini < acc[i].first) || (last <= fim && fim <= acc[i].first) || (last <= fim && ini <= acc[i].first)) {
-				mini = min(mini, pss);
-				maxi = max(maxi, pss);
-			}
-
-			pss += acc[i].second;
-			last = acc[i].first;
-		}
-
-		if (last <= fim) {
-			mini = min(mini, pss);
-			maxi = max(maxi, pss);
-		}
-		
-		if (mini == INT_MAX)
-			printf("0 0\n");
-		else
-			printf("%d %d\n", mini, maxi);
+		if(mnppl == INT_MAX) mnppl = 0;
+		printf("%d %d\n", mnppl, mxppl);
 	}
+	return 0;
 }
