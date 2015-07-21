@@ -8,14 +8,17 @@
 # I/O
 **/in*
 !**/in*.*
+**/*.in
 **/out*
 !**/out*.*
+**/*.out
 **/err*
 !**/err*.*
 **/test*
 !**/test*.*
 **/sol*
 !**/sol*.*
+**/*.sol
 
 # Compiled Object files
 *.slo
