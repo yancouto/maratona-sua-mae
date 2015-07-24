@@ -17,16 +17,36 @@ const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
 int n, t, ts[53], rr[52][209], ll[52][209];
 const int inf = 1000000;
-int memo[52][209];
-int solve(int i, int tim) {
-	if(tim > t) return inf;
-	if(i == n - 1 && tim == t) return 0;
-	int &r = memo[i][tim];
-	if(r != -1) return r;
-	r = solve(i, tim + 1) + 1;
-	if(rr[i][tim]) r = min(r, solve(i + 1, tim + ts[i]));
-	if(ll[i][tim]) r = min(r, solve(i - 1, tim + ts[i - 1]));
-	return r;
+
+struct no {
+	int st, t;
+	int spent;
+	no() {}
+	no(int a, int b, int c) : st(a), t(b), spent(c) {}
+	bool operator < (const no &o) const {
+		bool sm = t < o.t;
+		if(!sm && t == o.t) sm = spent < o.spent;
+		return !sm;
+	}
+};
+
+int seen[52][209], tempo;
+int solve() {
+	priority_queue<no> pq;
+	pq.push(no(0, 0, 0));
+	tempo++;
+	while(!pq.empty()) {
+		no x = pq.top();
+		pq.pop();
+		if(x.t > t) continue;
+		if(x.t == t && x.st == n - 1) return x.spent;
+		if(seen[x.st][x.t] == tempo) continue;
+		seen[x.st][x.t] = tempo;
+		pq.push(no(x.st, x.t + 1, x.spent + 1));
+		if(ll[x.st][x.t]) pq.push(no(x.st - 1, x.t + ts[x.st - 1], x.spent));
+		if(rr[x.st][x.t]) pq.push(no(x.st + 1, x.t + ts[x.st], x.spent));
+	}
+	return -1;
 }
 
 int main() {
@@ -61,10 +81,9 @@ int main() {
 				if(st == n - 1 || st == 0) break;
 			}
 		}
-		memset(memo, -1, sizeof memo);
-		int a = solve(0, 0);
+		int a = solve();
 		printf("Case Number %d: ", ++cn);
-		if(a >= inf) puts("impossible");
+		if(a == -1) puts("impossible");
 		else printf("%d\n", a);
 	}
 }
