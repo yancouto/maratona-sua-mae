@@ -19,16 +19,16 @@ int w[150009];
 
 int d(int, int);
 
-map<pair<int, pii>, int> s;
+int memo[150009][302];
 int c(int v, int i, int j) {
 	 if(j == 0) return 0;
 	 if(i == 1) return d(adj[v][0], j);
-	 if(s.count(make_pair(v, pii(i, j))))
-		 return s[make_pair(v, pii(i, j))];
+	 if(memo[adj[v][i-1]][j] != -1)
+		 return memo[adj[v][i-1]][j];
 	 int best = -1500000000;
 	 for(int kk = 0; kk <= j; kk++)
 		 best = max(best, c(v, i - 1, j - kk) + d(adj[v][i-1], kk));
-	return s[make_pair(v, pii(i, j))] = best;
+	return memo[adj[v][i-1]][j] = best;
 }
 
 int d(int v, int j) {
@@ -38,18 +38,37 @@ int d(int v, int j) {
 	 return c(v, adj[v].size(), j);
 }
 
+/* WRONG
+void dfs(int u, int *best) {
+	 int bs[303], bs2[303];
+	 for(int i = 0; i <= k; i++) {  bs[i] = 0; bs2[i] = best[i]; }
+	 if(adj[u].empty()) {
+		  best[1] = w[u];
+		  return;
+	 }
+	 for(int v : adj[u]) {
+		  dfs(v, bs);
+	 }
+	 best[0] = 0;
+	 bs2[1] = max(w[u], bs[1]);
+	 for(int i = 1; i <= k; i++) {
+		 for(int kk = 0; kk <= i; kk++)
+			 best[i] = max(bs2[i], bs2[i-kk] + bs[kk]);
+	 }
+}*/
+
 int main() {
 	int i, j, x;
-	int be[303];
 	while(scanf("%d %d", &n, &k) != EOF) {
-		s.clear();
 		for(i = 0; i < n; i++) adj[i].clear();
 		for(i = 0; i < n; i++) {
 			scanf("%d %d", &x, &w[i]);
 			if(x == 0) { root = i; continue; }
 			adj[--x].pb(i);
 		}
-		for(i = 0; i <= k; i++) be[i] = 0;
+		int bs[303];
+		memset(memo, -1, sizeof memo);
+		//dfs(root, bs);
 		int r = d(root, k);
 		if(r < 0) puts("impossible");
 		else printf("%d\n", r);
