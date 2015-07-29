@@ -16,17 +16,12 @@ template<typename num> struct point {
 	num distSqr(point o) const { return (*this - o) * (*this - o); }
 	bool operator < (point o) const { return x < o.x || (x == o.x && y < o.y); }
 };
-template<typename num> struct seg {
-	point<num> a, b;
-	seg() {}
-	seg(point<num> s, point<num> e) : a(s), b(e) {}
-	double distSqr(point<num> c) {
-		if((b - a) * (c - b) > 0) return b.distSqr(c);
-		if((a - b) * (c - a) > 0) return a.distSqr(c);
-		double d = (b - a) ^ (c - a);
-		return d * d / ((b - a) * (b - a));
-	}
-};
+template<typename num> double distSegSqr(point<num> a, point<num> b, point<num> c) {
+	if((b - a) * (c - b) > 0) return b.distSqr(c);
+	if((a - b) * (c - a) > 0) return a.distSqr(c);
+	double d = (b - a) ^ (c - a);
+	return d * d / ((b - a) * (b - a));
+}
 
 template <typename num> struct line {
 	num a, b, c;
@@ -42,7 +37,5 @@ template <typename num> struct line {
 };
 typedef point<int> pointi;
 typedef point<double> pointd;
-typedef seg<int> segi;
-typedef seg<double> segd;
 typedef line<int> linei;
 typedef line<double> lined;
