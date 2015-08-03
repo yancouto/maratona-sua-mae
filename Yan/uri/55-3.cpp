@@ -1,4 +1,3 @@
-// Arrumar emparelhamento estável
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -25,8 +24,7 @@ bool w_unstable(int u, int v) {
 	if(M[v] == -1) return true;
 	int a = (search_n(adj[v].begin(), adj[v].end(), 1, u) - adj[v].begin());
 	assert(u == adj[v][a]);
-	printf("%d is in pos %d in %d (ag %d)\n", u, a, v, M[v]);
-	if(M[v] < a) return true;
+	if(M[v] > a) return true;
 	return false;
 }
 string inv[500];
@@ -78,10 +76,11 @@ int main() {
 					M[v] = -1;
 				}
 				M[u] = i; M[v] = search_n(adj[v].begin(), adj[v].end(), 1, u) - adj[v].begin();
+				break;
 			}
 		}
 		for(i = 0; i < n; i++) {
-			printf("%s %s(%d)\n", inv[i].c_str(), inv[adj[i][M[i]]].c_str(), M[i]);
+			printf("%s %s\n", inv[i].c_str(), inv[adj[i][M[i]]].c_str());
 		}
 
 	}

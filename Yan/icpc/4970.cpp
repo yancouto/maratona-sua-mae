@@ -1,4 +1,4 @@
-// TLEEEE
+// era TLE virou RE???
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -21,52 +21,7 @@ int n; ull l;
 ull adj[15][15];
 vector<ull> v[1<<14][14][14];
 
-int pos[15];
-
-void create(int bm, int fst, int lst, ull tot) {
-	int used = __builtin_popcount(bm);
-	if(used == (n + 1) / 2) {
-		if(fst <= lst)
-			v[bm][fst][lst].pb(tot);
-		return;
-	}
-	for(int i = n - used - 1; i >= 0; i--) {
-		int j = pos[i];
-		swap(pos[i], pos[n - used - 1]);
-		create(bm | (1 << j), fst, j, tot + adj[lst][j]);
-		swap(pos[i], pos[n - used - 1]);	
-	}
-}
-
-bool create2(int bm, int fst, int lst, ull tot) {
-	int used = __builtin_popcount(bm);
-	if(used == (n/2)) {
-		if(fst > lst) return false;
-		int opp = (((1 << n) - 1) ^ bm);
-		int x, y;
-		for(int i = n - used - 1; i >= 0; i--) {
-			for(int j = i - 1; j >= 0; j--) {
-				x = pos[i];
-				y = pos[j];
-				if(x > y) continue;
-				if(binary_search(v[opp][x][y].begin(), v[opp][x][y].end(), l - tot - adj[fst][x] - adj[lst][y]))
-					return true;
-				if(binary_search(v[opp][x][y].begin(), v[opp][x][y].end(), l - tot - adj[fst][y] - adj[lst][x]))
-					return true;
-			}
-		}
-		return false;
-	}
-	for(int i = n - used - 1; i >= 0; i--) {
-		int j = pos[i];
-		swap(pos[i], pos[n - used - 1]);
-		if(create2(bm | (1 << j), fst, j, tot + adj[lst][j]))
-			return true;
-		swap(pos[i], pos[n - used - 1]);
-	}
-	return false;
-}
-
+int p[20];
 int main() {
 	int i, j, k;
 	while(scanf("%d %llu", &n, &l) != EOF) {
@@ -78,30 +33,51 @@ int main() {
 			else puts("impossible");
 			continue;
 		}
-		for(i = 0; i < n; i++) pos[i] = i;
 		for(i = 0; i < (1 << n); i++)
 			for(j = 0; j < n; j++)
 				for(k = j + 1; k < n; k++)
 					v[i][j][k].clear();
-		for(i = 0; i < n - 1; i++) {
-			swap(pos[i], pos[n - 1]);
-			create(1 << i, i, i, 0);
-			swap(pos[i], pos[n - 1]);
+		for(i = 0; i < (1 << n); i++) {
+			if(__builtin_popcount(i) != (n / 2) + 2) continue;
+			k = 0;
+			for(j = 0; j < n; j++)
+				if((1 << j) & i)
+					p[k++] = j;
+			do {
+				if(p[0] > p[k-1]) continue;
+				ull tot = 0;
+				for(j = 0; j < k - 1; j++)
+					tot += adj[p[j]][p[j + 1]];
+				v[i][p[0]][p[k-1]].pb(tot);
+			} while(next_permutation(p, p + k));
 		}
 		for(i = 0; i < (1 << n); i++)
 			for(j = 0; j < n; j++)
 				for(k = j + 1; k < n; k++) {
+					if(v[i][j][k].size() == 0) continue;
 					sort(v[i][j][k].begin(), v[i][j][k].end());
 					int a = unique(v[i][j][k].begin(), v[i][j][k].end()) - v[i][j][k].begin();
 					v[i][j][k].erase(v[i][j][k].begin() + a, v[i][j][k].end());
 				}
-		for(i = 0; i < n - 1; i++) {
-			swap(pos[i], pos[n - 1]);
-			if(create2(1 << i, i, i, 0))
-				break;
-			swap(pos[i], pos[n - 1]);
+		bool ok = false;
+		for(i = 0; !ok && i < (1 << n); i++) {
+			if(__builtin_popcount(i) != ((n + 1) / 2)) continue;
+			k = 0;
+			for(j = 0; j < n; j++)
+				if((1 << j) & i)
+					p[k++] = j;
+			do {
+				if(p[0] > p[k-1]) continue;
+				ull tot = 0;
+				for(j = 0; j < k - 1; j++)
+					tot += adj[p[j]][p[j+1]];
+				int bm = (1 << n) - 1;
+				bm ^= i; bm |= (1 << p[0]) | (1 << p[k-1]);
+				if(tot > l) continue;
+				if(binary_search(v[bm][p[0]][p[k-1]].begin(), v[bm][p[0]][p[k-1]].end(), l - tot)) ok = true;
+			} while(!ok && next_permutation(p, p + k));
 		}
-		if(i < n - 1) puts("possible");
+		if(ok) puts("possible");
 		else puts("impossible");
 	}
 	return 0;
