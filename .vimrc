@@ -1,4 +1,4 @@
-set ai si noet ts=4 sw=4 sta sm nu
+set ai si noet ts=4 sw=4 sta sm nu rnu
 inoremap {<CR> {<CR>}<Esc>O
 inoremap <NL> <ESC>o
 nnoremap <NL> o
