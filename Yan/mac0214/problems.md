@@ -17,6 +17,7 @@
 	- [1600](../uri/1600.cpp) | [O Gato do Zelador do Armazém](https://www.urionlinejudge.com.br/judge/pt/problems/view/1600)
 	- [1601](../uri/1601.cpp) | [Partição do Rebanho](https://www.urionlinejudge.com.br/judge/pt/problems/view/1601)
 	- [1602](../uri/1602.cpp) | [Hiperprimos](https://www.urionlinejudge.com.br/judge/pt/problems/view/1602)
+	- [1604](../uri/1604.cpp) | [Pair-voting no Conselho de Gueliz](https://www.urionlinejudge.com.br/judge/pt/problems/view/1604)
 	- [1605](../uri/1605.cpp) | [Montando Sua Própria Cáfila](https://www.urionlinejudge.com.br/judge/pt/problems/view/1605)
 	- [1606](../uri/1606.cpp) | [As Dicas de Ali Babá](https://www.urionlinejudge.com.br/judge/pt/problems/view/1606)
 - Codeforces
