@@ -28,11 +28,14 @@ struct no {
 	ll dist;
 	no() {}
 	no(int v, int p, ll d) : u(v), pai(p), dist(d) {}
-	bool operator < (const no &o) const { return dist > o.dist; }
+	bool operator < (const no &o) const {
+		if(dist == o.dist) return u < o.u;
+		return dist > o.dist;
+	}
 };
 vector<int> pai[MAX];
-int seen[MAX], dist[MAX];
-int onpath[MAX];
+int seen[MAX];
+ll dist[MAX];
 
 void solve2() {
 	priority_queue<no> pq;
@@ -40,19 +43,18 @@ void solve2() {
 	while(!pq.empty()) {
 		no x = pq.top();
 		while(!pq.empty() && pq.top().u == x.u) pq.pop();
-		onpath[x.u] = 1;
 		if(x.u == s) return;
-		bool mult = (pq.size() > 0);
+		bool mult = (pq.size() > 0) || pai[x.u].size() > 1;
 		for(int en : pai[x.u]) {
 			ed &e = es[en];
 			e.onp = true;
-			if(mult || pai[x.u].size() > 1) e.uniq = false;
+			if(mult) e.uniq = false;
 			pq.push(no(e.from, 0, x.dist + e.l));
 		}
 	}
 }
 
-int dist2[MAX];
+ll dist2[MAX];
 void solve3() {
 	priority_queue<no> pq;
 	pq.push(no(t, 0, 0));
@@ -63,9 +65,10 @@ void solve3() {
 			continue;
 		}
 		seen[e.u] = 2;
-		dist2[e.u] = e.dist;
+		dist2[e.u] = e.dist + 1;
 		for(int en : adj2[e.u]) {
 			ed &f = es[en];
+			if(seen[f.from] == 2) continue;
 			pq.push(no(f.from, en, e.dist + f.l));
 		}
 	}
@@ -78,16 +81,17 @@ void solve() {
 		no e = pq.top();
 		pq.pop();
 		if(seen[e.u]) {
-			if(dist[e.u] == e.dist) {
+			if(dist[e.u] == e.dist + 1) {
 				pai[e.u].pb(e.pai);
 			}
 			continue;
 		}
 		seen[e.u] = 1;
-		dist[e.u] = e.dist;
+		dist[e.u] = e.dist + 1;
 		pai[e.u].pb(e.pai);
 		for(int en : adj[e.u]) {
 			ed &f = es[en];
+			if(seen[f.to]) continue;
 			pq.push(no(f.to, en, e.dist + f.l));
 		}
 	}
@@ -113,7 +117,8 @@ int main() {
 			else puts("NO");
 		}
 		if(!e.onp) {
-			int need = dist[t] - dist[e.from] - dist2[e.to] - 1;
+			if(dist[e.from] == 0 || dist2[e.to] == 0) { puts("NO"); continue; }
+			int need = (dist[t] - 1) - (dist[e.from] - 1) - (dist2[e.to] - 1) - 1;
 			if(need >= 1) printf("CAN %d\n", e.l - need);
 			else puts("NO");
 		}
