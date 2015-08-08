@@ -20,6 +20,8 @@
 	- [1604](../uri/1604.cpp) | [Pair-voting no Conselho de Gueliz](https://www.urionlinejudge.com.br/judge/pt/problems/view/1604)
 	- [1605](../uri/1605.cpp) | [Montando Sua Própria Cáfila](https://www.urionlinejudge.com.br/judge/pt/problems/view/1605)
 	- [1606](../uri/1606.cpp) | [As Dicas de Ali Babá](https://www.urionlinejudge.com.br/judge/pt/problems/view/1606)
+	- [1852](../uri/1852.cpp) | [Lobos Stark](https://www.urionlinejudge.com.br/judge/pt/problems/view/1852)
+	- [1854](../uri/1854.cpp) | [Inverno em Winterfell](https://www.urionlinejudge.com.br/judge/pt/problems/view/1854)
 - Codeforces
 	- [567E](../codeforces/567E.cpp) | [President and Roads](http://codeforces.com/contest/567/problem/E)
 
