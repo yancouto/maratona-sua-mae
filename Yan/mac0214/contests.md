@@ -7,6 +7,12 @@
 - [Geometric Progression](../codeforces/567C.cpp)
 - [One-Dimensional Battle Ships](../codeforces/567D.cpp)
 
+#### Contest MaratonIME [07-08-15](http://ahmed-aly.com/Standings.jsp?ID=19692) \#2 (5h) ([gafeol](http://ahmed-aly.com/Profile.jsp?Username=gafeol))
+- [Nasty Hacks](../../SuaMae/MaratonIME/07-08-15/nasty.cpp)
+- [Card Trick](../../SuaMae/MaratonIME/07-08-15/card.cpp)
+- [Random Walking](../../SuaMae/MaratonIME/07-08-15/random.cpp)
+- [Honeycomb Walk](../../SuaMae/MaratonIME/07-08-15/walk2.cpp)
+
 
 ## Semana 0 (01 - 02 Agosto)
 #### Contest URI ["Westeros"](https://www.urionlinejudge.com.br/judge/pt/rankings/contest/55) \#4 (5h)

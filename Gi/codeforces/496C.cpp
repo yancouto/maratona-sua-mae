@@ -14,7 +14,7 @@ const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
 
 int n, m;
-int seen[105], tie[105];
+int seen[105];
 char mat[105][105];
 
 int main(){
@@ -36,6 +36,9 @@ int main(){
 					//					printf("Col %d\n", j);
 					col = min(col, j);
 				}
+				if(seen[j]) continue;
+				if(mat[i][j] < mat[i-1][j])
+					col = min(col, j);
 				else if(mat[i][j] > mat[i-1][j])
 					break;
 			}
@@ -48,4 +51,3 @@ int main(){
 	printf("%d\n", took);
 	return 0;
 }
-
