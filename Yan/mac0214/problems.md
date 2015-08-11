@@ -24,6 +24,8 @@
 	- [1854](../uri/1854.cpp) | [Inverno em Winterfell](https://www.urionlinejudge.com.br/judge/pt/problems/view/1854)
 - Codeforces
 	- [567E](../codeforces/567E.cpp) | [President and Roads](http://codeforces.com/contest/567/problem/E)
+- POJ
+	- [3029](../pku/3029.cpp) | [Tour Guide](http://poj.org/problem?id=3029)
 
 
 ## Semana 0 (01 - 02 Agosto)
