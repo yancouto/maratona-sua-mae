@@ -17,8 +17,7 @@ int n;
 int p2[MAX];
 int t[MAX], h[MAX][25];
 inline int mx_h(int s, int e) {
-	int sz = p2[e - s + 1];
-	//printf("(%d, %d) sz %d\n", s, e, (1 << sz));
+	int sz = 31 - __builtin_clz(e - s + 1);
 	return max(h[s][sz], h[e - (1 << sz) + 1][sz]);
 }
 
@@ -102,31 +101,19 @@ void set_t(int i, int from, int to, int ql, int qr, int val) {
 
 map<int, int> ct;
 map<int, int> oc;
-void deb() {
-	return;
-	for(auto &it : ct)
-		printf("%d -> %d\n", it.fst, it.snd);
-	puts("---------------");
-	for(auto &it : oc)
-		printf("%d -> %d\n", it.fst, it.snd);
 
-}
 void add(int i) {
 	ct[oc[i]]--;
 	ct[++oc[i]]++;
 }
+
 void rem(int i) {
-	deb();
 	ct[oc[i]]--; if(ct[oc[i]] == 0) ct.erase(oc[i]);
 	ct[--oc[i]]++;
 }
 
 int main() {
 	int i, j = -1;
-	for(i = 1; i < MAX; i++) {
-		if(!(i & (i - 1))) j++;
-		p2[i] = j;
-	}
 	for_tests(tn, tc) {
 		ct.clear(); oc.clear();
 		scanf("%d", &n);
@@ -147,14 +134,12 @@ int main() {
 				if(it->fst > 1) rem(t[qr--]);
 				else break;
 			}
-			//printf("%d -> %d valid\n", i, qr);
 			int l1 = i, r1 = qr;
 			while(l1 < r1) {
 				int m = (l1 + r1 + 1) / 2;
 				if(mx_h(i, m) == h[i][0]) l1 = m;
 				else r1 = m - 1;
 			}
-			//printf("maxmax %d -> %d\n", i, l1);
 			set_t(1, 0, n - 1, i, l1, h[i][0]); 
 			pp p = query_tree(1, 0, n - 1, i, qr);
 			if(i > 0) set_p(1, 0, n - 1, i - 1, p.t.p + p.t.h);

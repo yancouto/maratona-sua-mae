@@ -1,5 +1,14 @@
 # Relatório de MAC0214 - Problemas
 
+## Semana 2 (10 - 16 Agosto)
+- Codeforces
+	- [569A](../codeforces/569A.cpp) | [Music](http://codeforces.com/contest/569/problem/A)
+- Live Archive
+	- [3871](../icpc/3871.cpp) | [Save the Trees](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3871)
+- SPOJ
+	- [hallow](../spoj/hallow.cpp) | [Halloween treats](http://www.spoj.com/problems/HALLOW/)
+
+
 ## Semana 1 (03 - 09 Agosto)
 - Live Archive
 	- [4637](../icpc/4637.cpp) | [Exponential Towers](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4637)
