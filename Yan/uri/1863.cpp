@@ -1,4 +1,4 @@
-// arrumar
+// WA?
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -17,6 +17,7 @@ const int MAX = 50009;
 const int M = 802;
 int x[MAX], y[MAX], deg[MAX], n, m;
 vector<int> adj[MAX];
+int son[MAX];
 bool d;
 inline int l(int i) { return i << 1; }
 inline int r(int i) { return (i << 1) + 1; }
@@ -46,26 +47,55 @@ void set_y(int x, int i, int y1, int y2, int y3, int val) {
 	tree[x][i] = max(tree[x][l(i)], tree[x][r(i)]);
 }
 void set_t(int i, int x1, int y1, int x2, int y2, int x3, int y3, int val) {
+	if(d) printf("here (%d, %d)\n", x1, x2);
 	set_y(i, 1, y1, y2, y3, val);
-	if(x1 == y1) return;
+	if(x1 == x2) return;
 	int mx = (x1 + x2) / 2;
 	if(x3 <= mx) set_t(l(i), x1, y1, mx, y2, x3, y3, val);
 	else set_t(r(i), mx + 1, y1, x2, y2, x3, y3, val);
 }
 
+vector<int> cls[MAX]; int cln;
 int mx;
 void solve(int i) {
 	int a = query_t(1, 0, 0, M, M, x[i] + 1, y[i] + 1, M, M) + 1;
-	printf("%d--- %d\n", i, a);
 	mx = max(mx, a);
-	int g = query_t(1, 0, 0, M, M, x[i], y[i], x[i], y[i]);
-	d = 1;
-	if(a > g) set_t(1, 0, 0, M, M, x[i], y[i], a);
-	printf("a %d\n", query_t(1, 0, 0, M, M, x[i], y[i], x[i], y[i]));
-	d = 0;
+	set_t(1, 0, 0, M, M, x[i], y[i], a);
 	for(int v : adj[i])
 		solve(v);
-	if(a > g) set_t(1, 0, 0, M, M, x[i], y[i], g);
+	set_t(1, 0, 0, M, M, x[i], y[i], 0);
+}
+int seen[MAX];
+void solve_cls(int c) {
+	for(int i = cls[c].size() - 1; i >= 0; i--) {
+		int p = cls[c][i]; seen[p] = 1;
+		int a = query_t(1, 0, 0, M, M, x[p] + 1, y[p] + 1, M, M) + 1;
+		mx = max(mx, a);
+		set_t(1, 0, 0, M, M, x[p], y[p], a);
+	}
+	for(int i = 0; i < cls[c].size(); i++)
+		for(int v : adj[cls[c][i]])
+			if(!seen[v])
+				solve(v);
+	for(int i = 0; i < cls[c].size(); i++)
+		set_t(1, 0, 0, M, M, x[cls[c][i]], y[cls[c][i]], 0);
+}
+
+int S[MAX], sz[MAX];
+int find(int i) {
+	if(S[S[i]] != S[i]) S[i] = find(S[i]);
+	return S[i];
+}
+void join(int a, int b) {
+	a = find(a); b = find(b);
+	if(a == b) return;
+	if(sz[a] < sz[b]) swap(a, b);
+	sz[a] += sz[b];
+	S[b] = a;
+}
+bool cmp(int a, int b) {
+	//printf("access %d %d\n", a, b);
+	return (x[a] + y[a]) < (x[b] + y[b]);
 }
 
 int main() {
@@ -73,17 +103,31 @@ int main() {
 	scanf("%d %d", &n, &m);
 	for(i = 0; i < n; i++) {
 		scanf("%d %d", &x[i], &y[i]);
+		S[i] = i; sz[i] = 1;
 		x[i] += 401; y[i] += 401;
 	}
 	for(i = 0; i < m; i++) {
-		scanf("%d %d", &a, &b);
+		scanf("%d %d", &a, &b); a--; b--;
+		if(find(a) == find(b)) {
+			int s = b;
+			while(s != a) { cls[cln].pb(s); s = son[s]; }
+			cls[cln].pb(a);
+			//for(int v : cls[cln]) printf("%d ", v); putchar('\n');
+			sort(cls[cln].begin(), cls[cln].end(), cmp);
+			//for(int v : cls[cln]) printf("%d ", v); putchar('\n');
+			cln++;
+		}
+		join(a, b);
 		adj[b].pb(a);
+		son[a] = b;
 		deg[a]++;
 	}
 	mx = 0;
 	for(i = 0; i < n; i++)
 		if(!deg[i])
 			solve(i);
+	for(i = 0; i < cln; i++)
+		solve_cls(i);
 	printf("%d\n", mx);
 	return 0;
 }

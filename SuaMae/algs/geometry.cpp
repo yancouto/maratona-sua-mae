@@ -27,8 +27,9 @@ template <typename num> struct line {
 	num a, b, c;
 	line() {}
 	line(num aa, num bb, num cc) : a(aa), b(bb), c(cc) {}
-	line(point<num> s, point<num> e) : a(e.y - s.y), b(e.x - s.x), c(a*s.x + b*s.y) {}
+	line(point<num> s, point<num> e) : a(e.y - s.y), b(s.x - e.x), c(a*s.x + b*s.y) {}
 	line pass(point<num> p) { return line(a, b, a*p.x + b*p.y); }
+	bool parallel(const line &o) const { return a * o.b - o.a * b == 0; }
 	point<double> inter(line o) {
 		double d = a * o.b - o.a * b;
 		if(d == 0) return point<double>(0, 0); //fudeu

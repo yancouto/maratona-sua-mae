@@ -16,6 +16,7 @@ template<typename num> struct point {
 	num x, y;
 	point() {}
 	point(num a, num b) : x(a), y(b) {}
+	template<typename num2> point(point<num2> p) : x(p.x), y(p.y) {}
 	point operator + (point o) const { return point(x + o.x, y + o.y); }
 	point operator - (point o) const { return point(x - o.x, y - o.y); }
 	num operator * (point o) const { return x * o.x + y * o.y; }
@@ -27,7 +28,7 @@ template<typename num> struct point {
 		return point<double>(x*cs - y*sn, x*sn + y*cs);
 	}
 	num distSqr(point o) const { return (*this - o) * (*this - o); }
-	bool operator < (point o) const { return (x + y) < (o.x + o.y); }
+	bool operator < (point o) const { return ((x+y) == (o.x+o.y) &&  x < o.x)|| (x + y) < (o.x + o.y); }
 };
 template<typename num> double distSegSqr(point<num> a, point<num> b, point<num> c) {
 	if((b - a) * (c - b) > 0) return b.distSqr(c);
@@ -40,7 +41,7 @@ template <typename num> struct line {
 	num a, b, c;
 	line() {}
 	line(num aa, num bb, num cc) : a(aa), b(bb), c(cc) {}
-	line(point<num> s, point<num> e) : a(e.y - s.y), b(e.x - s.x), c(a*s.x + b*s.y) {}
+	line(point<num> s, point<num> e) : a(e.y - s.y), b(s.x - e.x), c(a*s.x + b*s.y) {}
 	line pass(point<num> p) { return line(a, b, a*p.x + b*p.y); }
 	bool parallel(const line &o) const { return (a * o.b - o.a * b) == 0; }
 	point<double> inter(line o) {
@@ -53,22 +54,57 @@ typedef point<int> pointi;
 typedef point<double> pointd;
 typedef line<int> linei;
 typedef line<double> lined;
-
+const int MAX = 2009;
 pointi ps[4009];
-vector<int> adj[2009];
+vector<int> adj[MAX];
 bool intersect(int i, int j) {
-	linei l1(ps[2*i], ps[2*i + 1]), l2(ps[2*j], ps[2*j + 1]);
-	if(l1.parallel(l2)) return ((ps[2*i+1] - ps[2*i]) ^ (ps[2*j+1] - ps[2*j])) == 0;
+	pointi &a = ps[2*i], &b = ps[2*i+1], &c = ps[2*j], &d = ps[2*j+1];
+	linei l1(a, b), l2(c, d);
+	//printf("comp %d, %d\n", i, j);
+	//printf("(%d, %d) -> (%d, %d) and\n(%d, %d) -> (%d, %d)\npal %d\n", a.x, a.y, b.x, b.y, c.x, c.y, d.x, d.y, l1.parallel(l2));
+	if(l1.parallel(l2)) return ((b - a) ^ (b - c)) == 0 && !(max(a.x, b.x) < min(c.x, d.x) || max(c.x, d.x) < min(a.x, b.x) 
+		|| max(a.y, b.y) < min(c.y, d.y) || max(c.y, d.y) < min(a.y, b.y));
+	pointd p = l1.inter(l2);
+	//printf("int (%.3f, %.3f)\n", p.x, p.y);
+	return abs(distSegSqr<double>(a, b, p)) < 1e-7 &&
+	       abs(distSegSqr<double>(c, d, p)) < 1e-7;
+}
 
+int n;
+int seen[MAX], d[MAX], low[MAX], tc, tempo;
+vector<int> st;
+int comp[MAX], ct;
+bool ok;
+void dfs(int u) {
+	if(seen[u] == tc) return;
+	seen[u] = tc;
+	low[u] = d[u] = tempo++;
+	st.pb(u);
+	for(int v : adj[u]) {
+		dfs(v);
+		low[u] = min(low[u], low[v]);
+	}
+	if(low[u] == d[u]) {
+		int s; ct++; //printf("round %d\n", ct);
+		do {
+			s = st.back(); st.pop_back();
+			low[s] = INT_MAX;
+			//printf("%d here (%d)\n", s, s ^ 1);
+			if(comp[s ^ 1] == ct) ok = false;
+			comp[s] = ct;
+		} while(s != u);
+	}
 }
 
 int main() {
+	int i, j;
 	while(true) {
+		st.clear();
 		scanf("%d", &n);
 		if(!n) return 0;
 		for(i = 0; i < n; i++) {
 			pointi a[4];
-			for(j = 0; j < 4; j++) scanf("%d %d", &a[i].x, &a[i].y);
+			for(j = 0; j < 4; j++) scanf("%d %d", &a[j].x, &a[j].y);
 			sort(a, a + 4);
 			ps[4*i] = a[0];
 			ps[4*i + 1] = a[3];
@@ -77,6 +113,20 @@ int main() {
 			adj[2*i].clear();
 			adj[2*i + 1].clear();
 		}
-		
+		for(i = 0; i < 2*n; i++)
+			for(j = i + 1; j < 2*n; j++) {
+				if(i == (j ^ 1)) continue;	
+				if(intersect(i, j)) {
+					//printf("%d, %d intersect\n", i, j);
+					adj[i].pb(j ^ 1);
+					adj[j].pb(i ^ 1);
+				}
+			}
+		ok = true;
+		tc++; tempo = 0;
+		for(i = 0; i < 2*n; i++)
+			dfs(i);
+		if(ok) puts("YES");
+		else puts("NO");
 	}
 }
