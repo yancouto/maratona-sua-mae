@@ -5,6 +5,12 @@
 - [Primes or Palindromes?](../codeforces/568A.cpp)
 - [Symmetric and Transitive](../codeforces/568B.cpp)
 
+#### Contest Codeforces [#316 Div2](http://codeforces.com/contest/570/standings) \#69 (2h) (Virtual Participation)
+- [Elections](../codeforces/570A.cpp)
+- [Simple Game](../codeforces/570B.cpp)
+- [Replacement](../codeforces/570C.cpp)
+- [Tree Requests](../codeforces/570D.cpp)
+
 #### Contest Codechef [August Challenge](https://www.codechef.com/AUG15) \#EmAndamento (Long Challenge 7 - 17 Ago)
 - [Cooking Machine](../codechef/cookmach.cpp)
 - [Gravity Guy](../codechef/grguy.cpp)
