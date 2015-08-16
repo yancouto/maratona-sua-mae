@@ -1,6 +1,21 @@
 # Relatório de MAC0214 - Contests
 
 ## Semana 2 (10 - 16 Agosto)
+
+#### Contest [USP-ICMC 2015](http://codeforces.com/gym/100733/standings) \#8 (5h)
+- [Shitália](../codeforces/100733A.cpp)
+- [Ascencion](../codeforces/100733B.cpp)
+- [Death Report](../codeforces/100733C.cpp)
+- [Little thief Shi](../codeforces/100733D.cpp)
+- [Shi's throne](../codeforces/100733E.cpp)
+- [Cosmic timeline](../codeforces/100733F.cpp)
+- [No Negations](../codeforces/100733G.cpp)
+- [Designation in the Mafia](../codeforces/100733H.cpp)
+- [The Cool Monkeys](../codeforces/100733I.cpp)
+- [Summer Wars](../codeforces/100733J.cpp)
+
+#### Maratona de Programação - Seletiva USP \#4 (5h) (Ranking e Enunciados não disponíveis ainda)
+
 #### Contest Codeforces [#315 Div1](http://codeforces.com/contest/569/standings) \#305 (2h)
 - [Primes or Palindromes?](../codeforces/568A.cpp)
 - [Symmetric and Transitive](../codeforces/568B.cpp)
