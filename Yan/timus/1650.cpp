@@ -1,4 +1,3 @@
-// incomplete
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -18,6 +17,7 @@ struct city {
 } cs[60009];
 struct cmp_d {
 	bool operator() (int i, int j) {
+		if(cs[i].d == cs[j].d) return cs[i].i < cs[j].i;
 		return cs[i].d < cs[j].d;
 	}
 };
@@ -30,7 +30,6 @@ struct cmp_i {
 set<int, cmp_d> rich;
 set<int, cmp_i> ind;
 map<string, int> cit;
-char inv[6009][23];
 int getcity(char *s) {
 	string st(s);
 	if(!cit.count(st)) {
@@ -39,7 +38,6 @@ int getcity(char *s) {
 		cs[i] = city(i);
 		ind.insert(i);
 		rich.insert(i);
-		printf("%s is %d\n", s, i);
 	}
 	return cit[st];
 }
@@ -75,14 +73,11 @@ int main() {
 	}
 	for(i = 1; i <= m; i++) {
 		int mx = mxmon();
-		puts("-----------------------------");
-		for(auto &e : cit) printf("%s(%d) -- %lld\n", e.first.c_str(), e.second, cs[e.second].d);
-		if(mx != -1) { printf("%d won\n", mx); cs[mx].day++; }
+		if(mx != -1) { cs[mx].day++; }
 		for(ev e : v[i]) {
 			int left = bilcity[e.bil];
-			rich.erase(left); cs[left].d -= mon[e.bil]; rich.insert(left);
+			rich.erase(left);  cs[left].d -= mon[e.bil];  rich.insert(left);
 			rich.erase(e.cit); cs[e.cit].d += mon[e.bil]; rich.insert(e.cit);
-			printf("old %lld new %lld\n", cs[left].d, cs[e.cit].d);
 			bilcity[e.bil] = e.cit;
 		}
 	}
