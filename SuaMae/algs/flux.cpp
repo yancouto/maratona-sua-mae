@@ -27,8 +27,11 @@ namespace f {
 		return false;
 	}
 
+	int us[maxv], te;
 	int dfs(int u, int t, num mx) {
 		if(u == t) return mx;
+		if(us[u] == te) return 0;
+		us[u] = te;
 		for(int i = es[u]; i != -1; i = nx[i]) {
 			if(cp[i] > fl[i] && lv[to[i]] == lv[u] + 1) {
 				if(int a = dfs(to[i], t, min(mx, cp[i] - fl[i]))) {
@@ -45,8 +48,9 @@ namespace f {
 	int max_flux(int s, int t) {
 		int fl = 0, a;
 		while(bfs(s, t)) {
+			te++;
 			while(a = dfs(s, t, inf))
-				fl += a;
+				fl += a, te++;
 		}
 		return fl;
 	}
