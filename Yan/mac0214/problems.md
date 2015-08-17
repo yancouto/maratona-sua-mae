@@ -1,5 +1,9 @@
 # Relatório de MAC0214 - Problemas
 
+## Semana 3 (17 - 23 Agosto)
+- Codeforces
+	- [566D](../codeforces/566D.cpp) | [Restructuring Company](http://codeforces.com/problemset/problem/566/D)
+
 ## Semana 2 (10 - 16 Agosto)
 - Codeforces
 	- [570E](../codeforces/570E.cpp) | [Music](http://codeforces.com/contest/569/problem/A)
@@ -8,6 +12,8 @@
 	- [3871](../icpc/3871.cpp) | [Save the Trees](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3871)
 - SPOJ
 	- [hallow](../spoj/hallow.cpp) | [Halloween treats](http://www.spoj.com/problems/HALLOW/)
+- SPOJ-BR
+	- [cebola](../spojbr/cebola.cpp) | [Camadas de cebola](http://br.spoj.com/problems/CEBOLA/)
 
 
 ## Semana 1 (03 - 09 Agosto)
