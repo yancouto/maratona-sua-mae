@@ -3,6 +3,12 @@
 ## Semana 3 (17 - 23 Agosto)
 - Codeforces
 	- [566D](../codeforces/566D.cpp) | [Restructuring Company](http://codeforces.com/problemset/problem/566/D)
+- UVA
+	- [456](../uva/456.cpp) | [King](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=456)
+- ICPC
+	- [2491](../icpc/2491.cpp) | [Help Bubu](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2491)
+- POJ
+	- [3764](../pku/3764.c) | [The xor-longest Path](http://poj.org/problem?id=3764)
 
 ## Semana 2 (10 - 16 Agosto)
 - Codeforces

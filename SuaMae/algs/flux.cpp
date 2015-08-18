@@ -27,12 +27,12 @@ namespace f {
 		return false;
 	}
 
-	int us[maxv], te;
+	int us[maxv], te, cr[maxv];
 	int dfs(int u, int t, num mx) {
 		if(u == t) return mx;
 		if(us[u] == te) return 0;
 		us[u] = te;
-		for(int i = es[u]; i != -1; i = nx[i]) {
+		for(int &i = cr[u]; i != -1; i = nx[i]) {
 			if(cp[i] > fl[i] && lv[to[i]] == lv[u] + 1) {
 				if(int a = dfs(to[i], t, min(mx, cp[i] - fl[i]))) {
 					fl[i] += a;
@@ -49,6 +49,7 @@ namespace f {
 		int fl = 0, a;
 		while(bfs(s, t)) {
 			te++;
+			for(int i = 0; i < n; i++) cr[i] = es[i];
 			while(a = dfs(s, t, inf))
 				fl += a, te++;
 		}
