@@ -5,8 +5,10 @@
 	- [566D](../codeforces/566D.cpp) | [Restructuring Company](http://codeforces.com/problemset/problem/566/D)
 - UVA
 	- [456](../uva/456.cpp) | [King](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=456)
+	- [3081](../uva/3081.cpp) | [Rectangles](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3081)
 - ICPC
 	- [2491](../icpc/2491.cpp) | [Help Bubu](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2491)
+	- [948](../icpc/948.cpp) | [Roof](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=948)
 - POJ
 	- [3764](../pku/3764.c) | [The xor-longest Path](http://poj.org/problem?id=3764)
 
