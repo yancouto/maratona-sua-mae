@@ -1,4 +1,3 @@
-// WAAAA
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -21,19 +20,18 @@ int n, k, a[103], all;
 
 int memo[103][103][9][257];
 int solve(int i, int l, int h, int bm) {
-	if(i == n) return __builtin_popcount(all ^ bm);
+	if(i == n) return __builtin_popcount(bm ^ all);
 	int &m = memo[i][l][h][bm];
 	if(m != -1) return m;
 	m = INT_MAX;
-	if(l > 0)
-		m = solve(i + 1, l - 1, h, bm);
+	if(l > 0) m = solve(i + 1, l - 1, h, bm);
 	m = min(m, (a[i] != h) + solve(i + 1, l, a[i], bm | (1 << a[i])));
 	return m;
 }
 
 
 int main() {
-	int t = 0, i;
+	int i, t = 0;
 	while(true) {
 		scanf("%d %d", &n, &k);
 		if(!n) return 0;
@@ -44,7 +42,6 @@ int main() {
 			all |= (1 << a[i]);
 		}
 		memset(memo, -1, sizeof memo);
-		printf("Case %d: %d\n", ++t, solve(0, k, 8, 0));
+		printf("Case %d: %d\n\n", ++t, solve(0, k, 8, 0));
 	}
-	return 0;
 }

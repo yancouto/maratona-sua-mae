@@ -13,13 +13,12 @@ const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
 const int MAX = 200009;
 int S[MAX], sz[MAX];
-int get1(int i) {
-	if(S[S[i]] != S[i]) S[i] = get(S[i]);
+int find(int i) {
+	if(S[S[i]] != S[i]) S[i] = find(S[i]);
 	return S[i];
 }
 void join(int a, int b) {
-	//printf("join %d %d\n", a, b);
-	a = get1(a); b = get1(b);
+	a = find(a); b = find(b);
 	if(a == b) return;
 	if(a > b) swap(a, b);
 	S[b] = a;
@@ -30,14 +29,13 @@ inline int r(int i) { return (i << 1) + 1; }
 void build_tree(int i, int from, int to) {
 	lazy[i] = INT_MAX;
 	if(from == to) {
-		tree[i] = from;
+		tree[i] = from + 1;
 		S[from] = from;
 		return;
 	}
 	int mid = (from + to) / 2;
 	build_tree(l(i), from, mid);
 	build_tree(r(i), mid + 1, to);
-	tree[i] = min(tree[l(i)], tree[r(i)]);
 }
 
 void unlaze(int i, int from, int to) {
@@ -50,12 +48,12 @@ void unlaze(int i, int from, int to) {
 	lazy[i] = INT_MAX;
 }
 
-int query_tree(int i, int from, int to, int ql, int qr) {
+int query_tree(int i, int from, int to, int x) {
 	unlaze(i, from, to);
-	if(to < ql || from > qr) return INT_MAX;
-	if(from >= ql && to <= qr) return tree[i];
+	if(from == to) return tree[i];
 	int mid = (from + to) / 2;
-	return min(query_tree(l(i), from, mid, ql, qr), query_tree(r(i), mid + 1, to, ql, qr));
+	if(x <= mid) return query_tree(l(i), from, mid, x);
+	else return query_tree(r(i), mid + 1, to, x);
 }
 
 void set_tree(int i, int from, int to, int ql, int qr, int val) {
@@ -69,51 +67,25 @@ void set_tree(int i, int from, int to, int ql, int qr, int val) {
 	int mid = (from + to) / 2;
 	set_tree(l(i), from, mid, ql, qr, val);
 	set_tree(r(i), mid + 1, to, ql, qr, val);
-	tree[i] = min(tree[l(i)], tree[r(i)]);
 }
 
 int n;
-int get(int i) {
-	int p = query_tree(1, 1, n, i, i);
-	int qp = query_tree(1, 1, n, p, p);
-	if(qp != p) {
-		qp = get(p);
-		set_tree(1, 1, n, p, p, qp);
-	}
-	return qp;
-}
-
-void deb(int i, int from, int to) {
-	unlaze(i, from, to);
-	if(from == to) {
-		printf("%02d ", tree[i]);
-		return;
-	}
-	int mid = (from + to) / 2;
-	deb(l(i), from, mid);
-	deb(r(i), mid + 1, to);
-}
-
 
 int main() {
-	int i, q, t, x, y, gx, gy;
+	int i, q, t, x, y, j;
 	scanf("%d %d", &n, &q);
 	build_tree(1, 1, n);
 	for(i = 0; i < q; i++) {
 		scanf("%d %d %d", &t, &x, &y); 
 		if(t == 1) {
-			gx = query_tree(1, 1, n, x, x);
-			gy = query_tree(1, 1, n, y, y);
-			int m = min(gx, gy);
-			join(gx, gy);
+			join(x, y);
 		} else if(t == 2) {
-			int m = query_tree(1, 1, n, x, y);
-			set_tree(1, 1, n, x, y, m);
+			for(j = x; j <= y; j = query_tree(1, 1, n, j))
+				join(x, j);
+			set_tree(1, 1, n, x, y, j);
 		} else {
-			printf("%s\n", (get(x) == get(y))? "YES" : "NO");			
+			printf("%s\n", (find(x) == find(y))? "YES" : "NO");			
 		}
-		deb(1, 1, n);
-		printf("\n>: ");
 	}
 	return 0;
 }

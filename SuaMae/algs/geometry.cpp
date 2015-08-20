@@ -1,34 +1,43 @@
 #include <cmath>
-template<typename num> struct point {
+#define temp template<typename num>
+#define ptn point<num>
+temp struct point {
 	num x, y;
-	point() {}
-	point(num a, num b) : x(a), y(b) {}
-	point operator + (point o) const { return point(x + o.x, y + o.y); }
-	point operator - (point o) const { return point(x - o.x, y - o.y); }
-	num operator * (point o) const { return x * o.x + y * o.y; }
-	num operator ^ (point o) const { return x * o.y - y * o.x; }
-	point operator * (num i) const { return point(x * i, y * i); }
-	point operator / (num i) const { return point(x / i, y / i); }
+	ptn() {}
+	ptn(num a, num b) : x(a), y(b) {}
+	ptn operator + (ptn o) const { return ptn(x + o.x, y + o.y); }
+	ptn operator - (ptn o) const { return ptn(x - o.x, y - o.y); }
+	num operator * (ptn o) const { return x * o.x + y * o.y; }
+	num operator ^ (ptn o) const { return x * o.y - y * o.x; }
+	ptn operator * (num i) const { return ptn(x * i, y * i); }
+	ptn operator / (num i) const { return ptn(x / i, y / i); }
 	point<double> rotate(double deg) {
 		double cs = cos(deg), sn = sin(deg);
 		return point<double>(x*cs - y*sn, x*sn + y*cs);
 	}
-	num distSqr(point o) const { return (*this - o) * (*this - o); }
-	bool operator < (point o) const { return x < o.x || (x == o.x && y < o.y); }
+	num distSqr(ptn o) const { return (*this - o) * (*this - o); }
+	bool operator < (ptn o) const { return x < o.x || (x == o.x && y < o.y); }
 };
-template<typename num> double distSegSqr(point<num> a, point<num> b, point<num> c) {
+temp inline num cross(ptn a, ptn b, ptn c) { return (c - a) ^ (b - a); }
+temp inline bool betweenSeg(ptn a, ptn b, ptn c) { return cross(a, b, c) == 0 && ((b - c) * (a - c) <= 0); }
+temp double distSegSqr(ptn a, ptn b, ptn c) {
 	if((b - a) * (c - b) > 0) return b.distSqr(c);
 	if((a - b) * (c - a) > 0) return a.distSqr(c);
 	double d = (b - a) ^ (c - a);
 	return d * d / ((b - a) * (b - a));
 }
+temp bool intersectSeg(ptn a, ptn b, ptn c, ptn d) {
+	if(betweenSeg(a, b, c) || betweenSeg(a, b, d) || betweenSeg(c, d, a) || betweenSeg(c, d, b)) return true;
+	if(((cross(a, b, c) > 0) ^ (cross(a, b, d) > 0)) && ((cross(c, d, a) > 0) ^ (cross(c, d, b) > 0))) return true;
+	return false;
+}
 
-template <typename num> struct line {
+temp struct line {
 	num a, b, c;
 	line() {}
 	line(num aa, num bb, num cc) : a(aa), b(bb), c(cc) {}
-	line(point<num> s, point<num> e) : a(e.y - s.y), b(s.x - e.x), c(a*s.x + b*s.y) {}
-	line pass(point<num> p) { return line(a, b, a*p.x + b*p.y); }
+	line(ptn s, ptn e) : a(e.y - s.y), b(s.x - e.x), c(a*s.x + b*s.y) {}
+	line pass(ptn p) { return line(a, b, a*p.x + b*p.y); }
 	bool parallel(const line &o) const { return a * o.b - o.a * b == 0; }
 	point<double> inter(line o) {
 		double d = a * o.b - o.a * b;
@@ -36,7 +45,7 @@ template <typename num> struct line {
 		return point<double>((o.b * c - b * o.c)/d, (a * o.c - o.a * c)/d);
 	}
 };
-typedef point<int> pointi;
-typedef point<double> pointd;
-typedef line<int> linei;
-typedef line<double> lined;
+typedef point<int> pti;
+typedef point<double> ptd;
+typedef line<int> lni;
+typedef line<double> lnd;

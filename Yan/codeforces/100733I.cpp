@@ -40,12 +40,12 @@ namespace f {
 		return false;
 	}
 
-	int seen[maxv], tempo;
+	int seen[maxv], tempo, cr[maxv];
 	int dfs(int u, int t, num mx) {
 		if(u == t) return mx;
 		if(seen[u] == tempo) return 0;
 		seen[u] = tempo;
-		for(int i = es[u]; i != -1; i = nx[i]) {
+		for(int &i = cr[u]; i != -1; i = nx[i]) {
 			if(cp[i] > fl[i] && lv[to[i]] == lv[u] + 1) {
 				if(int a = dfs(to[i], t, min(mx, cp[i] - fl[i]))) {
 					//printf("cam through %d->%d\n", u, to[i]);
@@ -60,15 +60,13 @@ namespace f {
 
 
 	int max_flux(int s, int t) {
-		//puts("NEW FLUX");
 		int fl = 0, a;
 		while(bfs(s, t)) {
 			tempo++;
+			for(int i = 0; i < n; i++) cr[i] = es[i];
 			while(a = dfs(s, t, inf))
 				fl += a, tempo++;
-			//puts("MOAR BFS");
 		}
-		//printf("ret %d\n", fl);
 		return fl;
 	}
 
