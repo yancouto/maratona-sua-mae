@@ -1,4 +1,3 @@
-// acabar
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -35,8 +34,8 @@ int main() {
 		}
 		nok = 0; int resp = 0;
 		for(i = 0; i < n + s; i++) {
-			if(i < n) add(i);
-			if(i - s >= 0) rem(i - s);
+			if(i < n) add(x[i]);
+			if(i - s >= 0) rem(x[i - s]);
 			ok[i] = (nok == 0) && ((i - s < 0) || ok[i - s]);
 			if(i >= n && ok[i]) resp++;
 		}
