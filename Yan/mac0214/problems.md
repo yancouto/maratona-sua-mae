@@ -9,8 +9,15 @@
 - ICPC
 	- [2491](../icpc/2491.cpp) | [Help Bubu](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2491)
 	- [948](../icpc/948.cpp) | [Roof](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=948)
+	- [1374](../icpc/1374.cpp) | [Countdown](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1374)
+	- [1376](../icpc/1376.cpp) | [Queens, Knights and Pawns](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1376)
+	- [1379](../icpc/1379.cpp) | [Swamp Things](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1379)
+	- [1377](../icpc/1377.cpp) | [Reliable Nets](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1377)
+	- [1380](../icpc/1380.cpp) | [Two Ends](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1380)
 - POJ
 	- [3764](../pku/3764.c) | [The xor-longest Path](http://poj.org/problem?id=3764)
+- SPOJ
+	- [fastflow](../spoj/fastflow.cpp) | [Fast Maximum Flow](http://www.spoj.com/problems/FASTFLOW/)
 
 ## Semana 2 (10 - 16 Agosto)
 - Codeforces

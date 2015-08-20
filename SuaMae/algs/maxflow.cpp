@@ -1,12 +1,12 @@
 namespace f {
-	const int maxv = 10009;
-	const int maxe = 30009 * 2;
+	const int maxv = 100009;
+	const int maxe = 300009 * 2;
 	typedef int num;
+	num inf = INT_MAX;
 	int n = maxv;
 
 	int to[maxe], en, nx[maxe], es[maxe], lv[maxv], qu[maxv];
 	num cp[maxe], fl[maxe];
-	num inf = INT_MAX;
 
 
 	bool bfs(int s, int t) {
@@ -28,7 +28,7 @@ namespace f {
 	}
 
 	int us[maxv], te, cr[maxv];
-	int dfs(int u, int t, num mx) {
+	num dfs(int u, int t, num mx) {
 		if(u == t) return mx;
 		if(us[u] == te) return 0;
 		us[u] = te;
@@ -45,8 +45,8 @@ namespace f {
 	}
 
 
-	int max_flux(int s, int t) {
-		int fl = 0, a;
+	num max_flow(int s, int t) {
+		num fl = 0, a;
 		while(bfs(s, t)) {
 			te++;
 			for(int i = 0; i < n; i++) cr[i] = es[i];
@@ -57,9 +57,9 @@ namespace f {
 	}
 
 	void reset_all(int n2=maxv) { n = n2; en = 0; memset(es, -1, sizeof(int) * n); }
-	void reset_flux(int m=maxe/2) { memset(fl, 0, sizeof(num) * m*2); }
+	void reset_flow(int m=maxe/2) { memset(fl, 0, sizeof(num) * m*2); }
 
-	void add_edge(int a, int b, int c, int rc=0) {
+	void add_edge(int a, int b, num c, num rc=0) {
 		fl[en] = 0; to[en] = b; cp[en] = c;  nx[en] = es[a]; es[a] = en++;
 		fl[en] = 0; to[en] = a; cp[en] = rc; nx[en] = es[b]; es[b] = en++;
 	}
