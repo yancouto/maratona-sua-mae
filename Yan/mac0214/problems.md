@@ -14,6 +14,7 @@
 	- [948](../icpc/948.cpp)  | [Roof](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=948)
 	- [1373](../icpc/1373.cpp) | [ACM (ACronym Maker)](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1373)
 	- [1374](../icpc/1374.cpp) | [Countdown](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1374)
+	- [1375](../icpc/1375.cpp) | [The Game of Efil](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1375)
 	- [1376](../icpc/1376.cpp) | [Queens, Knights and Pawns](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1376)
 	- [1378](../icpc/1378.cpp) | [Square Count](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1378)
 	- [1379](../icpc/1379.cpp) | [Swamp Things](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1379)
