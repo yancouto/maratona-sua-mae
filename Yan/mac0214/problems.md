@@ -3,7 +3,6 @@
 ## Semana 3 (17 - 23 Agosto)
 - Codeforces
 	- [566D](../codeforces/566D.cpp) | [Restructuring Company](http://codeforces.com/problemset/problem/566/D)
-	- [536A](../codeforces/536A.cpp) | [Tavas and Karafs](http://codeforces.com/contest/536/problem/A)
 	- [536B](../codeforces/536B.cpp) | [Tavas and Malekas](http://codeforces.com/contest/536/problem/B)
 - UVA
 	- [456](../uva/456.cpp) | [King](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=456)
@@ -11,6 +10,7 @@
 - ICPC
 	- [2491](../icpc/2491.cpp) | [Help Bubu](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2491)
 	- [2295](../icpc/2295.cpp) | [Shuffle](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2295)
+	- [2609](../icpc/2609.cpp) | [Mosaic](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2609)
 	- [948](../icpc/948.cpp) | [Roof](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=948)
 	- [1374](../icpc/1374.cpp) | [Countdown](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1374)
 	- [1376](../icpc/1376.cpp) | [Queens, Knights and Pawns](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1376)

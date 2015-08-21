@@ -1,5 +1,10 @@
 # Relatório de MAC0214 - Contests
 
+## Semana 3 (17 - 23 Agosto)
+
+#### Contest Codeforces [#299 Div1](http://codeforces.com/contest/536/standings) \#647 (2h) (Virtual Participation)
+- [Tavas and Karafs](http://codeforces.com/contest/536/problem/A)
+
 ## Semana 2 (10 - 16 Agosto)
 
 #### Contest [USP-ICMC 2015](http://codeforces.com/gym/100733/standings) \#8 (5h)
@@ -14,7 +19,9 @@
 - [The Cool Monkeys](../codeforces/100733I.cpp)
 - [Summer Wars](../codeforces/100733J.cpp)
 
-#### Maratona de Programação - Seletiva USP \#4 (5h) (Ranking e Enunciados não disponíveis ainda)
+#### Maratona de Programação - [Seletiva USP](http://www.ime.usp.br/~maratona/assets/post_files/2015-08-18-resultados-seletiva/detailscore.html) \#4 (5h)
+- Código não disponível - [Enunciados](http://www.ime.usp.br/~maratona/assets/post_files/2015-08-18-resultados-seletiva/seletiva_2015.pdf)
+
 
 #### Contest Codeforces [#315 Div1](http://codeforces.com/contest/569/standings) \#305 (2h)
 - [Primes or Palindromes?](../codeforces/568A.cpp)
@@ -26,7 +33,7 @@
 - [Replacement](../codeforces/570C.cpp)
 - [Tree Requests](../codeforces/570D.cpp)
 
-#### Contest Codechef [August Challenge](https://www.codechef.com/AUG15) \#EmAndamento (Long Challenge 7 - 17 Ago)
+#### Contest Codechef [August Challenge](https://www.codechef.com/AUG15) \#734 (Long Challenge 7 - 17 Ago)
 - [Cooking Machine](../codechef/cookmach.cpp)
 - [Gravity Guy](../codechef/grguy.cpp)
 - [Aditi and Magic Trick](../codechef/admag.cpp)
