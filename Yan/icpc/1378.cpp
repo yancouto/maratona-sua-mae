@@ -24,16 +24,18 @@ struct rect {
 } rs[1002];
 
 int main() {
+	int i, j, k, n, x1, y1, x2, y2, t = 0;
 	while(true) {
 		scanf("%d", &n);
-		unsigned tot = 0;
+		if(!n) return 0;
+		ll tot = 0;
 		for(i = 0; i < n; i++) {
 			scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
 			rs[i] = rect(x1, y1, x2, y2);
 			for(j = 1; ; j++) {
 				int nh = rs[i].h - j + 1, nw = rs[i].w - j + 1;
 				if(nh <= 0 || nw <= 0) break;
-				tot += unsigned(nh) * nw;
+				tot += ll(nh) * nw;
 			}
 		}
 		for(i = 0; i < n; i++)
@@ -41,15 +43,27 @@ int main() {
 				int a = i, b = j;
 				if(rs[a].x > rs[b].x) swap(a, b);
 				else if(rs[a].x == rs[b].x && rs[a].y < rs[b].y) swap(a, b);
-				if(rs[a].y == rs[b].y + rs[y].h) {
-					
+				if(rs[a].y == rs[b].y + rs[b].h || rs[a].y + rs[a].h == rs[b].y) {
+					int sz = min(rs[a].x + rs[a].w, rs[b].x + rs[b].w) - rs[b].x - 2;
+					int s1 = rs[a].h, s2 = rs[b].h;
+					for(k = 2; (sz - k + 1) > 0 && (s1 + s2 - k + 1) > 0; k++)
+						tot += (sz - k + 1) * (s1 + s2 - k + 1);
+					for(k = 2; (sz - k + 1) > 0 && (s1 - k + 1) > 0; k++)
+						tot -= (sz - k + 1) * (s1 - k + 1);
+					for(k = 2; (sz - k + 1) > 0 && (s2 - k + 1) > 0; k++)
+						tot -= (sz - k + 1) * (s2 - k + 1);
 				}
-				if(rs[a].y + rs[a].w == rs[b].y) {
-
-				}
-				if(rs[a].y + rs[a].h == rs[b].y) {
-
+				if(rs[a].x + rs[a].w == rs[b].x) {
+					int sz = min(rs[a].y + rs[a].h, rs[b].y + rs[b].h) - max(rs[a].y, rs[b].y) - 2;
+					int s1 = rs[a].w, s2 = rs[b].w;
+					for(k = 2; (sz - k + 1) > 0 && (s1 + s2 - k + 1) > 0; k++)
+						tot += (sz - k + 1) * (s1 + s2 - k + 1);
+					for(k = 2; (sz - k + 1) > 0 && (s1 - k + 1) > 0; k++)
+						tot -= (sz - k + 1) * (s1 - k + 1);
+					for(k = 2; (sz - k + 1) > 0 && (s2 - k + 1) > 0; k++)
+						tot -= (sz - k + 1) * (s2 - k + 1);
 				}
 			}
+		printf("Case %d: %lld\n", ++t, tot);
 	}
 }
