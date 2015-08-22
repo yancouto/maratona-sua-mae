@@ -4,6 +4,7 @@
 - Codeforces
 	- [566D](../codeforces/566D.cpp) | [Restructuring Company](http://codeforces.com/problemset/problem/566/D)
 	- [536B](../codeforces/536B.cpp) | [Tavas and Malekas](http://codeforces.com/contest/536/problem/B)
+	- [571C](../codeforces/571C.cpp) | [CNF 2](http://codeforces.com/contest/571/problem/C)
 - UVA
 	- [456](../uva/456.cpp) | [King](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=456)
 	- [3081](../uva/3081.cpp) | [Rectangles](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3081)
@@ -12,6 +13,7 @@
 	- [2295](../icpc/2295.cpp) | [Shuffle](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2295)
 	- [2609](../icpc/2609.cpp) | [Mosaic](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2609)
 	- [948](../icpc/948.cpp)  | [Roof](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=948)
+	- [1372](../icpc/1372.cpp) | [Stake Your Claim](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1372)
 	- [1373](../icpc/1373.cpp) | [ACM (ACronym Maker)](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1373)
 	- [1374](../icpc/1374.cpp) | [Countdown](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1374)
 	- [1375](../icpc/1375.cpp) | [The Game of Efil](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1375)
@@ -24,6 +26,8 @@
 	- [3764](../pku/3764.c) | [The xor-longest Path](http://poj.org/problem?id=3764)
 - SPOJ
 	- [fastflow](../spoj/fastflow.cpp) | [Fast Maximum Flow](http://www.spoj.com/problems/FASTFLOW/)
+- SPOJ-BR
+	- [mcairo](../spojbr/mcairo.cpp) | [Mercado do Cairo](http://br.spoj.com/problems/MCAIRO/)
 
 ## Semana 2 (10 - 16 Agosto)
 - Codeforces

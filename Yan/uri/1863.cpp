@@ -58,7 +58,7 @@ void set_t(int i, int x1, int y1, int x2, int y2, int x3, int y3, int val) {
 vector<int> cls[MAX]; int cln;
 int mx;
 void solve(int i) {
-	int a = query_t(1, 0, 0, M, M, x[i] + 1, y[i] + 1, M, M) + 1;
+	int a = query_t(1, 0, 0, M, M, 0, 0, x[i] - 1, y[i] - 1) + 1;
 	mx = max(mx, a);
 	set_t(1, 0, 0, M, M, x[i], y[i], a);
 	for(int v : adj[i])
@@ -69,7 +69,7 @@ int seen[MAX];
 void solve_cls(int c) {
 	for(int i = cls[c].size() - 1; i >= 0; i--) {
 		int p = cls[c][i]; seen[p] = 1;
-		int a = query_t(1, 0, 0, M, M, x[p] + 1, y[p] + 1, M, M) + 1;
+		int a = query_t(1, 0, 0, M, M, 0, 0, x[p] - 1, y[p] - 1) + 1;
 		mx = max(mx, a);
 		set_t(1, 0, 0, M, M, x[p], y[p], a);
 	}
