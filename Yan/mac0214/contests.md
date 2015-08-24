@@ -1,9 +1,18 @@
 # Relatório de MAC0214 - Contests
 
+## Semana 4 (24 - 30 Agosto)
+
+#### Contest Codeforces [#300](http://codeforces.com/contest/538/standings) \#410 (2h30) (Virtual Participation)
+- [Cutting Banner](../codeforces/538A.cpp)
+- [Quasi Binary](../codeforces/538B.cpp)
+- [Tourist's Notes](../codeforces/538C.cpp)
+- [Weird Chess](../codeforces/538D.cpp)
+- [Demiurges Play Again](../codeforces/538E.cpp)
+
 ## Semana 3 (17 - 23 Agosto)
 
 #### Contest Codeforces [#299 Div1](http://codeforces.com/contest/536/standings) \#647 (2h) (Virtual Participation)
-- [Tavas and Karafs](http://codeforces.com/contest/536/problem/A)
+- [Tavas and Karafs](../codeforces/536A.cpp)
 
 ## Semana 2 (10 - 16 Agosto)
 
