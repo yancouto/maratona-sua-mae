@@ -22,4 +22,4 @@ Onde **ID** é um link para a resolução, e **Nome** é um link para o enunciad
 
 Ambos os arquivos são organizados por semana, e serão atualizados frequentemente.
 
-Observação: Eu também estou cursando a matéria [**MAC0327 - Desafios de Programação**](https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=MAC0327&nomdis=), que também consiste de resolver problemas em juízes online, mas como já faz parte de alguma outra matéria que estou participando, os problemas resolvidos em Desafios **não** serão contados no meu progresso para MAC0214.
+Observação: Eu também estou cursando a matéria **MAC0327 - Desafios de Programação**, que também consiste de resolver problemas em juízes online, mas como já faz parte de alguma outra matéria que estou participando, os problemas resolvidos em Desafios **não** serão contados no meu progresso para MAC0214.
