@@ -13,35 +13,15 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
 
-ll pot[75005], inv[75005];
+ll pot[75005];
 int n1, n2;
-
-ll prec_inv(int i, ll j) {
-	if(2 * j > modn - 2) return j;
-	inv[i] = mod(inv[i] * inv[i]);
-	ll aux = inv[i];
-	ll w = prec_inv(i, 2 * j);
-	if(2 * j + w > modn - 2) return w;
-	inv[i] = mod(inv[i] * aux); 
-	return 2 * j + w;
-}
 
 void prec_pot() {
 	pot[0] = 1;
 	int n = max(n1, n2);
 	for(int i = 1; i < n; i++)
 		pot[i] = mod(pot[i-1] * 31);
-	inv[0] = 1;
-	for(int i = 1; i < n; i++) {
-		inv[i] = pot[i];
-		ll j = prec_inv(i, 1);
-		for(j = j + 1; j <= modn - 2; j++) 
-			inv[i] = mod(inv[i] * pot[i]);
-	}
-	//for(int i = 0; i < n; i++)
-	//	printf("(%d) %lld\n", i, inv[i]);
 }
-
 
 void make_hash(ll h[75005], char s[75005], int n) {
 	h[0] = s[0];
@@ -49,12 +29,14 @@ void make_hash(ll h[75005], char s[75005], int n) {
 		h[i] = mod(h[i-1] + mod(s[i] * pot[i]));
 }
 
-ll get_hash(int l, int r, ll h[75005], int n) {
-	if(r > n - 1) return -1;
-	ll a, b;
-	a = 0; if(l > 0) a = h[l-1];
-	b = h[r];
-	return mod(mod(b - a + modn) * inv[l]);
+ll h1[75005], h2[75005];
+
+bool get_hash(int l, int r, int b, int e) {
+	if(r > n1 - 1 || e > n2 - 1) return false;
+	ll d1 = mod(h1[r] - ((l) ? h1[l-1] : 0) + modn);
+	ll d2 = mod(h2[e] - ((b) ? h2[b-1] : 0) + modn);
+	if(l > b) return d1 == mod(d2 * pot[l-b]);
+	return d2 == mod(d1 * pot[b-l]);
 }
 
 void show_hash(ll h[75005], int n) {
@@ -63,8 +45,8 @@ void show_hash(ll h[75005], int n) {
 	putchar('\n');
 }
 
-ll h1[75005], h2[75005];
 set<pii> ans;
+
 int main() {
 	char s1[75005], s2[75005];
 	scanf(" %s %s", s1, s2);
@@ -73,19 +55,12 @@ int main() {
 	prec_pot();
 	make_hash(h1, s1, n1);
 	make_hash(h2, s2, n2);
-	//show_hash(h1, n1);
-	//show_hash(h2, n2);
 	for(int i = 0; i < n2; i++) {
 		int imax = -1;
-	//	printf("-------------------------------------------------\n\n");
 		for(int j = 0; j < n1; j++) {
-			ll a = get_hash(0, j, h1, n1);
-			ll b = get_hash(i, i+j, h2, n2);
-	//		printf("Comparando [%d, %d] com [%d, %d] %lld = %lld\n", 0, j, i, i + j, a, b);
-			if(a == b) imax = i + j;  
+			if(get_hash(0, j, i, i + j)) imax = i + j;  
 			else break;
 		}
-	//	printf("Bateu %d %d\n", i, imax);
 		if(imax == -1) continue;
 		ans.insert(pii(i, imax));		
 	}
