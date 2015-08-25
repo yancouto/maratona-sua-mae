@@ -1,4 +1,3 @@
-//WA
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -19,7 +18,7 @@ int n1, n2;
 void prec_pot() {
 	pot[0] = 1;
 	int n = max(n1, n2);
-	for(int i = 1; i < n; i++)
+	for(int i = 1; i <= n; i++)
 		pot[i] = mod(pot[i-1] * 31);
 }
 
@@ -62,9 +61,9 @@ int main() {
 			k = i;
 		}
 	}
-	if(k > 0) puts("YES");
+	if(k > 0) puts("Yes");
 	else {
-		puts("NO");
+		puts("No");
 		for(int i = ans.size() - 2; i >= 0; i--) {
 			for(int j = ans[i+1]; j < ans[i]; j++)
 				printf("%c", s2[j]);
