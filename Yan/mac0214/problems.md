@@ -1,8 +1,11 @@
 # Relatório de MAC0214 - Problemas
 
-## Semana 3 (17 - 23 Agosto)
+## Semana 4 (24 - 30 Agosto)
 - Codeforces
 	- [521C](../codeforces/521C.cpp) | [Cubes](http://codeforces.com/contest/521/problem/C)
+
+## Semana 3 (17 - 23 Agosto)
+- Codeforces
 	- [536B](../codeforces/536B.cpp) | [Tavas and Malekas](http://codeforces.com/contest/536/problem/B)
 	- [566D](../codeforces/566D.cpp) | [Restructuring Company](http://codeforces.com/problemset/problem/566/D)
 	- [571C](../codeforces/571C.cpp) | [CNF 2](http://codeforces.com/contest/571/problem/C)
