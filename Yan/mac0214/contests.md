@@ -2,6 +2,10 @@
 
 ## Semana 4 (24 - 30 Agosto)
 
+#### Contest Codeforces [#296 Div1](http://codeforces.com/contest/528/standings) \#143 (2h) (Virtual Participation)
+- [Glass Carving](../codeforces/528A.cpp)
+- [Clique Problem](../codeforces/528B.cpp)
+
 #### Contest Codeforces [#300](http://codeforces.com/contest/538/standings) \#410 (2h30) (Virtual Participation)
 - [Cutting Banner](../codeforces/538A.cpp)
 - [Quasi Binary](../codeforces/538B.cpp)
