@@ -2,6 +2,10 @@
 
 ## Semana 4 (24 - 30 Agosto)
 
+#### Contest Codeforces [#295 Div1](http://codeforces.com/contest/521/standings) \#214 (2h) (Virtual Participation)
+- [DNA Alignment](../codeforces/521A.cpp)
+- [Cubes](../codeforces/521B.cpp)
+
 #### Contest Codeforces [#296 Div1](http://codeforces.com/contest/528/standings) \#143 (2h) (Virtual Participation)
 - [Glass Carving](../codeforces/528A.cpp)
 - [Clique Problem](../codeforces/528B.cpp)
