@@ -3,6 +3,8 @@
 ## Semana 4 (24 - 30 Agosto)
 - Codeforces
 	- [521C](../codeforces/521C.cpp) | [Cubes](http://codeforces.com/contest/521/problem/C)
+- ICPC
+	- [4374](../icpc/4374.cpp) | [Graph](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4374)
 
 ## Semana 3 (17 - 23 Agosto)
 - Codeforces
