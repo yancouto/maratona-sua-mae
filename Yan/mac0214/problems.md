@@ -3,6 +3,7 @@
 ## Semana 4 (24 - 30 Agosto)
 - Codeforces
 	- [521C](../codeforces/521C.cpp) | [Cubes](http://codeforces.com/contest/521/problem/C)
+	- [461C](../codeforces/461C.cpp) | [Appleman and a Sheet of Paper](http://codeforces.com/contest/461/problem/C)
 - ICPC
 	- [4374](../icpc/4374.cpp) | [Graph](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4374)
 

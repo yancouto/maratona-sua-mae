@@ -2,6 +2,10 @@
 
 ## Semana 4 (24 - 30 Agosto)
 
+#### Contest Codeforces [#263 Div1](http://codeforces.com/contest/461/standings) \#378 (2h) (Virtual Participation)
+- [Appleman and Toastman](../codeforces/461A.cpp)
+- [Appleman and Tree](../codeforces/461B.cpp)
+
 #### Contest Topcoder [SRM 666 Div2](http://community.topcoder.com/stat?c=round_stats_sorted&rd=16515&dn=2&sq=Round_Statistics_Data&sc=16&sd=asc) \#34 (1h30)
 - [DevuAndGame](http://community.topcoder.com/stat?c=problem_solution&rm=326900&rd=16515&pm=13744&cr=40044946)
 - [GoodString](http://community.topcoder.com/stat?c=problem_solution&rm=326900&rd=16515&pm=13751&cr=40044946)
