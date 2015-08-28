@@ -25,16 +25,16 @@ int prec(int nn) {
 }
 
 ll solve(int who, int i, int pre, int sum) {
-	if(i == 61) { 
-		if(!sum) return (x == 0);
-		return (prec(sum) + 1) == x; 
-	}
+	if(i == 61) return (prec(sum) + 1) == x; 
 	ll &m = memo[who][i][pre][sum];
 	if(m != -1) return m;
 	ll ans = 0;
 	for(int d = 0; d <= 1; d++) {
 		if(pre && d > num[who][i]) break;
-		ans += solve(who, i + 1, pre && (num[who][i] == d), sum + d);
+		if(i < 60 || sum)
+			ans += solve(who, i + 1, pre && (num[who][i] == d), sum + d);
+		else
+			ans += (x == 0);
 	}
 	return m = ans;
 }
@@ -57,13 +57,8 @@ int main() {
 		memset(num, 0, sizeof num);
 		generate(0, a);
 		generate(1, b);
-		ll r1 = solve(1, 0, 1, 0);
-		ll r2 = solve(0, 0, 1, 0);
-		if(a > 0 && x == 1) r2--;
-		if(a > 0 && x == 0) r2++;
-		if(b > 0 && x == 1) r1--;
-		if(b > 0 && x == 0) r1++;
-		printf("%lld\n", r1 - r2);
+		ll ans = solve(1, 0, 1, 0) -  solve(0, 0, 1, 0);
+		printf("%lld\n", ans);
 	}
 	return 0;
 }
