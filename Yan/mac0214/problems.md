@@ -2,9 +2,14 @@
 
 ## Semana 4 (24 - 30 Agosto)
 - Codeforces
+	- [461C](../codeforces/461C.cpp) | [Appleman and a Sheet of Paper](http://codeforces.com/contest/461/problem/C)
 	- [521C](../codeforces/521C.cpp) | [Cubes](http://codeforces.com/contest/521/problem/C)
+	- [525C](../codeforces/525C.cpp) | [Ilya and Sticks](http://codeforces.com/contest/525/problem/C)
+- Codechef
+	- [cbars](../codechef/cbars.cpp) | [A Wonderful Chocolate](https://www.codechef.com/problems/CBARS/)
 - ICPC
 	- [4374](../icpc/4374.cpp) | [Graph](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4374)
+	- [4970](../icpc/4970.cpp) | [Indoorienteering](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4970)
 
 ## Semana 3 (17 - 23 Agosto)
 - Codeforces
