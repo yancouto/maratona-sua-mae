@@ -1,5 +1,10 @@
-#include <bits/stdc++.h>
+//#include <bits/stdc++.h>
 #include <cstdlib>
+#include <cstdio>
+#include <map>
+#include <vector>
+#include <string>
+#include <cstring>
 using namespace std;
 #define fst first
 #define snd second
@@ -21,65 +26,73 @@ inline ull mod(ull x) { return x % modn; }
 int n, m;
 map<string, int> mp;
 vector<int> adj[100010];
-char linha[500];
-int dg[100010], memo[100010][2], ns[100010], nf[100010];
+char linha[5000000];
+int dg[100010], memo[100010][2], ns[100010][2], nf[100010][2];
 
 ull solve(int no, int pai) {
 	if(adj[no].empty()) {
-		ns[no] = pai;
-		nf[no] = 0;
+		ns[no][0] = nf[no][0] = nf[no][1] = 0;
+		ns[no][1] = 1;
 		return pai*n;
 	}
 	int &mem = memo[no][pai];
 	if(mem != -1) return mem;
 
 	ull sum1 = 0, sum2 = 0;
-	int nss = 0, nfs = 0;
+	int nss0 = 0, nss1 = 0, nfs0 = 0, nfs1 = 0;
 	for(int i = 0; i < adj[no].size(); i++) {
 		sum1 += solve(adj[no][i], 1);
 		sum2 += solve(adj[no][i], 0);
-		nss += ns[adj[no][i]];
-		nfs += nf[adj[no][i]];
+		nss1 += ns[adj[no][i]][1];
+		nss0 += ns[adj[no][i]][0];
+		nfs1 += nf[adj[no][i]][1];
+		nfs0 += ns[adj[no][i]][0];
 	}
 	sum2 += m;
 	if(pai) sum1 += n;
 	if(sum1 < sum2) {
-		ns[no] = pai + nss;
-		nf[no] = nfs;
+		ns[no][pai] = pai + nss1;
+		nf[no][pai] = nfs1;
 	} else if(sum2 < sum1) {
-		ns[no] = nss;
-		nf[no] = 1 + nfs;
+		ns[no][pai] = nss0;
+		nf[no][pai] = 1 + nfs0;
 	} else {
-		if(pai > 1) {
-			ns[no] = nss;
-			nf[no] = 1 + nfs;
-		} else {
-			ns[no] = nss;
-			nf[no] = nfs;
-		}
-	} 
-		
+      if(pai) {
+	      if(nss0 + nfs0 <= nss1 + nfs1) {
+            ns[no][pai] = nss0;
+            nf[no][pai] = 1 + nfs0;
+         } else {
+            ns[no][pai] = 1 + nss1;
+            nf[no][pai] = nfs1;
+         }
+      } 
+      else {
+         if(nss0 + nfs0 + 1 <= nss1 + nfs1) {
+            ns[no][pai] = nss0;
+            nf[no][pai] = 1 + nfs0;
+         } 
+         else {
+            ns[no][pai] = nss1;
+            nf[no][pai] = nfs1;
+         }
+      }  
+   } 	
 	return mem = min(sum1, sum2);
 }
 
-int build(int no, int pai) {
-	if(adj[no].empty()) return pai;
-	int ret = 0;
-	if(memo2[no][pai] == 1)
-		ret = 1 + build(adj[no], 1
-	
-}
-
 int main() {
-	fgets(linha, 500, stdin);
+   int count = 0;
+	fgets(linha, 5000000, stdin);
 	while(42) {
 		int k = 0;
 		sscanf(linha, "%d%d", &n, &m);
 		if(n == 0 && m == 0) break;
 		memset(dg, 0, sizeof dg);
-		memset(memo, -1, sizeof memo);
-		while(true) {
-			fgets(linha, 500, stdin);
+		for(int i = 0; i <= 100005; i++)
+         adj[i].clear();
+      mp.clear();
+      while(true) {
+			fgets(linha, 5000000, stdin);
 			if(linha[0] >= '0' && linha[0] <= '9') 
 				break;
 			int s = strlen(linha);
@@ -98,7 +111,8 @@ int main() {
 			
 			linha[s-1] = ' ';
 			for(i = strlen(word)+1; i < s; i++) {
-				if(linha[i] == ' ' && linha[i-1] != ' ') {
+				if(linha[i] == ' ') {
+               if(linha[i-1] == ' ') continue;
 					string str(word, word + iw);
 					it = mp.find(str);
 					if(it == mp.end()) {		
@@ -114,19 +128,18 @@ int main() {
 					continue;
 				}
 				word[iw++] = linha[i];
-			}
-			for(i = 0; i < k; i++) {
-				printf("(%d)", i);
-				for(int j = 0; j < adj[i].size(); j++)
-					printf("%d ", adj[i][j]);
-				printf("\n");
-			}
-			
-			ull ans = 0;
-			for(i = 0; i < k; i++) {
-				if(dg[i] == 0)
-					ans += solve(i, 1);
-			}
+			}	
 		}
+      for(int i = 0; i <= k+2; i++)
+         memo[i][0] = memo[i][1] = -1;
+		ull ans = 0;
+      int NS = 0, NF = 0;
+		for(int i = 0; i < k; i++) {
+		   if(dg[i] == 0) {
+				ans += solve(i, 1);
+            NS += ns[i][1]; NF += nf[i][1];  
+         }
+		}
+      printf("%d. %d %d %llu\n", ++count, NS, NF, ans);
 	}
 }
