@@ -2,6 +2,17 @@
 
 ## Semana 4 (24 - 30 Agosto)
 
+#### Contest Codeforces [#318 Div1](http://codeforces.com/contest/573/standings) \#63 (2h)
+- [Bear and Poker](../codeforces/573A.cpp)
+- [Bear and Blocks](../codeforces/573B.cpp)
+- [Bear and Drawing](../codeforces/573C.cpp)
+
+#### Contest MaratonIME [28-08-15](http://ahmed-aly.com/Standings.jsp?ID=20237) \#1 (5h) ([gafeol](http://ahmed-aly.com/Profile.jsp?Username=gafeol))
+- [Randomly-priced Tickets](../../SuaMae/MaratonIME/28-08-15/random.cpp)
+- [How Many Ones Needed?](../../SuaMae/MaratonIME/28-08-15/ones.cpp)
+- [Haunted Graveyard](../../SuaMae/MaratonIME/28-08-15/haunted2.cpp)
+- [Games of Block](../../SuaMae/MaratonIME/28-08-15/game.cpp)
+
 #### Contest Codeforces [#263 Div1](http://codeforces.com/contest/461/standings) \#378 (2h) (Virtual Participation)
 - [Appleman and Toastman](../codeforces/461A.cpp)
 - [Appleman and Tree](../codeforces/461B.cpp)
@@ -44,7 +55,7 @@
 - [The Cool Monkeys](../codeforces/100733I.cpp)
 - [Summer Wars](../codeforces/100733J.cpp)
 
-#### Maratona de Programação - [Seletiva USP](http://www.ime.usp.br/~maratona/assets/post_files/2015-08-18-resultados-seletiva/detailscore.html) \#4 (5h)
+#### Maratona de Programação - [Seletiva USP](http://www.ime.usp.br/~maratona/assets/post_files/2015-08-18-resultados-seletiva/detailscore.html) \#4 (5h) ([gafeol](http://ahmed-aly.com/Profile.jsp?Username=gafeol), [gidelfino](http://ahmed-aly.com/Profile.jsp?Username=gidelfino))
 - Código não disponível - [Enunciados](http://www.ime.usp.br/~maratona/assets/post_files/2015-08-18-resultados-seletiva/seletiva_2015.pdf)
 
 
