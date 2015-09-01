@@ -1,5 +1,18 @@
 # Relatório de MAC0214 - Problemas
 
+## Semana 5 (31 Agosto - 6 Setembro)
+- Codeforces
+	- [100739C](../codeforces/100739C.cpp) | [Broken robot](http://codeforces.com/problemset/gymProblem/100739/C)
+	- [100739L](../codeforces/100739L.cpp) | [Many recursions](http://codeforces.com/problemset/gymProblem/100739/L)
+- ICPC
+	- [1532](../icpc/1532.cpp) | [Word Rings](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1532)
+- SPOJ
+	- [samer08d](../spoj/samer08d.cpp) | [DNA Sequences](http://www.spoj.com/problems/SAMER08D/)
+- SPOJ-BR
+	- [hooligan](../spojbr/hooligan.cpp) | [Hooligans](http://www.spoj.com/problems/HOOLIGAN/)
+- URI
+	- [1888](../uri/1888.cpp) | [Os chedis de Kamphaeng Phet](https://www.urionlinejudge.com.br/judge/pt/problems/view/1888)
+
 ## Semana 4 (24 - 30 Agosto)
 - Codeforces
 	- [461C](../codeforces/461C.cpp) | [Appleman and a Sheet of Paper](http://codeforces.com/contest/461/problem/C)
