@@ -1,5 +1,15 @@
 # Relatório de MAC0214 - Contests
 
+## Semana 5 (31 Agosto - 5 Setembro)
+
+#### Contest MaratonIME [02-09-15](http://ahmed-aly.com/Standings.jsp?ID=20291) \#2 (5h)
+- [Division of Nlogonia](../uva/2493.cpp)
+- [Shopaholic](../uva/2354.cpp)
+- [Ants](../uva/1655.cpp)
+- [Fast Food](../uva/603.cpp)
+- [Rip Van Winkle's Code](../uva/3867.cpp)
+- [Disjoint Paths](../icpc/2142.cpp)
+
 ## Semana 4 (24 - 30 Agosto)
 
 #### Contest Codeforces [#318 Div1](http://codeforces.com/contest/573/standings) \#63 (2h)
