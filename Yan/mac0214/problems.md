@@ -11,6 +11,8 @@
 - SPOJ-BR
 	- [hooligan](../spojbr/hooligan.cpp) | [Hooligans](http://www.spoj.com/problems/HOOLIGAN/)
 - URI
+	- [1710](../uri/1710.cpp) | [Confederação](https://www.urionlinejudge.com.br/judge/pt/problems/view/1710)
+	- [1879](../uri/1879.cpp) | [Bridge](https://www.urionlinejudge.com.br/judge/pt/problems/view/1879)
 	- [1888](../uri/1888.cpp) | [Os chedis de Kamphaeng Phet](https://www.urionlinejudge.com.br/judge/pt/problems/view/1888)
 
 ## Semana 4 (24 - 30 Agosto)
