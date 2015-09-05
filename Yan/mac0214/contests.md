@@ -2,6 +2,16 @@
 
 ## Semana 5 (31 Agosto - 5 Setembro)
 
+#### Contest Codeforces [#270](http://codeforces.com/contest/472/standings) \#187 (2h30) (Virtual Participation)
+- [Design Tutorial: Learn from Math](../codeforces/472A.cpp)
+- [Design Tutorial: Learn from Life](../codeforces/472B.cpp)
+- [Design Tutorial: Make It Nondeterministic](../codeforces/472C.cpp)
+- [Design Tutorial: Inverse the Problem](../codeforces/472D.cpp)
+
+#### Contest Codeforces [#265 Div1](http://codeforces.com/contest/464/standings) \#247 (2h) (Virtual Participation)
+- [No to Palindromes!](../codeforces/464A.cpp)
+- [Restore Cube](../codeforces/464B.cpp)
+
 #### Contest MaratonIME [02-09-15](http://ahmed-aly.com/Standings.jsp?ID=20291) \#2 (5h)
 - [Division of Nlogonia](../uva/2493.cpp)
 - [Shopaholic](../uva/2354.cpp)

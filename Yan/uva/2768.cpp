@@ -1,3 +1,4 @@
+// WA
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -12,18 +13,9 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
 const int MAX = 1009;
-int dist[MAX], bad[MAX], seen[MAX];
+int dist[MAX], bad[MAX];
 vector<pii> adj[MAX];
-bool dfs(int i) {
-	if(bad[i]) return true;
-	if(seen[i]) return false;
-	seen[i] = true;
-	for(pii e : adj[i])
-		if(dfs(e.fst))
-			return bad[i] = true;
-	return false;
-}
-
+int pai[MAX];
 
 int main() {
 	int i, n, m, a, b, t, k;
@@ -32,27 +24,23 @@ int main() {
 		for(i = 0; i < n; i++) adj[i].clear();
 		for(i = 0; i < m; i++) {
 			scanf("%d %d %d", &a, &b, &t);
-			adj[a].pb(pii(b, t));
+			adj[b].pb(pii(a, t));
 		}
 		memset(dist, 0, sizeof dist);
 		memset(bad, 0, sizeof bad);
-		memset(seen, 0, sizeof seen);
 		for(k = 0; k < n; k++)
 			for(i = 0; i < n; i++)
 				for(pii e : adj[i])
 					if(dist[e.fst] > dist[i] + e.snd)
 						dist[e.fst] = dist[i] + e.snd;
 		bool any = false;
-		for(k = 0; k < n; k++)
-			for(i = 0; i < n; i++)
-				for(pii e : adj[i])
-					if(dist[e.fst] > dist[i] + e.snd) {
-						bad[i] = any = true;
-						dist[e.fst] = dist[i] + e.snd;
-					}
+		for(i = 0; i < n + 2; i++)
+			for(pii e : adj[i])
+				if(dist[e.fst] > dist[i] + e.snd) {
+					bad[i] = any = true;
+					dist[e.fst] = dist[i] + e.snd;
+				}
 		if(!any) { printf("Case %d: impossible\n", tt); continue; }
-		for(i = 0; i < n; i++)
-			dfs(i);
 		printf("Case %d:", tt);
 		for(i = 0; i < n; i++)
 			if(bad[i])

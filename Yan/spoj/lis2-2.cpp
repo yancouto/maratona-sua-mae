@@ -19,16 +19,16 @@ struct point {
 		return x < o.x;
 	}
 };
-
-set<point> memo[100009];
+typedef pair<point, int> poi;
+set<poi> memo[100009];
 
 bool big_any(point p, int m) {
-	auto it = memo[m].lower_bound(p);
+	auto it = memo[m].lower_bound(poi(p, INT_MIN));
 	if(it == memo[m].begin()) return false;
 	--it;
-	return it->y < p.y;
+	return it->fst.y < p.y;
 }
-
+int ant[100009];
 int main() {
 	int i, n;
 	scanf("%d", &n);
@@ -42,14 +42,23 @@ int main() {
 			else r = m;
 		}
 		if(l == sz) sz++;
-		auto it = memo[l].insert(p).fst;
+		auto it = memo[l].insert(poi(p, i)).fst;
+		if(l > 1)
+			ant[i] = prev(memo[l - 1].lower_bound(poi(p, INT_MIN)))->snd;
 		while(true) {
 			auto it2 = it++;
 			if(it == memo[l].end()) break;
-			if(it->y <= p.y) break;
+			if(it->fst.y <= p.y) break;
 			memo[l].erase(it);
 			it = it2;
 		}
 	}
 	printf("%d\n", sz - 1);
+	int st[100009], sn = 0;
+	int lst = memo[sz - 1].begin()->snd;
+	for(sz--; sz; sz--) {
+		st[sn++] = lst;
+		lst = ant[lst];
+	}
+	while(sn) printf("%d\n", st[--sn] + 1);
 }

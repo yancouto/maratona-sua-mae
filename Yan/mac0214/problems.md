@@ -7,10 +7,12 @@
 - ICPC
 	- [1532](../icpc/1532.cpp) | [Word Rings](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1532)
 - SPOJ
+	- [lis2](../spoj/lis2.cpp) | [Another Longest Increasing Subsequence Problem](http://www.spoj.com/problems/LIS2/)
 	- [samer08d](../spoj/samer08d.cpp) | [DNA Sequences](http://www.spoj.com/problems/SAMER08D/)
 - SPOJ-BR
 	- [hooligan](../spojbr/hooligan.cpp) | [Hooligans](http://www.spoj.com/problems/HOOLIGAN/)
 - URI
+	- [1226](../uri/1226.cpp) | [Elevador Espacial](https://www.urionlinejudge.com.br/judge/pt/problems/view/1226)
 	- [1710](../uri/1710.cpp) | [Confederação](https://www.urionlinejudge.com.br/judge/pt/problems/view/1710)
 	- [1879](../uri/1879.cpp) | [Bridge](https://www.urionlinejudge.com.br/judge/pt/problems/view/1879)
 	- [1888](../uri/1888.cpp) | [Os chedis de Kamphaeng Phet](https://www.urionlinejudge.com.br/judge/pt/problems/view/1888)
