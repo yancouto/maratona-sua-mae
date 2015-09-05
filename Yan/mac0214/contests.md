@@ -22,6 +22,11 @@
 
 ## Semana 4 (24 - 30 Agosto)
 
+#### Contest Codeforces [#292 Div1](http://codeforces.com/contest/516/standings) \#93 (2h) (Virtual Participation)
+- [Drazil and Factorial](../codeforces/516A.cpp)
+- [Drazil and Tiles](../codeforces/516B.cpp)
+- [Drazil and Park](../codeforces/516C.cpp)
+
 #### Contest Codeforces [#318 Div1](http://codeforces.com/contest/573/standings) \#63 (2h)
 - [Bear and Poker](../codeforces/573A.cpp)
 - [Bear and Blocks](../codeforces/573B.cpp)
