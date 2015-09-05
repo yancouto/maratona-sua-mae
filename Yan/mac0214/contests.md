@@ -2,6 +2,20 @@
 
 ## Semana 5 (31 Agosto - 5 Setembro)
 
+#### Contest URI [Codando na Vila](https://www.urionlinejudge.com.br/judge/pt/rankings/contest/69) \#1 (5h)
+- [Ajude Kiko](../uri/69-1.cpp)
+- [Ajude Clotilde](../uri/69-2.cpp)
+- [Ajude Girafales](../uri/69-3.cpp)
+- [Ajude Seu Madruga](../uri/69-4.cpp)
+- [Ajude o Sr. Barriga](../uri/69-5.cpp)
+- [De quem é a vez?](../uri/69-6.cpp)
+- [Ajude Chaves](../uri/69-7.cpp)
+- [Banco de Horas de Jaiminho](../uri/69-8.cpp)
+- [Ajude o Chapolin Colorado!](../uri/69-9.cpp)
+- [Viagem para Acapulco](../uri/69-10.cpp)
+- [Ajude Nhonho](../uri/69-11.cpp)
+- [Fonte dos Desejos](../uri/69-12.cpp)
+
 #### Contest Codeforces [#270](http://codeforces.com/contest/472/standings) \#187 (2h30) (Virtual Participation)
 - [Design Tutorial: Learn from Math](../codeforces/472A.cpp)
 - [Design Tutorial: Learn from Life](../codeforces/472B.cpp)
