@@ -1,6 +1,15 @@
 # Relatório de MAC0214 - Contests
 
-## Semana 5 (31 Agosto - 5 Setembro)
+## Semana 5 (31 Agosto - 6 Setembro)
+
+#### Contest Codechef [Insomnia 2015 Qualifier](https://www.codechef.com/rankings/INSQ2015) \#2 (3h)
+- [Who is at kth position](../codechef/insq15_e.cpp)
+- [Sesquipedalophobia](../codechef/insq15_d.cpp)
+- [The Gift Of Raksha Bandhan](../codechef/insq15_a.cpp)
+- [Nice subsets](../codechef/insq15_c.cpp)
+- [FCAR](../codechef/insq15_f.cpp)
+- [Lanku and mysterious country](../codechef/insq15_b.cpp)
+- [Collect the blocks](../codechef/insq15_h.cpp)
 
 #### Contest URI [Codando na Vila](https://www.urionlinejudge.com.br/judge/pt/rankings/contest/69) \#1 (5h)
 - [Ajude Kiko](../uri/69-1.cpp)
