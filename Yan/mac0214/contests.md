@@ -2,6 +2,10 @@
 
 ## Semana 5 (31 Agosto - 6 Setembro)
 
+#### Contest Codeforces [#254 Div1](http://codeforces.com/contest/444/standings) \#105 (2h)
+- [DZY Loves Physics](../codeforces/444A.cpp)
+- [DZY Loves Colors](../codeforces/444C.cpp)
+
 #### Contest Codechef [Insomnia 2015 Qualifier](https://www.codechef.com/rankings/INSQ2015) \#2 (3h)
 - [Who is at kth position](../codechef/insq15_e.cpp)
 - [Sesquipedalophobia](../codechef/insq15_d.cpp)
