@@ -12,60 +12,51 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
 
-int sz[(1 << 15) + 1];
-int memo[(1 << 13) + 1][1003];
-int a[1003], n;
-int to[1003];
+int memo[(1 << 13) + 2][1002];
+int a[1002], acc[1002], n;
+//int solve(int l, int i) {
+//	int r = acc[i] - l;
+//	if(i == n) {
+//		if(l == r && !(l & (l - 1))) return true;
+//		return !(l * r) && !((l + r) & (l + r - 1));
+//	}
+//	int &ans = memo[l][i];
+//	if(ans != -1) return ans;
+//	ans = 0;
+//	if(!l || !((a[i] - 1) & l)) ans |= solve(l + a[i], i + 1);
+//	if(!r || !((a[i] - 1) & r)) ans |= solve(l, i + 1);
+//	return ans;
+//}
 
-int solve(int l, int i) {
-	int r = to[i] - l;
-	int &ans = memo[l][i];
-	if(ans != -1) return ans;
-	ans = 0; int aa = a[i];
-	if(i == n) return ans = ((((l * r == 0) && !((l+r) & (l+r-1))) || ((l == r) && !(l & (l - 1)))));
-	if(l == 0) ans |= solve(aa, i + 1);
-	if(r == 0) ans |= solve(l,  i + 1);
-	if(l && (l & -l) >= aa) ans |= solve(l + aa, i + 1);
-	if(r && (r & -r) >= aa) ans |= solve(l, i + 1);
-	return ans;
+int& m(int i, int j) { return memo[i][j]; }
+void build(int l, int i) {
+	if(i == n) { putchar('\n'); return; }
+	int r = acc[i] - l;
+	if(!((a[i] - 1) & l) && m(l, i) == m(l + a[i], i + 1)) { putchar('l'); build(l + a[i], i + 1); }
+	else if(!((a[i] - 1) & r) && m(l, i) == m(l, i + 1)) { putchar('r'); build(l, i + 1); }
 }
-
-
 int main() {
-	int i, j;
+	int i, l;
 	for_tests(t, tt) {
-		scanf("%d", &n);
-		int tot = 0; to[0] = 0;
-		memset(sz, 0, sizeof sz);
+		scanf("%d", &n); acc[0] = 0;
 		for(i = 0; i < n; i++) {
 			scanf("%d", &a[i]);
-			tot += a[i];
-			to[i + 1] = tot;
-			sz[tot] = i + 1;
+			acc[i + 1] = a[i] + acc[i];
 		}
-		//for(i = tot; i >= 0; i--)
-		//	for(j = tot; j >= 0; j--) {
-		//		memo[i][j] = 0;
-		//		if((i || j) && !sz[i + j]) continue;
-		//		if(sz[i + j] == n) { memo[i][j] = (((i * j == 0) && !((i+j) & (i+j-1))) || ((i == j) && !(i & (i - 1)))); continue; }
-		//		int &ans = memo[i][j]; ans = 0; int aa = a[sz[i + j]];
-		//		if(i == 0) ans |= memo[aa][j];
-		//		if(j == 0) ans |= memo[i][aa];
-		//		if(j && !(j & ((1 << __builtin_ctz(aa)) - 1))) ans |= memo[i][j + aa];
-		//		if(i && !(i & ((1 << __builtin_ctz(aa)) - 1))) ans |= memo[i + aa][j];
-		//	}
-		memset(memo, -1, sizeof memo);
-		solve(0, 0);
-		if(!memo[0][0]) { puts("no"); continue; }
-		int l = 0, r = 0; i = 0;
-		while(i < n) {
-			//printf("%d\n", i);
-			r = to[i] - l; int aa = a[i];
-			if(1 == memo[aa][i+1]) { putchar('l'); l = aa; i++; continue; }
-			if(1 == memo[l][i+1]) { putchar('r'); i++; continue; }
-			if(1 == memo[l + aa][i + 1]) { putchar('l'); l += aa; i++; continue; }
-			if(1 == memo[l][i + 1]) { putchar('r'); i++; continue; }
+		for(i = n; i >= 0; i--) {
+			for(l = acc[i]; l >= 0; l--) {
+				int r = acc[i] - l;
+				if(i == n) {
+					if(l == r && !(l & (l - 1))) m(l, i) = true;
+					else m(l, i) =  !(l * r) && !((l + r) & (l + r - 1));
+					continue;
+				}
+				m(l, i) = 0;
+				if(!((a[i] - 1) & l)) m(l, i) |= m(l + a[i], i + 1);
+				if(!((a[i] - 1) & r)) m(l, i) |= m(l, i + 1);
+			}
 		}
-		putchar('\n');
+		if(!m(0, 0)) puts("no");
+		else build(0, 0);
 	}
 }

@@ -1,5 +1,11 @@
 # Relatório de MAC0214 - Problemas
 
+## Semana 7 (14 - 20 Setembro)
+
+## Semana 6 (7 - 13 Setembro)
+- Codeforces
+	- [576C](../codeforces/576C.cpp) | [Points on Plane](http://codeforces.com/contest/576/problem/C)
+
 ## Semana 5 (31 Agosto - 6 Setembro)
 - Codeforces
 	- [100739C](../codeforces/100739C.cpp) | [Broken robot](http://codeforces.com/problemset/gymProblem/100739/C)

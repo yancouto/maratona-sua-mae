@@ -11,22 +11,19 @@ typedef long double ld;
 template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
-const int MAX = 1000009;
-int x[MAX], y[MAX], p[MAX];
-bool cmp(int i, int j) {
-	int bli = y[i] / 1000, blj = y[j] / 1000;
-	if(bli != blj) return bli < blj;
-	if(x[i] != x[j]) return (x[i] < x[j]) ^ (bli & 1);
-	return y[i] < y[j];
-}
 
 int main() {
-	int i, n;
-	scanf("%d", &n);
-	for(i = 0; i < n; i++)
-		scanf("%d %d", &x[i], &y[i]), p[i] = i;
-	sort(p, p + n, cmp);
-	for(i = 0; i < n; i++)
-		printf("%d ", p[i] + 1);
-	putchar('\n');
+	for_tests(t, tt) {
+		int n, i; ld p;
+		scanf("%d %Lf", &n, &p); n--;
+		ld ans = 1;
+		for(i = 1; i <= n; i <<= 1) {
+			if(i & n) ans *= p;
+			p *= p;
+		}
+		ld o = 1000000000 * ans;
+		ans = 1000000000 - o;
+		if(!(n & 1)) swap(o, ans);
+		printf("%Lf %Lf %Lf\n", ans, o, ans + o);
+	}
 }
