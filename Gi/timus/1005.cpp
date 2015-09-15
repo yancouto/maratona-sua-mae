@@ -13,25 +13,22 @@ const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
 
 int n;
-int p[30], tot;
-int memo[20][1000005];
-
-int solve(int i, int sum) {
-	if(sum >= tot / 2) return abs(tot - sum - sum);
-	if(i == n) return abs(tot - sum - sum);
-	int &m = memo[i][sum];
-	if(m != -1) return m;
-	m = min(solve(i + 1, sum), solve(i + 1, sum + p[i]));
-	return m;
-}
+int p[30];
 
 int main() {
 	scanf("%d", &n);
-	for(int i = 0; i < n; i++) {
+	for(int i = 0; i < n; i++) 
 		scanf("%d", &p[i]);
-		tot += p[i];
+	int ans = 10000000;
+	for(int i = 0; i < (1 << n); i++) {
+		pii cur = pii(0, 0);
+		for(int j = 0; j < n; j++) {
+			int k = 1 << j;
+			if(i & k) cur.fst += p[j];
+			else cur.snd += p[j];
+		}
+		ans = min(ans, abs(cur.fst - cur.snd));
 	}
-	memset(memo, -1, sizeof memo);
-	printf("%d\n", solve(0, 0));
+	printf("%d\n", ans);
 	return 0;
 }
