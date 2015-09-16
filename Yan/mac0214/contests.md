@@ -1,8 +1,48 @@
 # Relatório de MAC0214 - Contests
 
+## Semana 7 (14 - 20 Setembro)
+
+## Semana 6 (7 - 13 Setembro)
+
+#### Maratona de Programação - [Regional SP](http://maratona.ime.usp.br/prim-fase15/saopaulo/Detailed_Scoreboard.pdf) \#2 (SP) \#5 (Brasil) (5h) ([gafeol](http://ahmed-aly.com/Profile.jsp?Username=gafeol), [gidelfino](http://ahmed-aly.com/Profile.jsp?Username=gidelfino))
+- Código não disponível - [Enunciados](http://maratona.ime.usp.br/prim-fase15/maratona.pdf)
+
+#### Contest Codeforces [#319 Div1](http://codeforces.com/contest/576/standings) \#254 (2h)
+- [Vasya and Petya's Game](../codeforces/576A.cpp)
+- [Invariance of Tree](../codeforces/576B.cpp)
+
+#### Contest URI [Tapioca´s Round I](https://www.urionlinejudge.com.br/judge/pt/rankings/contest/71) \#1 (3h)
+- [Guilherme e Suas Pipas](../uri/71-1.cpp)
+- [Rerisson e o Churrasco](../uri/71-3.cpp)
+- [Vitória e a Indecisão](../uri/71-4.cpp)
+- [Ordan e as Novinhas](../uri/71-5.cpp)
+- [Marianne e os Primos Gêmeos](../uri/71-6.cpp)
+- [Tapioca e a Chuva de Trufas](../uri/71-7.cpp)
+
+#### Contest MaratonIME [10-09-15](http://ahmed-aly.com/Standings.jsp?ID=20731) \#1 (5h) ([gafeol](http://ahmed-aly.com/Profile.jsp?Username=gafeol))
+- Telephone Lines
+- Running
+- Cow Contest
+- Cell Phone Network
+
+#### Contest MaratonIME [09-09-15](http://ahmed-aly.com/Standings.jsp?ID=20682) \#3 (5h) ([gafeol](http://ahmed-aly.com/Profile.jsp?Username=gafeol))
+- [Sums](../../SuaMae/MaratonIME/09-09-15/sum.cpp)
+- [Wheels](../../SuaMae/MaratonIME/09-09-15/wheel.cpp)
+- [Good morning!](../../SuaMae/MaratonIME/09-09-15/morning.cpp)
+
+#### Contest MaratonIME [08-09-15](http://ahmed-aly.com/Standings.jsp?ID=20630) \#1 (5h) ([gafeol](http://ahmed-aly.com/Profile.jsp?Username=gafeol))
+- [Counting BST](../../SuaMae/MaratonIME/08-09-15/bst.cpp)
+- [Playing With Stones](../../SuaMae/MaratonIME/08-09-15/stones.cpp)
+- [Arm Wrestling Tournament](../../SuaMae/MaratonIME/08-09-15/arm.cpp)
+- [Lightning Energy Report](../../SuaMae/MaratonIME/08-09-15/light.cpp)
+- [Transitive Closure](../../SuaMae/MaratonIME/08-09-15/graph.cpp)
+- [Just Sum It](../../SuaMae/MaratonIME/08-09-15/sum.cpp)
+- [Romantic Date](../../SuaMae/MaratonIME/08-09-15/date.cpp)
+- [Fire Drill](../../SuaMae/MaratonIME/08-09-15/fire.cpp)
+
 ## Semana 5 (31 Agosto - 6 Setembro)
 
-#### Contest Codeforces [#254 Div1](http://codeforces.com/contest/444/standings) \#105 (2h)
+#### Contest Codeforces [#254 Div1](http://codeforces.com/contest/444/standings) \#105 (2h) (Virtual Participation)
 - [DZY Loves Physics](../codeforces/444A.cpp)
 - [DZY Loves Colors](../codeforces/444C.cpp)
 
@@ -70,8 +110,8 @@
 - [Appleman and Tree](../codeforces/461B.cpp)
 
 #### Contest Topcoder [SRM 666 Div2](http://community.topcoder.com/stat?c=round_stats_sorted&rd=16515&dn=2&sq=Round_Statistics_Data&sc=16&sd=asc) \#34 (1h30)
-- [DevuAndGame](http://community.topcoder.com/stat?c=problem_solution&rm=326900&rd=16515&pm=13744&cr=40044946)
-- [GoodString](http://community.topcoder.com/stat?c=problem_solution&rm=326900&rd=16515&pm=13751&cr=40044946)
+- [DevuAndGame](../topcoder/DevuAndGame.cpp)
+- [GoodString](../topcoder/GoodString.cpp)
 
 #### Contest Codeforces [#295 Div1](http://codeforces.com/contest/521/standings) \#214 (2h) (Virtual Participation)
 - [DNA Alignment](../codeforces/521A.cpp)

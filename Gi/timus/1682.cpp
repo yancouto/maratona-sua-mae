@@ -11,10 +11,10 @@ typedef long double ld;
 template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
-#define MAX 200010
+#define MAX_N 200010
 
-vector<int> op[MAX], op2[MAX];
-int id[MAX], sz[MAX];
+vector<int> op[MAX_N], op2[MAX_N];
+int id[MAX_N], sz[MAX_N];
 
 int find(int i) {
 	if(id[i] != i) id[i] = find(id[i]);
@@ -32,17 +32,25 @@ bool join(int i, int j) {
 
 int main() {
 	ll k; scanf("%lld", &k);
-	for(ll i = 1; i < MAX; i++) {
-		id[i] = i; sz[i] = 1;
+	for(ll i = 1; i < MAX_N; i++) {
+		id[i] = i; 
+		sz[i] = 1;
 		set<int> cur;			
 		int aux = (i * i) % k;
-		for(int x = 0; x < op[aux].size(); x++) cur.insert(op[aux][x]);
+		for(int x = 0; x < op[aux].size(); x++) 
+			cur.insert(op[aux][x]);
 		aux = i % k;
-		for(int x = 0; x < op2[aux].size(); x++) cur.insert(op2[aux][x]);
-		if(!cur.empty())
-			for(set<int> :: iterator x = cur.begin(); x != cur.end(); ++x) {
-				if(join(i, (*x))) { printf("%d\n", i); return 0; }
+		for(int x = 0; x < op2[aux].size(); x++) 
+			cur.insert(op2[aux][x]);
+		if(!cur.empty()) {
+			set<int> :: iterator x;
+			for(x = cur.begin(); x != cur.end(); ++x) {
+				if(join(i, (*x))) { 
+					printf("%d\n", i); 
+					return 0; 
+				}
 			}
+		}
 		op[(k - (i % k)) % k].pb(i);
 		op2[(k - ((i * i) % k)) % k].pb(i);
 	}

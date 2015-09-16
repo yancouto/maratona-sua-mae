@@ -45,18 +45,21 @@ int fx(ll x) {
 	return sum;
 }
 
-int main() {
-	ll a, f; scanf("%lld", &a);
-	ll l = 1, r = 100000000000000000ll;
 
-	while(l < r) {
-		ll mid = (l + r) / 2;
-		n = count_dig(mid);
-		memset(memo, -1, sizeof memo);
-		f = solve(0, 1, 0);
-		if(f >= a) r = mid; 
-		else l = mid + 1; 
-	}
+ll bs(ll l, ll r, int x) {
+	if(l >= r) return l;
+	ll mid = (l + r) / 2;
+	n = count_dig(mid);
+	memset(memo, -1, sizeof memo);
+	ll val = solve(0, 1, 0);
+	if(val >= x) return solve(l, mid, x);
+	return solve(mid + 1, r, x);
+}
+
+int main() {
+	ll a, f, l, r; scanf("%lld", &a);
+	l = bs(1, 100000000000000000ll, a);
+	r = l;
 	n = count_dig(l);
 	memset(memo, -1, sizeof memo);
 	f = solve(0, 1, 0) % a;
@@ -67,4 +70,5 @@ int main() {
 	}
 	printf("%lld %lld\n", l, r);		
 	return 0;
+	
 }
