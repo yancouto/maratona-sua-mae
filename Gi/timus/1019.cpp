@@ -30,29 +30,37 @@ int main(){
 	int iev = 0;
 	ev[iev++] = make_pair(0, Evento(0, 1));
 	ev[iev++] = make_pair(1000000000, Evento(0, -1));
+
 	for(int i = 2; i < k+2; i++){
 		int a, b; char c;
 		scanf("%d %d %c", &a, &b, &c);
 		ev[iev++] = make_pair(a, Evento((c == 'b'), i));
 		ev[iev++] = make_pair(b, Evento((c == 'b'), -i));
 	}
+
 	sort(ev, ev+iev);
 	st.insert(Evento(0, 1));
 	int lwhite = 0, ini = 0, fim = -1;
+
 	for(int i = 1; i < iev; i++){
-		bool bwhite = (st.begin()->cor) == 0;
+		bool bwhite = true;
+		if((st.begin()->cor) != 0) bwhite = false;
 		int hm = ev[i].fst - lwhite;			
-		if(ev[i].snd.pty < 0) { st.erase(Evento(ev[i].snd.cor, -ev[i].snd.pty)); }
+		if(ev[i].snd.pty < 0) 
+			st.erase(Evento(ev[i].snd.cor, -ev[i].snd.pty)); 
 		else st.insert(ev[i].snd);
-		bool awhite = (st.begin()->cor) == 0;	
+		bool awhite = true;
+		if((st.begin()->cor) != 0) awhite = false;	
 		if(bwhite){
 			if(hm > fim - ini + 1){
 				ini = lwhite; 
 				fim = ev[i].fst - 1; //Checar se lado direito é fechado 
 			}
-			if(!awhite) lwhite = 1000000015;	
+			if(!awhite) 
+				lwhite = 1000000015;	
 		}
-		else if(awhite) lwhite = ev[i].fst;
+		else if(awhite) 
+			lwhite = ev[i].fst;
 	}
 	printf("%d %d\n", ini, fim+1); 
 	return 0;
