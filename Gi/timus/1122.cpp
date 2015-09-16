@@ -14,13 +14,32 @@ inline ull mod(ull x) { return x % modn; }
 
 int tab[4], mv[3];
 
+int sh(int m, int d) {
+	if(d >= 0) return m << d;
+	else return m >> (-d);
+}
 
 bool check(int mask) {
-	int t[4] = {tab[0], tab[1], tab[2], tab[3]}
-	for(int i = 0; i < 4; i++) {
-		for(int j = 0
-	}
-
+	int t[4] = {tab[0], tab[1], tab[2], tab[3]};
+	for(int i = 0; i < 4; i++) 
+		for(int j = 0; j < 4; j++) {
+			int k = 1 << (i * 4 + j);
+			if(k & mask) {
+				for(int k = -1; k <= 1; k++) {
+					if(i + k < 0) continue;
+					if(i + k > 3) continue;
+					t[i+k] = (t[i+k] ^ sh(mv[k+1], j-1));
+				}
+			}
+		}
+	bool yes = true;
+	for(int i = 0; i < 4 && yes; i++) 
+		if((t[i] & 0xf) != 0xf) yes = false;
+	if(yes) return true;
+	yes = true;
+	for(int i = 0; i < 4 && yes; i++) 
+		if(t[i] & 0xf) yes = false;
+	return yes;
 }
 
 
@@ -33,18 +52,19 @@ int main() {
 				tab[i] = (tab[i] | (1 << j));
 		}
 	}
-	
 	for(int i = 0; i < 3; i++) {
 		for(int j = 0; j < 3; j++) {
-			char c; scanf(" %d", &c);
-			if(c == 1)
+			char c; scanf(" %c", &c);
+			if(c == '1')
 				mv[i] = (mv[i] | (1 << j));
 		}
 	}
-
-	for(int t = 0; t < (1 << 16); t++) {
-		
+	int ans = INT_MAX;
+	for(int mask = 0; mask < (1 << 16); mask++) {
+		if(check(mask))
+			ans = min(ans, __builtin_popcount(mask));
 	}
-
+	if(ans == INT_MAX) puts("Impossible");
+	else printf("%d\n", ans);
 	return 0;
 }
