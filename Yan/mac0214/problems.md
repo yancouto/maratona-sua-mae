@@ -4,6 +4,10 @@
 - UVA
 	- [2592](../uva/2592.cpp) | [Best Compression Ever](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2592)
 	- [2595](../uva/2595.cpp) | [Event Planning](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2595)
+	- [2768](../uva/2768.cpp) | [Instant View of Big Bang](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2768)
+	- [4835](../uva/4835.cpp) | [Curious Guardians](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4835)
+- Codeforces
+	- [578C](../codeforces/578C.cpp) | [Weakness and Poorness](http://codeforces.com/contest/578/problem/C)
 
 ## Semana 6 (7 - 13 Setembro)
 - Codeforces

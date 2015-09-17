@@ -2,6 +2,10 @@
 
 ## Semana 7 (14 - 20 Setembro)
 
+#### Contest Codeforces [#320 Div1](http://codeforces.com/contest/578/standings) \#542 (2h30)
+- [A Problem about Polyline](../codeforces/578A.cpp)
+- ["Or" Game](../codeforces/578B.cpp)
+
 ## Semana 6 (7 - 13 Setembro)
 
 #### Maratona de Programação - [Regional SP](http://maratona.ime.usp.br/prim-fase15/saopaulo/Detailed_Scoreboard.pdf) \#2 (SP) \#5 (Brasil) (5h) ([gafeol](http://ahmed-aly.com/Profile.jsp?Username=gafeol), [gidelfino](http://ahmed-aly.com/Profile.jsp?Username=gidelfino))

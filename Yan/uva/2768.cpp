@@ -1,4 +1,3 @@
-// WA
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -31,15 +30,17 @@ int main() {
 		for(k = 0; k < n; k++)
 			for(i = 0; i < n; i++)
 				for(pii e : adj[i])
-					if(dist[e.fst] > dist[i] + e.snd)
+					if(dist[e.fst] > dist[i] + e.snd) {
 						dist[e.fst] = dist[i] + e.snd;
+					}
 		bool any = false;
-		for(i = 0; i < n + 2; i++)
-			for(pii e : adj[i])
-				if(dist[e.fst] > dist[i] + e.snd) {
-					bad[i] = any = true;
-					dist[e.fst] = dist[i] + e.snd;
-				}
+		for(k = 0; k < n + 2; k++)
+			for(i = 0; i < n; i++)
+				for(pii e : adj[i])
+					if(dist[e.fst] > dist[i] + e.snd) {
+						bad[e.fst] = any = true;
+						dist[e.fst] = -10000000;
+					}
 		if(!any) { printf("Case %d: impossible\n", tt); continue; }
 		printf("Case %d:", tt);
 		for(i = 0; i < n; i++)
