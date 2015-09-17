@@ -44,18 +44,15 @@ int main() {
 		int x = d0.back();		
 		d0.pop_back();
 		if(ign[x]) continue;
-		//printf("seeing %d (%d)\n", x, a[x]);
 		if(nu.count(A - a[x])) {
 			s[x] = 1; s[nu[A - a[x]]] = 1;
 			if(nu.count(B - (A - a[x])) && ((B - (A - a[x])) != (A - a[x]))) d0.push_back(nu[B - (A - a[x])]);
 			else ign[nu[A - a[x]]] = 1;
-			//printf("erasing %d and %d\n", a[x], A - a[x]);
 			nu.erase(a[x]); nu.erase(A - a[x]);
 		} else if(nu.count(B - a[x])) {
 			s[x] = 2; s[nu[B - a[x]]] = 2;
 			if(nu.count(A - (B - a[x])) && ((A - (B - a[x])) != (B - a[x]))) d0.push_back(nu[A - (B - a[x])]);
 			else ign[nu[B - a[x]]] = 1;
-			//printf("erasing %d and %d\n", a[x], B - a[x]);
 			nu.erase(a[x]); nu.erase(B - a[x]);
 		} else {
 			if(a[x] == (A - a[x])) { s[x] = 1; continue; }

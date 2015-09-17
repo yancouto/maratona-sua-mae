@@ -4,6 +4,7 @@
 # Stuff
 **/*~
 **/.nfs*
+*.swp
 
 # I/O
 **/in*

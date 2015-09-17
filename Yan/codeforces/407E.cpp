@@ -12,256 +12,270 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
 
-const int MAX = 200003;
-int n, k, d, a[MAX];
-struct tr {
+struct kd {
 	int mn, mx, sz;
-	tr() {}
-	tr(int a, int b, int c) : mn(a), mx(b), sz(c) {}
-	inline int& operator[](int i) {
-		if(i == 0) return mn;
-		if(i == 1) return mx;
-		return sz;
-	}
-	int val() const { return mx - mn + 1 - sz; }
-	bool operator < (const tr &o) const { return val() < o.val(); }
-};
-struct tt {
-	tr a, b[2];
-	tt() : a(0, 2000000009, 0) {
-		b[0] = tr(0, 2000000009, 0);
-		b[1] = tr(-2000000009, 0, 0);
+	int val() const { return (mx - mn - sz + 1); }
+	bool operator < (const kd &o) const { return val() < o.val(); }
+	void deb() {
+		printf("{%d, %d, %d}->%d\n", mn, mx, sz, val());
 	}
 };
-tt join(const tt &a, const tt &b) {
-	tt c;
-	c.a = min(a.a, b.a);
-	c.b[0] = min(a.b[0], b.b[0]);
-	c.b[1] = min(a.b[1], b.b[1]);
-	return c;
+struct kk {
+	kd a, mn, mx;
+};
+kd join(kd a, kd b) {
+	return min(a, b);
 }
-tt tree[MAX << 2];
-int li[2][MAX << 2], lsz[MAX << 2];
+kk join(kk a, kk b) {
+	return {min(a.a, b.a), min(a.mn, b.mn), min(a.mx, b.mx)};
+}
+const int MAX = 200009;
+kk tree[MAX << 2];
 inline int l(int i) { return i << 1; }
 inline int r(int i) { return (i << 1) + 1; }
+int lsz[MAX << 2], lmn[MAX << 2], lmx[MAX << 2];
 
-void unlazei(int ind, int i, int from, int to) {
-	if(!li[ind][i]) return;
-	tree[i].a = tree[i].b[ind];
-	tree[i].a[ind] = li[ind][i];
-	tree[i].b[ind^1][ind] = li[ind][i];
-	if(from != to)
-		li[ind][l(i)] = li[ind][r(i)] = li[ind][i];
-	li[ind][i] = 0;
+void build_tree(int i, int from, int to) {
+	lsz[i] = lmn[i] = lmx[i] = -1;
+	if(from == to) {
+		kd c = {0, 0, 0};
+		tree[i] = {c, c, c};
+		return;
+	}
+	int mid = (from + to) / 2;
+	build_tree(l(i), from, mid);
+	build_tree(r(i), mid + 1, to);
+	tree[i] = join(tree[l(i)], tree[r(i)]);
 }
-void unlazesz(int i, int from, int to) {
-	if(!lsz[i]) return;
+
+void unsz(int i, int from, int to) {
+	if(lsz[i] == -1) return;
 	tree[i].a.sz += lsz[i];
-	tree[i].b[0].sz += lsz[i];
-	tree[i].b[1].sz += lsz[i];
+	tree[i].mn.sz += lsz[i];
+	tree[i].mx.sz += lsz[i];
 	if(from != to) {
 		lsz[l(i)] += lsz[i];
 		lsz[r(i)] += lsz[i];
 	}
-	lsz[i] = 0;
+	lsz[i] = -1;
 }
 
-void unlaze(int i, int from, int to) {
-	if(li[0][i] && li[1][i]) {
-		for(int j = 0; j < 2; j++) {
-			tree[i].b[!j][j] = tree[i].a[j] = li[j][i];
-			if(from != to) li[j][l(i)] = li[j][r(i)] = li[j][i];
-			li[j][i] = 0;
-		}
-	} else
-		for(int j = 0; j < 2; j++)
-			unlazei(j, i, from, to);
-	unlazesz(i, from, to);
-}
-
-tt query(int i, int from, int to, int ql, int qr) {
-	unlaze(i, from, to);
-	if(from > qr || to < ql) return tt();
-	if(from >= ql && to <= qr) return tree[i];
-	int mid = (from + to) / 2;
-	return join(query(l(i), from, mid, ql, qr), query(r(i), mid + 1, to, ql, qr));
-}
-
-void set_i(int ind, int i, int from, int to, int ql, int qr, int val) {
-	unlaze(i, from, to);
-	if(from > qr || to < ql) return;
-	if(from >= ql && to <= qr) {
-		li[ind][i] = val;
-		unlazei(ind, i, from, to);
-		return;
+void unmn(int i, int from, int to) {
+	if(lmn[i] == -1) return;
+	//printf("unmn(%d, %d, %d) -- before\n", i, from, to);
+	//tree[i].a.deb();
+	tree[i].a = tree[i].mx;
+	tree[i].a.mn = lmn[i];
+	tree[i].mn.mn = lmn[i];
+	//tree[i].a.deb();
+	if(from != to) {
+		lmn[l(i)] = lmn[i];
+		lmn[r(i)] = lmn[i];
 	}
-	int mid = (from + to) / 2;
-	set_i(ind, l(i), from, mid, ql, qr, val);
-	set_i(ind, r(i), mid + 1, to, ql, qr, val);
-	tree[i] = join(tree[l(i)], tree[r(i)]);
+	lmn[i] = -1;
 }
+void unmx(int i, int from, int to) {
+	if(lmx[i] == -1) return;
+	//printf("unmx(%d, %d, %d) -- before\n", i, from, to);
+	//tree[i].a.deb();
+	tree[i].a = tree[i].mn;
+	tree[i].a.mx = lmx[i];
+	tree[i].mx.mx = lmx[i];
+	//tree[i].a.deb();
+	if(from != to) {
+		lmx[l(i)] = lmx[i];
+		lmx[r(i)] = lmx[i];
+	}
+	lmx[i] = -1;
+}
+inline void unlaze(int i, int f, int t) { unsz(i, f, t); unmn(i, f, t); unmx(i, f, t); }
 
-void add1_sz(int i, int from, int to, int ql, int qr) {
+kd query_tree(int i, int from, int to, int ql, int qr) {
+	unlaze(i, from, to);
+	if(from > qr || to < ql) return {0, INT_MAX - 10, 0};
+	if(from >= ql && to <= qr) return tree[i].a;
+	int mid = (from + to) / 2;
+	return join(query_tree(l(i), from, mid, ql, qr),
+	          query_tree(r(i), mid + 1, to, ql, qr));
+}
+void add_sz(int i, int from, int to, int ql, int qr) {
 	unlaze(i, from, to);
 	if(from > qr || to < ql) return;
 	if(from >= ql && to <= qr) {
+		printf("doing sz(%d, %d) -- ", from + 1, to + 1); tree[i].a.deb();
 		lsz[i] = 1;
-		unlazesz(i, from, to);
+		unsz(i, from, to);
+		tree[i].a.deb();
 		return;
 	}
 	int mid = (from + to) / 2;
-	add1_sz(l(i), from, mid, ql, qr);
-	add1_sz(r(i), mid + 1, to, ql, qr);
+	add_sz(l(i), from, mid, ql, qr);
+	add_sz(r(i), mid + 1, to, ql, qr);
 	tree[i] = join(tree[l(i)], tree[r(i)]);
 }
-int mxx[MAX][19], mnn[MAX][19];
-void pre() {
-	int i, j;
-	for(i = 0; i < n; i++)
-		mxx[i][0] = mnn[i][0] = a[i] / d;
-	for(j = 1; j < 19; j++)
-		for(i = 0; i < n; i++) {
-			if(i + (1 << (j - 1)) >= n) {
-				mxx[i][j] = mxx[i][j - 1];
-				mnn[i][j] = mnn[i][j - 1];
-				continue;
-			}
-			mxx[i][j] = max(mxx[i][j - 1], mxx[i + (1 << (j - 1))][j - 1]);
-			mnn[i][j] = min(mnn[i][j - 1], mnn[i + (1 << (j - 1))][j - 1]);
-		}
+void set_mn(int i, int from, int to, int ql, int qr, int x) {
+	unlaze(i, from, to);
+	if(from > qr || to < ql) return;
+	if(from >= ql && to <= qr) {
+		lmn[i] = x;
+		unmn(i, from, to);
+		return;
+	}
+	int mid = (from + to) / 2;
+	set_mn(l(i), from, mid, ql, qr, x);
+	set_mn(r(i), mid + 1, to, ql, qr, x);
+	tree[i] = join(tree[l(i)], tree[r(i)]);
 }
-int mn(int s, int e) {
-	int p = 31 - __builtin_clz(e - s + 1);
-	return min(mnn[s][p], mnn[e - (1 << p) + 1][p]);
+void set_mx(int i, int from, int to, int ql, int qr, int x) {
+	unlaze(i, from, to);
+	if(from > qr || to < ql) return;
+	if(from >= ql && to <= qr) {
+		lmx[i] = x;
+		unmx(i, from, to);
+		return;
+	}
+	int mid = (from + to) / 2;
+	set_mx(l(i), from, mid, ql, qr, x);
+	set_mx(r(i), mid + 1, to, ql, qr, x);
+	tree[i] = join(tree[l(i)], tree[r(i)]);
 }
-int mx(int s, int e) {
-	int p = 31 - __builtin_clz(e - s + 1);
-	return max(mxx[s][p], mxx[e - (1 << p) + 1][p]);
+void set_mnmx(int i, int from, int to, int qi, int x) {
+	unlaze(i, from, to);
+	if(from == to) {
+		tree[i].a.mn = tree[i].a.mx = tree[i].mn.mn = tree[i].mx.mx = x;
+		return;
+	}
+	int mid = (from + to) / 2;
+	if(qi <= mid) set_mnmx(l(i), from, mid, qi, x);
+	else set_mnmx(r(i), mid + 1, to, qi, x);
+	tree[i] = join(tree[l(i)], tree[r(i)]);
 }
 
 map<int, int> ocs, noc;
-
-void add(int num) {
-	ocs[noc[num]]--;
-	ocs[++noc[num]]++;
+int a[MAX], n;
+void norm(int &s, int e) {
+	noc[ocs[a[e]]]--;
+	noc[++ocs[a[e]]]++;
+	while(noc.rbegin()->fst > 1) {
+		if(--noc[ocs[a[s]]] == 0) noc.erase(ocs[a[s]]);
+		noc[--ocs[a[s++]]]++;
+	}
+}
+int mn[MAX][20], mx[MAX][20]; 
+inline int get_mn(int s, int e) {
+	int k = 31 - __builtin_clz(e - s + 1);
+	return min(mn[s][k], mn[e - (1 << k) + 1][k]);
+}
+inline int get_mx(int s, int e) {
+	int k = 31 - __builtin_clz(e - s + 1);
+	return max(mx[s][k], mx[e - (1 << k) + 1][k]);
 }
 
-void rem(int num) {
-	if(--ocs[noc[num]] == 0) ocs.erase(noc[num]);
-	ocs[--noc[num]]++;
-}
-
-int bl, br;
-void d0() {
-	for(int i = n - 1; i >= 0; ) {
-		int j = i;
-		for(i--; i >= 0 && a[i] == a[i + 1]; i--);
-		if(j - i >= br - bl + 1) {
-			bl = i + 1;
-			br = j;
+void pre() {
+	int i, j;
+	for(i = 0; i < n; i++)
+		mn[i][0] = mx[i][0] = a[i];
+	for(j = 1; j < 20; j++)
+		for(i = 0; i < n; i++) {
+			if(i + (1 << j) - 1 >= n) {
+				mn[i][j] = mn[i][j - 1];
+				mx[i][j] = mx[i][j - 1];
+				continue;
+			}
+			mn[i][j] = min(mn[i][j - 1], mn[i + (1 << j) - 1][j - 1]);
+			mx[i][j] = max(mx[i][j - 1], mx[i + (1 << j) - 1][j - 1]);
 		}
+}
+
+int bl, br, k;
+void process_mn(int s, int e, int sl, int i) {
+	int sr = i;
+	while(sl < sr) {
+		int mid = (sl + sr) / 2;
+		if(get_mn(mid, i) == mn[i][0]) sr = mid;
+		else sl = mid + 1;
+	}
+	if(sl == i) return;
+	printf("upd (%d, %d) min %d\n", sl+1, i+1, a[i]);
+	set_mn(1, s, e, sl, i, a[i]);
+}
+void process_mx(int s, int e, int sl, int i) {
+	int sr = i;
+	while(sl < sr) {
+		int mid = (sl + sr) / 2;
+		if(get_mx(mid, i) == mx[i][0]) sr = mid;
+		else sl = mid + 1;
+	}
+	if(sr == i) return;
+	printf("upd (%d, %d) max %d\n", sl+1, i+1, a[i]);
+	set_mx(1, s, e, sl, i, a[i]);
+}
+void process_kd(int s, int e, int sl, int i, int &ql, int &qr) {
+	if(query_tree(1, s, e, sl, i).val() > k) { ql = e + 1; qr = -1; return; }
+	puts("SEARCH");
+	while(ql < qr) {
+		int mid = (ql + qr) / 2;
+		printf("(%d, %d, %d) -> ", ql, mid, qr); query_tree(1, s, e, sl, mid).deb();
+		if(query_tree(1, s, e, sl, mid).val() <= k) qr = mid;
+		else ql = mid + 1;
+	}
+	printf("(%d, %d) bestOOO\n", ql + 1, i + 1);
+}
+void deb(int s, int e, int ql, int qr) {
+	for(int i = ql; i <= qr; i++) {
+		kd a = query_tree(1, s, e, i, i);
+		printf("(%d, %d) -- {%d, %d, %d}->%d\n", i + 1, qr + 1, a.mn, a.mx, a.sz, a.val());
+	}
+}
+
+void solve(int s, int e) {
+	printf("solve(%d, %d)\n", s + 1, e + 1);
+	ocs.clear(); noc.clear(); noc[0] = 0;
+	build_tree(1, s, e);
+	int i, sl = s;
+	for(i = s; i <= e; i++) {
+		puts("---------------------");
+		norm(sl, i);
+		printf("[%d, %d]\n", sl + 1, i + 1);
+		set_mnmx(1, s, e, i, a[i]);
+		add_sz(1, s, e, sl, i);
+		process_mn(s, e, sl, i);
+		process_mx(s, e, sl, i);
+		int left = sl, right = i;
+		deb(s, e, sl, i);
+		process_kd(s, e, sl, i, left, right);
+		printf("(%d, %d) best\n", left + 1, i + 1);
+		if(i - left > br - bl) { br = i; bl = left; }
+	}
+}
+
+void do0() {
+	int left = 0;
+	for(int i = 0; i < n; i++) {
+		if(i && a[i] != a[i - 1]) left = i;
+		if(i - left > br - bl) { br = i; bl = left; }
 	}
 	printf("%d %d\n", bl + 1, br + 1);
 	exit(0);
 }
-void process(int s, int e) {
-	int i;
-	ocs.clear(); noc.clear();
-	ocs[0] = 0; int cr = e;
-	for(i = e; i >= s; i--) {
-		add(a[i]);
-		while(true) {
-			auto it = ocs.end(); --it;
-			if(it->fst <= 1) break;
-			rem(a[cr--]);
-		}
-		//printf("pos %d -> %d\n", i, cr);
-		//for(int j = i; j <= cr; j++) {
-		//	tt t = query(1, 0, n - 1, j, cr);
-		//	printf("(%d, %d, %d) ", t.a.mn, t.a.mx, t.a.sz);
-		//	//printf("%d ", t.a.val());
-		//}
-		//putchar('\n');
-		add1_sz(1, 0, n - 1, i, cr);
-		int mnl = i, mnr = cr;
-		while(mnl < mnr) {
-			int m = (mnl + mnr + 1) / 2;
-			if(mn(i, m) == a[i]) mnl = m;
-			else mnr = m - 1;
-		}
-		//for(int j = i; j <= cr; j++) {
-		//	tt t = query(1, 0, n - 1, j, cr);
-		//	printf("(%d, %d, %d) ", t.a.mn, t.a.mx, t.a.sz);
-		//	//printf("%d ", t.a.val());
-		//}
-		//putchar('\n');
-		set_i(0, 1, 0, n - 1, i, mnl, a[i]);
-		mnl = i; mnr = cr;
-		while(mnl < mnr) {
-			int m = (mnl + mnr + 1) / 2;
-			if(mx(i, m) == a[i]) mnl = m;
-			else mnr = m - 1;
-		}
-		//for(int j = i; j <= cr; j++) {
-		//	tt t = query(1, 0, n - 1, j, cr);
-		//	printf("(%d, %d, %d) ", t.a.mn, t.a.mx, t.a.sz);
-		//	//printf("%d ", t.a.val());
-		//}
-		//putchar('\n');
-		set_i(1, 1, 0, n - 1, i, mnl, a[i]);
-		//for(int j = i; j <= cr; j++) {
-		//	tt t = query(1, 0, n - 1, j, cr);
-		//	printf("(%d, %d, %d) ", t.a.mn, t.a.mx, t.a.sz);
-		//	//printf("%d ", t.a.val());
-		//}
-		//putchar('\n');
-		//for(int j = i; j <= cr; j++) {
-		//	tt t = query(1, 0, n - 1, j, j);
-		//	printf("(%d, %d, %d) ", t.a.mn, t.a.mx, t.a.sz);
-		//	//printf("%d ", t.a.val());
-		//}
-		//putchar('\n');
-		//for(int j = i; j <= cr; j++) {
-		//	tt t = query(1, 0, n - 1, j, cr);
-		//	//printf("(%d, %d, %d) ", t.a.mn, t.a.mx, t.a.sz);
-		//	printf("%d ", t.a.val());
-		//}
-		//putchar('\n');
-		mnl = i; mnr = cr;
-		while(mnl < mnr) {
-			int m = (mnl + mnr + 1) / 2;
-			if(query(1, 0, n - 1, m, cr).a.val() <= k) mnl = m;
-			else mnr = m - 1;
-		}
-		//printf("gto %d -> %d\n", i, mnl);
-		if(mnl - i + 1 >= br - bl + 1) {
-			bl = i;
-			br = mnl;
-			//printf("%d -> %d: ", bl, br);
-			//for(int j = bl; j <= br; j++)
-			//	printf("%d ", a[j]);
-			//printf("ok\n");
-		}
-	}
-}
 
 int main() {
-	int i;
+	int i, d;
 	scanf("%d %d %d", &n, &k, &d);
-	for(i = 0; i < n; i++) {
+	for(i = 0; i < n; i++){
 		scanf("%d", &a[i]);
 		a[i] += 1000000001;
 	}
-	bl = 0; br = -1;
-	if(d == 0) d0();
 	pre();
-	for(i = n - 1; i >= 0;) {
-		int j = i;
-		for(i--; i >= 0 && (a[i] % d) == (a[i+1] % d); i--) a[i+1] /= d;
-		a[i+1] /= d;
-		process(i + 1, j);
-		//puts("----------------");
+	bl = 0; br = -1;
+	if(d == 0) do0();
+	int left = 0;
+	for(i = 0; i < n; i++) {
+		if(i == n - 1 || (a[i + 1] % d) != (a[i] % d)) {
+			a[i] /= d;
+			solve(left, i);
+			left = i + 1;
+		} else a[i] /= d;
 	}
 	printf("%d %d\n", bl + 1, br + 1);
-	return 0;
 }
