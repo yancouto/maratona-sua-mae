@@ -2,6 +2,13 @@
 
 ## Semana 7 (14 - 20 Setembro)
 
+#### Contest MaratonIME [NCPC 2008](http://ahmed-aly.com/Standings.jsp?ID=20832) \#EmAndamento (Long Contest)
+	- [Aspen Avenue](../uva/2591.cpp)
+	- [Best Compression Ever](../uva/2592.cpp)
+	- [Event Planning](../uva/2595.cpp)
+	- [Fixing the Bugs](../uva/2596.cpp)
+	- [Getting Gold](../uva/2597.cpp)
+
 #### Contest Codeforces [#320 Div1](http://codeforces.com/contest/578/standings) \#542 (2h30)
 - [A Problem about Polyline](../codeforces/578A.cpp)
 - ["Or" Game](../codeforces/578B.cpp)
