@@ -25,36 +25,7 @@ int mark[10];
 bool brute(int pos) {
 	int i = pos / N;
 	int j = pos % N;
-	if(i && !j) {
-	//	puts("Checando linha");
-		memset(mark, 0, sizeof mark);
-		for(int k = 0; k < N; k++)
-			mark[tab[i-1][k]] = 1;
-		for(int k = 1; k <= N; k++)
-			if(!mark[k]) return false;
-	}
-	if(i == N - 1 && j) {
-	//	puts("Checando coluna");
-		memset(mark, 0, sizeof mark);
-		for(int k = 0; k < N; k++)
-			mark[tab[k][j-1]] = 1;
-		for(int k = 1; k <= N; k++)
-			if(!mark[k]) return false;
-	}
-	if(pos && isCorner(pos-1)) {
-	//	puts("Checando bordas");
-		memset(mark, 0, sizeof mark);
-		int ii = (pos - 1) / N;
-		int jj = (pos - 1) % N;
-		for(int k = ii - n + 1; k <= ii; k++)
-			for(int l = jj - n + 1; l <= jj; l++)
-				mark[tab[k][l]] = 1;
-		for(int k = 1; k <= N; k++)
-			if(!mark[k]) return false;
-				
-	}
 	if(pos == N * N) {
-//		puts("Terminei o tabuleiro");
 		for(int k = 0; k < N; k++) {
 			for(int l = 0; l < N; l++) {
 				printf("%d", tab[k][l]);
@@ -64,9 +35,22 @@ bool brute(int pos) {
 		}
 		return true;
 	}
-	if(tab[i][j])
-		return brute(pos + 1);
-	for(int dig = 1; dig <= 9; dig++) {
+	if(tab[i][j]) 
+		return brute(pos+1);
+	
+	int mm[10];
+	memset(mm, 0, sizeof mm);
+	for(int k = 0; k < N; k++)
+		mm[tab[k][j]] = 1;
+	for(int k = 0; k < N; k++)
+		mm[tab[i][k]] = 1;
+	int x = i - (i%n);
+	int y = j - (j%n);
+	for(int k = x; k < x + n; k++)
+		for(int l = y; l < y + n; l++)
+			mm[tab[k][l]] = 1;
+	for(int dig = 1; dig <= N; dig++) {
+		if(mm[dig]) continue;
 		tab[i][j] = dig;
 		if(brute(pos+1)) return true;
 	}
@@ -75,13 +59,33 @@ bool brute(int pos) {
 }
 
 int main() {
+	int um = 0;
 	while(scanf("%d", &n) != EOF) {
+		if(um) putchar('\n');
 		N = n*n;
 		for(int i = 0; i < N; i++) 
 			for(int j = 0; j < N; j++) 
 				scanf("%d", &tab[i][j]);
-		puts("Lido");
+		int mm[10]; 
+		memset(mm, 0, sizeof mm);
+		bool stop = false;
+		for(int i = 0; i < N; i++) 
+			for(int j = 0; j < N; j++)
+				mm[tab[j][i]] = 1;
+		for(int i = 1; i <= N && !stop; i++)
+			if(mm[i] > 1) {  puts("NO SOLUTION"); stop = true; }
+		if(stop) continue;
+
+		memset(mm, 0, sizeof mm);
+		for(int i = 0; i < N; i++) 
+			for(int j = 0; j < N; j++)
+				mm[tab[j][i]] = 1;
+		for(int i = 1; i <= N && !stop; i++)
+			if(mm[i] > 1) {  puts("NO SOLUTION"); stop = true; }
+		if(stop) continue;
+
 		if(!brute(0)) puts("NO SOLUTION");
+		um++;
 	}
 	return 0;
 }
