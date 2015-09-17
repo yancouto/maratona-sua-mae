@@ -13,12 +13,13 @@ const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
 const int oo = 1000000000;
 
-int T, w, n;
-int memo[35][1005];
-pii v[35];
+int T, W;
+int n;
+int tres[35][2];
+int memo[35][10005];
 
 int solve(int i, int t) {
-	if(t > T) return -oo; 
+	if(t > T) return -oo;
 	if(i == n) return 0;
 	int &m = memo[i][t];
 	if(m != -1) return m;
@@ -36,24 +37,25 @@ void build(int i, int t) {
 	else {
 		ans.pb(i);
 		build(i + 1, t + 3 * w * v[i].fst);
-	}
+	m = max(m, tres[i][1] + solve(i + 1, t + 3 * W * tres[i][0]));
+	return m;
 }
 
 int main() {
-	int tt = 1;
-	while(scanf("%d %d", &T, &w) != EOF) {
-		if(tt > 1) putchar('\n');
+	int ini = 0;
+	while(scanf("%d %d", &T, &W) != EOF) {
 		memset(memo, -1, sizeof memo);
+		ans.clear();
+		if(ini > 0) putchar('\n');
 		scanf("%d", &n);
-		for(int i = 0; i < n; i++) 
-			scanf("%d %d", &v[i].fst, &v[i].snd);
-		printf("%d\n", solve(0, 0));	
+		for(int i = 0; i < n; i++)
+			scanf("%d %d", &tres[i][0], &tres[i][1]);
+		printf("%d\n", solve(0, 0));
 		build(0, 0);
 		printf("%d\n", ans.size());
-		for(int i = 0; i < ans.size(); i++) 
-			printf("%d %d\n", v[ans[i]].fst, v[ans[i]].snd);
-		ans.clear();
-		tt++;
+		for(int i = 0; i < ans.size(); i++)
+			printf("%d %d\n", ans[i].fst, ans[i].snd);
+		ini = 1;
 	}
 	return 0;
 }

@@ -3,7 +3,9 @@ Meu objetivo em MAC0214 é estudar para a Maratona de Programação, resolvendo 
 
 O principal objetivo desse estudo é conseguir uma boa posição e vagas para as etapas da Maratona (Seletiva, Regional, Brasileira e Mundial), tanto nesse ano, quanto nos próximos. Um objetivo secundário é conseguir boa classificação em sites com competições online frequentes (Codeforces, Codechef, Topcoder, ...). Além disso, o conhecimento adquirido dessa forma pode ser útil para matérias da própria graduação, já tendo uma base forte para essas matérias (como ocorreu em Análise de Algoritmos, em que eu já tinha visto grande parte da matéria nos meus treinos).
 
-Para medir meu progresso semanalmente, criei uma [pasta no github](https://github.com/yancouto/maratona-sua-mae/tree/master/Yan/mac0214) com as informações do meu treino, um arquivo mostra os contests que participei, no formato:
+Para medir meu progresso semanalmente é possível checar meus problemas resolvidos pelo [Ahmed Aly](http://ahmed-aly.com/Profile.jsp?Username=yancouto), além disso, criei uma [pasta no github](https://github.com/yancouto/maratona-sua-mae/tree/master/Yan/mac0214) com as informações do meu treino.
+
+Um arquivo mostra os contests que participei, no formato:
 
 >Contest **Juiz Nome** #**Posição** (**Duração**) (**Outros Integrantes**)
 >- **Problema Resolvido 1**
@@ -20,4 +22,4 @@ Onde **ID** é um link para a resolução, e **Nome** é um link para o enunciad
 
 Ambos os arquivos são organizados por semana, e serão atualizados frequentemente.
 
-Observação: Eu também estou cursando a matéria [**MAC0327 - Desafios de Programação**](https://uspdigital.usp.br/jupiterweb/obterDisciplina?sgldis=MAC0327&nomdis=), que também consiste de resolver problemas em juízes online, mas como já faz parte de alguma outra matéria que estou participando, os problemas resolvidos em Desafios **não** serão contados no meu progresso para MAC0214.
+Observação: Eu também estou cursando a matéria **MAC0327 - Desafios de Programação**, que também consiste de resolver problemas em juízes online, mas como já faz parte de alguma outra matéria que estou participando, os problemas resolvidos em Desafios **não** serão contados no meu progresso para MAC0214.
