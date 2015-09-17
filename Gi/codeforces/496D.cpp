@@ -16,8 +16,7 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
 
-int n;
-int info[100005], jog1[100005], jog2[100005];
+int n, info[100005], jog1[100005], jog2[100005];
 
 int bs(int b, int e, int x, int jog[100005]){
 	if(b == e) {

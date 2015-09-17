@@ -13,8 +13,7 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
 
-int n, m;
-int seen[105];
+int n, m, seen[105];
 char mat[105][105];
 
 int main(){

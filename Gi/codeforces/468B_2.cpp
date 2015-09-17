@@ -15,7 +15,7 @@ typedef long double ld;
 template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
-
+int aloha;
 int n, a, b, p;
 int seq[100005], seen[100005], mask[100005];
 map<int, int> mp;

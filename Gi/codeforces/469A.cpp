@@ -13,7 +13,7 @@ const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
 
 int seen[105];
-
+int aloha;
 int main(){
 	int n, p, q;
 	scanf("%d %d", &n, &p);

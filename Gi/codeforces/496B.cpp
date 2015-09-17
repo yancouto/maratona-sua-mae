@@ -3,8 +3,7 @@
 
 using namespace std;
 
-int n;
-int l[1005], aux[1005], resp[1005];
+int n, l[1005], aux[1005], resp[1005];
 
 int main(){
 	scanf("%d", &n);

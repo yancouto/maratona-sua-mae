@@ -13,6 +13,7 @@ const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
 
 int p, q, l, r;
+int aloha;
 vector<pii> x, z;
 int main(){
 	scanf("%d %d %d %d", &p, &q, &l, &r);
