@@ -2,6 +2,10 @@
 
 ## Semana 7 (14 - 20 Setembro)
 
+#### Contest Codeforces [#110 Div1](http://codeforces.com/contest/156/standings) \#235 (2h) (Virtual Participation)
+- [Message](../codeforces/156A.cpp)
+- [Suspects](../codeforces/156B.cpp)
+
 #### Contest MaratonIME [NCPC 2008](http://ahmed-aly.com/Standings.jsp?ID=20832) \#EmAndamento (Long Contest)
 	- [Aspen Avenue](../uva/2591.cpp)
 	- [Best Compression Ever](../uva/2592.cpp)
