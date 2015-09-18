@@ -4,8 +4,16 @@
 - UVA
 	- [2768](../uva/2768.cpp) | [Instant View of Big Bang](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2768)
 	- [4835](../uva/4835.cpp) | [Curious Guardians](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4835)
+	- [2591](../uva/2591) | [Aspen Avenue](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2591)
+	- [2592](../uva/2592.cpp) | [Best Compression Ever](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2592)
+	- [2595](../uva/2595.cpp) | [Event Planning](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2595)
+	- [2596](../uva/2596.cpp) | [Fixing the Bugs](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2596)
+	- [2597](../uva/2597.cpp) | [Getting Gold](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2597)
+	- [2599](../uva/2599.cpp) | [Introspective Caching](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2599)
 - Codeforces
 	- [578C](../codeforces/578C.cpp) | [Weakness and Poorness](http://codeforces.com/contest/578/problem/C)
+- SPOJ
+	- [beads](../spoj/beads.cpp) | [Glass Beads](http://www.spoj.com/problems/BEADS/)
 
 ## Semana 6 (7 - 13 Setembro)
 - Codeforces
