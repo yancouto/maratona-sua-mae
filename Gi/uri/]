@@ -1,0 +1,56 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define fst first
+#define snd second
+typedef unsigned long long ull;
+typedef long long ll;
+typedef pair<int, int> pii;
+#define pb push_back
+#define for_tests(t, tt) int t; scanf("%d", &t); for(int tt = 1; tt <= t; tt++)
+template<typename T> inline T abs(T t) { return t < 0? -t : t; }
+const ll modn = 1000000007;
+inline ll mod(ll x) { return x % modn; }
+
+
+struct raj {
+	int x, y;
+}
+
+int N, H, K;
+raj up[2005], low[2005];
+int iup, ilow;
+
+bool comp(raj a, raj b) {
+	if(a.x == b.x)
+		return a.y > b.y;
+	return a.x < b.x;
+}
+
+int main() {
+	int t; scanf("%d", &t);
+	while(t--) {
+		scanf("%d %d %d", &N, &H, &K);
+		iup = ilow = 0;
+		for(int i = 0; i < N; i++) {
+			int a, b;
+			scanf("%d %d", &a, &b);
+			if(b > a) {
+				up[iup].x = a;
+				up[iup++].y = b;
+			}
+			else {
+				low[ilow].x = a;
+				low[ilow++].y = b;
+			}
+		}
+		sort(up, up+iup, comp);
+		for(int i = 0; i < iup; i++) {
+			H -= up[i].x;
+			if(H <= 0) { puts("N"); continue; }
+			H += up[i].y;
+		}
+
+
+	}
+	return 0;
+}
