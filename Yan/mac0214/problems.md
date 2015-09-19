@@ -14,6 +14,7 @@
 	- [578C](../codeforces/578C.cpp) | [Weakness and Poorness](http://codeforces.com/contest/578/problem/C)
 - SPOJ
 	- [beads](../spoj/beads.cpp) | [Glass Beads](http://www.spoj.com/problems/BEADS/)
+	- [disubstr](../spoj/disubstr.cpp) | [Distinct Substrings](http://www.spoj.com/problems/BEADS/)
 
 ## Semana 6 (7 - 13 Setembro)
 - Codeforces
