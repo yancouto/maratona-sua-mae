@@ -12,36 +12,63 @@ const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 const int MAX = 100009;
 struct no {
-	int a, b, i;
-	bool operator < (no o) const { return pii(a, b) < pii(o.a, o.b); }
-	bool operator == (no o) { return a == o.a && b == o.b; }
-} l[MAX];
-int p[MAX][19], r[MAX], lc[MAX], n;
+	int i; pii p;
+	bool operator < (no o) const { return p < o.p; }
+	bool operator == (no o) const { return p == o.p; }
+	no() {}
+	no(int x, int y, int z) : p(x, y), i(z) {}
+} l[MAX], g[2*MAX];
+int c[2*MAX];
+int p[MAX][19], r[MAX], lc[MAX], n, lg;
 char s[MAX];
 int lcp(int i, int j) {
 	int t = 0;
-	for(int k = 18; k >= 0; k--)
+	for(int k = lg - 1; k >= 0; k--)
 		if(p[i + t][k] == p[j + t][k] && i + t + (1 << k) <= n && j + t + (1 << k) <= n)
 			t += 1 << k;
 	return t;
 }
-
+int d[256];
 int main() {
-	int i, j;
+	int i, j, k;
 	while(true) {
 		scanf("%s", s); n = strlen(s);
 		if(s[0] == '*') return 0;
+		lg = 33 - __builtin_clz(n);
+		memset(d, 0, sizeof d);
 		for(i = 0; i < n; i++)
-			p[i][0] = s[i];
-		for(j = 1; j < 19; j++) {
+			d[s[i]]++;
+		for(i = 1; i < 256; i++)
+			d[i] += d[i-1];
+		for(j = 0; j < lg; j++) {
+			for(i = 0; i < n; i++) {
+				if(j) l[i] = no(p[i][j - 1], i + (1 << (j - 1)) < n? p[i + (1 << (j - 1))][j - 1] : -n, i);
+				else l[i] = no(d[s[i] - 1], -n, i);
+				g[l[i].p.snd + c[l[i].p.snd + n]++ + n] = l[i];
+			}
+			int sz = 0;
+			for(i = 0; i < 2*n; i++) {
+				for(k = 0; k < c[i]; k++)
+					l[sz++] = g[i + k];
+				c[i] = 0;
+			}
+			assert(sz == n);
 			for(i = 0; i < n; i++)
-				l[i] = no{p[i][j - 1], i + (1 << (j - 1)) < n? p[i + (1 << (j - 1))][j - 1] : -1, i};
-			sort(l, l + n);
+				g[l[i].p.fst + c[l[i].p.fst]++] = l[i];
+			sz = 0;
+			for(i = 0; i < n; i++) {
+				for(k = 0; k < c[i]; k++)
+					l[sz++] = g[i + k];
+				c[i] = 0;
+			}
+			assert(sz == n);
+
 			for(i = 0; i < n; i++)
 				p[l[i].i][j] = i && l[i] == l[i - 1]? p[l[i - 1].i][j] : i;
 		}
 		for(i = 0; i < n; i++)
-			r[p[i][18]] = i;
+			r[p[i][lg - 1]] = i;
+		lc[0] = 0;
 		for(i = 0; i < n - 1; i++)
 			lc[i] = lcp(r[i], r[i + 1]);
 		int tot = lc[0], last = lc[0];

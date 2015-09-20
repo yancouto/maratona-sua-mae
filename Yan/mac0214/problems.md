@@ -15,6 +15,12 @@
 - SPOJ
 	- [beads](../spoj/beads.cpp) | [Glass Beads](http://www.spoj.com/problems/BEADS/)
 	- [disubstr](../spoj/disubstr.cpp) | [Distinct Substrings](http://www.spoj.com/problems/BEADS/)
+- ICPC
+	- [1932](../icpc/1932.cpp) | [Emoticons :-)](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1932)
+	- [2478](../icpc/2478.cpp) | [File Recover](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2478)
+	- [2514](../icpc/2514.cpp) | [Stammering Aliens](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2514)
+	- [3065](../icpc/3065.cpp) | [Serial Numbers](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=3065)
+	- [3805](../icpc/3805.cpp) | [File Retrieval](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=3805)
 
 ## Semana 6 (7 - 13 Setembro)
 - Codeforces
