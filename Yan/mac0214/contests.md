@@ -1,5 +1,11 @@
 # Relatório de MAC0214 - Contests
 
+## Semana 8 (21 - 27 Setembro)
+
+### Contest Codeforces [#109 Div1](http://codeforces.com/contest/154/standings)
+- [Hometask](../codeforces/154A.cpp)
+- [Colliders](../codeforces/154B.cpp)
+
 ## Semana 7 (14 - 20 Setembro)
 
 #### Contest Codeforces [#110 Div1](http://codeforces.com/contest/156/standings) \#235 (2h) (Virtual Participation)

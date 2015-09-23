@@ -16,14 +16,14 @@ int mx;
 int dir[4][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 bool valid(int i, int j) { return i >= 0 && j >= 0 && i < n && j < n; }
 
-int get_hash(vector<pii> &v) {
-	ll h = 0;
+ull get_hash(vector<pii> &v) {
+	ull h = 0;
 	for(pii p : v)
-		h = mod(h * 463ll + 20ll * (p.fst + 10ll) + p.snd + 10ll);
+		h = h * 463llu + 20llu * (p.fst + 10llu) + p.snd + 10llu;
 	return h;
 }
 vector<vector<pii> > pcs;
-set<int> seen;
+set<ull> seen;
 int dx[4] = {1, -1, 0, 0};
 int dy[4] = {0, 0, 1, -1};
 void gen(vector<pii> &v) {
@@ -41,24 +41,34 @@ void gen(vector<pii> &v) {
 			vector<pii> v2(v);
 			v2.pb(h);
 			int j = v2.size() - 1;
-			while(j && v2[j] > v2[j-1]) { swap(v[j], v[j-1]); j--; }
+			while(j && v2[j] < v2[j-1]) { swap(v2[j], v2[j-1]); j--; }
 			gen(v2);
 		}
 	}
 }
 
+int sum(int i, int j, vector<pii> &pc) {
+	int s = 0;
+	for(pii p : pc) {
+		if(!valid(p.fst + i, p.snd + j)) return -1;
+		s += g[p.fst + i][p.snd + j];
+	}
+	return s;
+}
+
 int main() {
 	vector<pii> v; v.pb(pii(0, 0));
-	gen(v);
 	scanf("%d %d", &n, &m);
-	printf("%d\n", (int)pcs.size());
+	gen(v);
 	int i, j;
 	for(i = 0; i < n; i++)
 		for(j = 0; j < n; j++)
 			scanf("%d", &g[i][j]);
-	mx = 0;
-	for(i = 0; i < n; i++)
-		for(j = 0; j < n; j++);
+	int mx = 0;
+	for(vector<pii> &v : pcs)
+		for(i = 0; i < n; i++)
+			for(j = 0; j < n; j++)
+				mx = max(mx, sum(i, j, v));
 	printf("%d\n", mx);
 	return 0;
 }

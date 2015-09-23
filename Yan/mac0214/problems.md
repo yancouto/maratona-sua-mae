@@ -1,5 +1,12 @@
 # Relatório de MAC0214 - Problemas
 
+## Semana 8 (21 - 27 Setembro)
+- ICPC
+	- [1526](../icpc/1526.cpp) | [Wild West](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1526)
+	- [2930](../icpc/2930.cpp) | [Finite Fingerprints](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2930)
+- URI
+	- [1712](../uri/1712.cpp) | [Ecologia](https://www.urionlinejudge.com.br/judge/pt/problems/view/1712)
+
 ## Semana 7 (14 - 20 Setembro)
 - UVA
 	- [2768](../uva/2768.cpp) | [Instant View of Big Bang](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2768)
@@ -19,7 +26,6 @@
 	- [1932](../icpc/1932.cpp) | [Emoticons :-)](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1932)
 	- [2478](../icpc/2478.cpp) | [File Recover](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2478)
 	- [2514](../icpc/2514.cpp) | [Stammering Aliens](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2514)
-	- [2930](../icpc/2930.cpp) | [Finite Fingerprints](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2930)
 	- [3065](../icpc/3065.cpp) | [Serial Numbers](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=3065)
 	- [3805](../icpc/3805.cpp) | [File Retrieval](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=3805)
 
