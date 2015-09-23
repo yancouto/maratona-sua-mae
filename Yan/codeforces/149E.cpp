@@ -53,13 +53,12 @@ int main() {
 		n += sz[i];
 		s[n++] = '|';
 	}
-	lg = 33 - __builtin_clz(n);
 	memset(d, 0, sizeof d);
 	for(i = 0; i < n; i++)
 		d[s[i]]++;
 	for(i = 1; i < 256; i++)
 		d[i] += d[i-1];
-	for(j = 0; j < lg; j++) {
+	for(j = 0; ; j++) {
 		for(i = 0; i < n; i++) {
 			if(j) l[i] = no(p[i][j - 1], i + (1 << (j - 1)) < n? p[i + (1 << (j - 1))][j - 1] : -n, i);
 			else l[i] = no(d[s[i] - 1], -n, i);
@@ -71,7 +70,6 @@ int main() {
 				l[sz++] = g[i + k];
 			c[i] = 0;
 		}
-		assert(sz == n);
 		for(i = 0; i < n; i++)
 			g[l[i].p.fst + c[l[i].p.fst]++] = l[i];
 		sz = 0;
@@ -80,16 +78,18 @@ int main() {
 				l[sz++] = g[i + k];
 			c[i] = 0;
 		}
-		assert(sz == n);
 
+		bool any = false;
 		for(i = 0; i < n; i++)
-			p[l[i].i][j] = i && l[i] == l[i - 1]? p[l[i - 1].i][j] : i;
+			p[l[i].i][j] = i && l[i] == l[i - 1]? p[l[i - 1].i][j] : i, any |= i && l[i] == l[i-1];
+		if(!any) break;
 	}
+	lg = j + 1;
 	for(i = 0; i < n; i++)
 		r[p[i][lg - 1]] = i;
 	for(i = 0; i < n - 1; i++)
 		lc[i][0] = lcp_(r[i], r[i + 1]);
-	for(j = 1; j < lg; j++)
+	for(j = 1; j < 20; j++)
 		for(i = 0; i < n - 1; i++) {
 			lc[i][j] = lc[i][j-1];
 			if(i + (1 << (j - 1)) < n - 1)
