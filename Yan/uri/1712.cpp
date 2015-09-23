@@ -1,4 +1,3 @@
-// WA ??
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -15,30 +14,51 @@ inline ull mod(ull x) { return x % modn; }
 int g[52][52], n, m;
 int mx;
 int dir[4][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-int seen[52][52];
 bool valid(int i, int j) { return i >= 0 && j >= 0 && i < n && j < n; }
-void s(int i, int j, int l, int sum) {
-	if(seen[i][j]) return;
-	if(l == 0) { mx = max(mx, sum); return; }
-	seen[i][j] = 1;
-	for(int d = 0; d < 4; d++) {
-		int ni = i + dir[d][0], nj = j + dir[d][1];
-		if(!valid(ni, nj)) continue;
-		s(ni, nj, l - 1, sum + g[ni][nj]);
+
+int get_hash(vector<pii> &v) {
+	ll h = 0;
+	for(pii p : v)
+		h = mod(h * 463ll + 20ll * (p.fst + 10ll) + p.snd + 10ll);
+	return h;
+}
+vector<vector<pii> > pcs;
+set<int> seen;
+int dx[4] = {1, -1, 0, 0};
+int dy[4] = {0, 0, 1, -1};
+void gen(vector<pii> &v) {
+	pii g(v[0]);
+	if(g != pii(0, 0))
+		for(pii &p : v)
+			p.fst -= g.fst,
+			p.snd -= g.snd;
+	if(!seen.insert(get_hash(v)).snd) return;
+	if(v.size() == m) { pcs.pb(v); return; }
+	for(pii p : v) {
+		for(int d = 0; d < 4; d++) {
+			pii h(p.fst + dx[d], p.snd + dy[d]);
+			if(binary_search(v.begin(), v.end(), h)) continue;
+			vector<pii> v2(v);
+			v2.pb(h);
+			int j = v2.size() - 1;
+			while(j && v2[j] > v2[j-1]) { swap(v[j], v[j-1]); j--; }
+			gen(v2);
+		}
 	}
-	seen[i][j] = 1;
 }
 
 int main() {
-	int i, j;
+	vector<pii> v; v.pb(pii(0, 0));
+	gen(v);
 	scanf("%d %d", &n, &m);
+	printf("%d\n", (int)pcs.size());
+	int i, j;
 	for(i = 0; i < n; i++)
 		for(j = 0; j < n; j++)
 			scanf("%d", &g[i][j]);
 	mx = 0;
 	for(i = 0; i < n; i++)
-		for(j = 0; j < n; j++)
-			s(i, j, m - 1, g[i][j]);
+		for(j = 0; j < n; j++);
 	printf("%d\n", mx);
 	return 0;
 }
