@@ -22,12 +22,12 @@ int find(int v) {
 	return id[v];
 }
 
-bool join(int i, int j) {
+void join(int i, int j) {
 	int x = find(i);
 	int y = find(j);
 	if(sz[x] < sz[y]) swap(x, y);
 	sz[x] += sz[y];
-	id[x] = id[y];
+	id[y] = id[x];
 }
 
 int main() {
@@ -52,20 +52,16 @@ int main() {
 		int f = edge[i].fst; 
 		int s = edge[i].snd;
 		if(find(f) == find(v)) continue;
-		printf("1Edge %d %d -- %d %d\n", f, s, find(f), find(s));
-		comp--; join(f, v);
-		printf("2Edge %d %d -- %d %d\n", f, s, find(f), find(s));
+		comp--; join(f, s);
 	}
 	vector<int> ans;
 	for(int i = q-1; i >= 0; i--) {
 		ans.pb(comp);
 		int f = edge[qq[i]].fst;
 		int s = edge[qq[i]].snd;
-		printf("Add %d %d -- %d %d\n", f, s, find(f), find(s));
 		if(find(f) != find(s)) comp--;
 		join(f, s);
 	}
-	ans.pb(comp);
 	for(int i = q-1; i >= 0; i--)
 		printf("%d ", ans[i]);
 	putchar('\n');
