@@ -6,6 +6,7 @@
 	- [2930](../icpc/2930.cpp) | [Finite Fingerprints](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2930)
 - URI
 	- [1712](../uri/1712.cpp) | [Ecologia](https://www.urionlinejudge.com.br/judge/pt/problems/view/1712)
+	- [1141](../uri/1141.cpp) | [Cultivando Strings](https://www.urionlinejudge.com.br/judge/pt/problems/view/1141)
 
 ## Semana 7 (14 - 20 Setembro)
 - UVA
