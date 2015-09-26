@@ -11,6 +11,9 @@
 	- [1141](../uri/1141.cpp) | [Cultivando Strings](https://www.urionlinejudge.com.br/judge/pt/problems/view/1141)
 - Timus
 	- [1158](../timus/1158.java) | [Censored!](http://acm.timus.ru/problem.aspx?space=1&num=1158)
+	- [1713](../timus/1713.cpp) | [Key Substrings](http://acm.timus.ru/problem.aspx?space=1&num=1713)
+- SPOJ
+	- [knights](../spoj/knights.cpp) | [Knights of the Round Table](http://www.spoj.com/problems/KNIGHTS/)
 
 ## Semana 7 (14 - 20 Setembro)
 - UVA
