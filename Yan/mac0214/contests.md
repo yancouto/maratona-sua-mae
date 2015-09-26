@@ -2,7 +2,14 @@
 
 ## Semana 8 (21 - 27 Setembro)
 
-### Contest Codeforces [#109 Div1](http://codeforces.com/contest/154/standings)
+#### Contest MaratonIME [NWERC 2011](http://ahmed-aly.com/Standings.jsp?ID=21220) \#1 (5h) ([gafeol](http://ahmed-aly.com/Profile.jsp?Username=gafeol), [gidelfino](http://ahmed-aly.com/Profile.jsp?Username=gidelfino))
+- [Bird tree](../../SuaMae/MaratonIME/25-09-15/bird.cpp)
+- [Movie collection](../../SuaMae/MaratonIME/25-09-15/movie.cpp)
+- [Please, go first](../../SuaMae/MaratonIME/25-09-15/E.cpp)
+- [Tichu](../../SuaMae/MaratonIME/25-09-15/card.cpp)
+- [Tracking RFIDs](../../SuaMae/MaratonIME/25-09-15/rfid.cpp)
+
+### Contest Codeforces [#109 Div1](http://codeforces.com/contest/154/standings) (Virtual Participation)
 - [Hometask](../codeforces/154A.cpp)
 - [Colliders](../codeforces/154B.cpp)
 
