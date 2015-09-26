@@ -4,9 +4,13 @@
 - ICPC
 	- [1526](../icpc/1526.cpp) | [Wild West](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1526)
 	- [2930](../icpc/2930.cpp) | [Finite Fingerprints](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2930)
+	- [3914](../icpc/3914.cpp) | [Piece it together](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=3914)
+	- [4905](../icpc/4905.cpp) | [The Big Painting](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=4905)
 - URI
 	- [1712](../uri/1712.cpp) | [Ecologia](https://www.urionlinejudge.com.br/judge/pt/problems/view/1712)
 	- [1141](../uri/1141.cpp) | [Cultivando Strings](https://www.urionlinejudge.com.br/judge/pt/problems/view/1141)
+- Timus
+	- [1158](../timus/1158.java) | [Censored!](http://acm.timus.ru/problem.aspx?space=1&num=1158)
 
 ## Semana 7 (14 - 20 Setembro)
 - UVA
