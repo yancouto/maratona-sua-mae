@@ -19,7 +19,6 @@ void dfs(int no, list<int>::iterator it) {
 	list<int>::iterator aux = it;
 	if(it != ans.end()) ++aux;
 	it = ans.insert(aux, no);
-	printf("No %d\n", no);
 	while(!g[no].empty()) {
 		int x = g[no].back();
 		g[no].pop_back();
@@ -38,7 +37,7 @@ int main() {
 	}
 	dfs(1, ans.begin());
 	list<int>::iterator it;
-	printf("%ld\n", ans.size());
+	printf("%ld ", ans.size()-1);
 	for(it = ans.begin(); it != ans.end(); ++it)
 		printf("%d ", *it);
 	putchar('\n');
