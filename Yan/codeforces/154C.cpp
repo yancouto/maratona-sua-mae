@@ -19,6 +19,10 @@ const int MAX = 1000009;
 int p[MAX]; ull h[MAX], h2[MAX], h3[MAX];
 ull x[MAX], x2[MAX], x3[MAX];
 bool cmp(int i, int j) {
+	if(h[i] == h[j]) {
+		if(h2[i] == h2[j]) return h3[i] < h3[j];
+		return h2[i] < h2[j];
+	}
 	return h[i] < h[j];
 }
 int main() {

@@ -7,19 +7,25 @@
 	- [3914](../icpc/3914.cpp) | [Piece it together](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=3914)
 	- [4905](../icpc/4905.cpp) | [The Big Painting](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=4905)
 - URI
-	- [1712](../uri/1712.cpp) | [Ecologia](https://www.urionlinejudge.com.br/judge/pt/problems/view/1712)
 	- [1141](../uri/1141.cpp) | [Cultivando Strings](https://www.urionlinejudge.com.br/judge/pt/problems/view/1141)
+	- [1712](../uri/1712.cpp) | [Ecologia](https://www.urionlinejudge.com.br/judge/pt/problems/view/1712)
 - Timus
 	- [1158](../timus/1158.java) | [Censored!](http://acm.timus.ru/problem.aspx?space=1&num=1158)
 	- [1713](../timus/1713.cpp) | [Key Substrings](http://acm.timus.ru/problem.aspx?space=1&num=1713)
 - SPOJ
 	- [knights](../spoj/knights.cpp) | [Knights of the Round Table](http://www.spoj.com/problems/KNIGHTS/)
+- Codeforces
+	- [149E](../codeforces/149E.cpp) | [Martian Strings](http://codeforces.com/contest/149/problem/E)
+	- [154C](../codeforces/154C.cpp) | [Double Profiles](http://codeforces.com/contest/154/problem/C)
+	- [580C](../codeforces/580C.cpp) | [Kefa and Park](http://codeforces.com/contest/580/problem/C)
+	- [580D](../codeforces/580D.cpp) | [Kefa and Dishes](http://codeforces.com/contest/580/problem/D)
+	- [580E](../codeforces/580E.cpp) | [Kefa and Watch](http://codeforces.com/contest/580/problem/E)
 
 ## Semana 7 (14 - 20 Setembro)
 - UVA
 	- [2768](../uva/2768.cpp) | [Instant View of Big Bang](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2768)
 	- [4835](../uva/4835.cpp) | [Curious Guardians](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4835)
-	- [2591](../uva/2591) | [Aspen Avenue](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2591)
+	- [2591](../uva/2591.cpp) | [Aspen Avenue](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2591)
 	- [2592](../uva/2592.cpp) | [Best Compression Ever](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2592)
 	- [2595](../uva/2595.cpp) | [Event Planning](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2595)
 	- [2596](../uva/2596.cpp) | [Fixing the Bugs](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2596)

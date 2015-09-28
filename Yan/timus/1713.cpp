@@ -65,14 +65,6 @@ int main() {
 	g = j;
 	for(i = 0; i < n; i++)
 		r[p[i][g]] = i;
-	//for(i = 0; i < n; i++) {
-	//	printf("[%2d]: ", i);
-	//	for(j = r[i]; j < n; j++)
-	//		if(s[j] > 256) putchar('|');
-	//		else putchar(s[j]);
-	//	if(i < n - 1) printf(" lcp %2d", lcp_(r[i], r[i+1])); 
-	//	putchar('\n');
-	//}
 	for(i = 0; i < n - 1; i++)
 		lc[i][0] = lcp_(r[i], r[i+1]);
 	for(j = 1; j < 18; j++)
@@ -88,19 +80,16 @@ int main() {
 			while(ri < n && ow[r[ri]] == ow[r[le]]) ri++;
 			ri--;
 		}
-		//printf("%2d in [%2d, %2d]\n", i, le, ri);
 		if(ow[r[i]] == -1) continue;
 		int &a = mx[ow[r[i]]][r[i] - pos[ow[r[i]]]];
 		if(ri < n - 1) a = max(a, lcp(i, ri) + 1);
 		if(le > 0) a = max(a, lcp(le - 1, i - 1) + 1);
-		//printf("a = %d\n", a);
 	}
 	for(i = 0; i < m; i++) {
 		int xi = 0;
 		for(j = 1; j < sz[i]; j++)
 			if(j + mx[i][j] <= sz[i] && mx[i][j] < mx[i][xi]) {
 				xi = j;
-				//printf("(%d) [%d][%d] = %d best\n", i, i, j, mx[i][j]);
 			}
 		for(j = 0; j < mx[i][xi]; j++)
 			putchar(s[pos[i] + xi + j]);
