@@ -15,18 +15,15 @@ const int MAX = 1000005;
 char s[MAX];
 int n;
 ll memo[MAX][3][2];
+bool isLetter(int i) { return s[i] >= 'a' && s[i] <= 'z'; }
 
-ll solve(int i, int sum, int pre) {
-	if(i == n) { 
-		return sum == 0 && !pre;
-	}
-	ll &m = memo[i][sum][pre];
+ll solve(int i, int sum, int beg) {
+	if(i == n || isLetter(i)) return sum == 0 && beg;	
+	ll &m = memo[i][sum][beg];
 	if(m != -1) return m;
-	m = solve(i + 1, sum, pre);
-	if(s[i] >= '0' && s[i] <= '9') {
-		if(!(pre && s[i] == 0))
-			m += solve(i + 1, (sum + s[i]-'0') % 3, 0);
-	}
+	m = 0;
+	if(beg)  m += solve(i + 1, (sum + s[i]-'0') % 3, beg) + solve(n, sum, beg);
+	else m += solve(i + 1, 0, 0) + solve(i + 1, (s[i]-'0') % 3, 1);
 	return m;
 }
 
@@ -34,6 +31,10 @@ int main() {
 	scanf("%s", s);
 	n = strlen(s);
 	memset(memo, -1, sizeof memo);
-	printf("%lld\n", solve(0, 0, 1));
+	ll ans = (isLetter(0)) ? 0 : (solve(0, 0, 0));
+	for(int i = 1; i < n; i++)
+		if(!isLetter(i) && isLetter(i-1)) 
+			ans += solve(i, 0, 0);
+	printf("%lld\n", ans);
 	return 0;
 }
