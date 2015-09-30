@@ -14,6 +14,7 @@
 	- [1713](../timus/1713.cpp) | [Key Substrings](http://acm.timus.ru/problem.aspx?space=1&num=1713)
 - SPOJ
 	- [knights](../spoj/knights.cpp) | [Knights of the Round Table](http://www.spoj.com/problems/KNIGHTS/)
+	- [kqueryo](../spoj/kqueryo.cpp) | [K-Query Online](http://www.spoj.com/problems/KQUERYO/)
 - Codeforces
 	- [149E](../codeforces/149E.cpp) | [Martian Strings](http://codeforces.com/contest/149/problem/E)
 	- [154C](../codeforces/154C.cpp) | [Double Profiles](http://codeforces.com/contest/154/problem/C)
