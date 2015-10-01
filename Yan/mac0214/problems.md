@@ -34,7 +34,12 @@
 	- [1713](../timus/1713.cpp) | [Key Substrings](http://acm.timus.ru/problem.aspx?space=1&num=1713)
 - SPOJ
 	- [knights](../spoj/knights.cpp) | [Knights of the Round Table](http://www.spoj.com/problems/KNIGHTS/)
+<<<<<<< Updated upstream
 	- [niceday](../spoj/niceday.cpp) | [The day of the competitors](http://www.spoj.com/problems/NICEDAY/)
+=======
+	- [kqueryo](../spoj/kqueryo.cpp) | [K-Query Online](http://www.spoj.com/problems/KQUERYO/)
+	- [mkthnum](../spoj/mkthnum.cpp) | [K-th Number](http://www.spoj.com/problems/MKTHNUM/)
+>>>>>>> Stashed changes
 - Codeforces
 	- [12D](../codeforces/12D.cpp) | [Ball](http://codeforces.com/contest/578/problem/C)
 
