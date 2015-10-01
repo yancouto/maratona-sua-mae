@@ -1,26 +1,42 @@
 # Relatório de MAC0214 - Problemas
 
-## Semana 8 (21 - 27 Setembro)
-- ICPC
-	- [1526](../icpc/1526.cpp) | [Wild West](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1526)
-	- [2930](../icpc/2930.cpp) | [Finite Fingerprints](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2930)
-	- [3914](../icpc/3914.cpp) | [Piece it together](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=3914)
-	- [4905](../icpc/4905.cpp) | [The Big Painting](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=4905)
-- URI
-	- [1141](../uri/1141.cpp) | [Cultivando Strings](https://www.urionlinejudge.com.br/judge/pt/problems/view/1141)
-	- [1712](../uri/1712.cpp) | [Ecologia](https://www.urionlinejudge.com.br/judge/pt/problems/view/1712)
-- Timus
-	- [1158](../timus/1158.java) | [Censored!](http://acm.timus.ru/problem.aspx?space=1&num=1158)
-	- [1713](../timus/1713.cpp) | [Key Substrings](http://acm.timus.ru/problem.aspx?space=1&num=1713)
+## Semana 9 (28 Setembro - 4 Outubro)
 - SPOJ
-	- [knights](../spoj/knights.cpp) | [Knights of the Round Table](http://www.spoj.com/problems/KNIGHTS/)
 	- [kqueryo](../spoj/kqueryo.cpp) | [K-Query Online](http://www.spoj.com/problems/KQUERYO/)
+	- [cot](../spoj/cot.cpp) | [Count on a tree](http://www.spoj.com/problems/COT/)
 - Codeforces
 	- [149E](../codeforces/149E.cpp) | [Martian Strings](http://codeforces.com/contest/149/problem/E)
 	- [154C](../codeforces/154C.cpp) | [Double Profiles](http://codeforces.com/contest/154/problem/C)
 	- [580C](../codeforces/580C.cpp) | [Kefa and Park](http://codeforces.com/contest/580/problem/C)
 	- [580D](../codeforces/580D.cpp) | [Kefa and Dishes](http://codeforces.com/contest/580/problem/D)
 	- [580E](../codeforces/580E.cpp) | [Kefa and Watch](http://codeforces.com/contest/580/problem/E)
+
+## Semana 8 (21 - 27 Setembro)
+- ICPC
+	- [1526](../icpc/1526.cpp) | [Wild West](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1526)
+	- [2187](../icpc/2187.cpp) | [Lucky cities](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2187)
+	- [2930](../icpc/2930.cpp) | [Finite Fingerprints](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2930)
+	- [3914](../icpc/3914.cpp) | [Piece it together](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=3914)
+	- [4905](../icpc/4905.cpp) | [The Big Painting](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=4905)
+- URI
+	- [1141](../uri/1141.cpp) | [Cultivando Strings](https://www.urionlinejudge.com.br/judge/pt/problems/view/1141)
+	- [1712](../uri/1712.cpp) | [Ecologia](https://www.urionlinejudge.com.br/judge/pt/problems/view/1712)
+	- [1743](../uri/1743.cpp) | [Máquina de Verificação Automatizada](https://www.urionlinejudge.com.br/judge/pt/problems/view/1743)
+	- [1744](../uri/1744.cpp) | [Pedras Pretas e Brancas](https://www.urionlinejudge.com.br/judge/pt/problems/view/1744)
+	- [1745](../uri/1745.cpp) | [Contando Substhreengs](https://www.urionlinejudge.com.br/judge/pt/problems/view/1745)
+	- [1747](../uri/1747.cpp) | [Distribuição Igual](https://www.urionlinejudge.com.br/judge/pt/problems/view/1747)
+	- [1749](../uri/1749.cpp) | [Colisão Galática](https://www.urionlinejudge.com.br/judge/pt/problems/view/1749)
+	- [1750](../uri/1750.cpp) | [Ajude o Cupido](https://www.urionlinejudge.com.br/judge/pt/problems/view/1750)
+	- [1751](../uri/1751.cpp) | [Alpinista Intrépido](https://www.urionlinejudge.com.br/judge/pt/problems/view/1751)
+	- [1808](../uri/1808.cpp) | [O Retorno do Rei](https://www.urionlinejudge.com.br/judge/pt/problems/view/1808)
+- Timus
+	- [1158](../timus/1158.java) | [Censored!](http://acm.timus.ru/problem.aspx?space=1&num=1158)
+	- [1713](../timus/1713.cpp) | [Key Substrings](http://acm.timus.ru/problem.aspx?space=1&num=1713)
+- SPOJ
+	- [knights](../spoj/knights.cpp) | [Knights of the Round Table](http://www.spoj.com/problems/KNIGHTS/)
+	- [niceday](../spoj/niceday.cpp) | [The day of the competitors](http://www.spoj.com/problems/NICEDAY/)
+- Codeforces
+	- [12D](../codeforces/12D.cpp) | [Ball](http://codeforces.com/contest/578/problem/C)
 
 ## Semana 7 (14 - 20 Setembro)
 - UVA

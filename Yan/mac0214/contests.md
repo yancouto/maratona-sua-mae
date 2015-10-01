@@ -1,5 +1,21 @@
 # Relatório de MAC0214 - Contests
 
+## Semana 9 (28 Setembro - 4 Outubro)
+
+#### Contest MaratonIME [NWERC 2010](http://ahmed-aly.com/Standings.jsp?ID=21351) \#3 (5h) ([gafeol](http://ahmed-aly.com/Profile.jsp?Username=gafeol), [gidelfino](http://ahmed-aly.com/Profile.jsp?Username=gidelfino))
+- [Fair Division](../../SuaMae/MaratonIME/30-19-15/div.cpp)
+- [Free Goodies](../../SuaMae/MaratonIME/30-19-15/free.cpp)
+- [High Score](../../SuaMae/MaratonIME/30-19-15/score2.cpp)
+- [Rankings](../../SuaMae/MaratonIME/30-19-15/rank.cpp)
+- [Stock Prices](../../SuaMae/MaratonIME/30-19-15/stock.cpp)
+
+#### Contest Codeforces [#322 Div2](http://codeforces.com/contest/581/standings) \#19 (2h)
+- [Vasya the Hipster](../codeforces/581A.cpp)
+- [Luxurious Houses](../codeforces/581B.cpp)
+- [Developing Skills](../codeforces/581C.cpp)
+- [Three Logos](../codeforces/581D.cpp)
+- [Zublicanes and Mumocrates](../codeforces/581E.cpp)
+
 ## Semana 8 (21 - 27 Setembro)
 
 #### Contest MaratonIME [NWERC 2011](http://ahmed-aly.com/Standings.jsp?ID=21220) \#1 (5h) ([gafeol](http://ahmed-aly.com/Profile.jsp?Username=gafeol), [gidelfino](http://ahmed-aly.com/Profile.jsp?Username=gidelfino))
