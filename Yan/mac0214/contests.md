@@ -2,6 +2,14 @@
 
 ## Semana 9 (28 Setembro - 4 Outubro)
 
+#### Contest MaratonIME [LATAM 2011](http://ahmed-aly.com/Standings.jsp?ID=21451http://ahmed-aly.com/Standings.jsp?ID=21451) \#1 (5h)
+- [Army Buddies](../icpc/3800.cpp)
+- [File Retrieval](../icpc/3805.cpp)
+- [Hedge Mazes](../icpc/3807.cpp)
+- [In Braille](../icpc/3808.cpp)
+- [Jupiter Atacks!](../icpc/3809.cpp)
+- [King's Poker](../icpc/3810.cpp)
+
 #### Contest MaratonIME [NWERC 2010](http://ahmed-aly.com/Standings.jsp?ID=21351) \#3 (5h) ([gafeol](http://ahmed-aly.com/Profile.jsp?Username=gafeol), [gidelfino](http://ahmed-aly.com/Profile.jsp?Username=gidelfino))
 - [Fair Division](../../SuaMae/MaratonIME/30-19-15/div.cpp)
 - [Free Goodies](../../SuaMae/MaratonIME/30-19-15/free.cpp)
