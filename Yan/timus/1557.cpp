@@ -1,5 +1,15 @@
-#include <stdio.h>
+#include <bits/stdc++.h>
+using namespace std;
+#define fst first
+#define snd second
+typedef unsigned long long ull;
 typedef long long ll;
+typedef pair<int, int> pii;
+#define pb push_back
+#define for_tests(t, tt) int t; scanf("%d", &t); for(int tt = 1; tt <= t; tt++)
+template<typename T> inline T abs(T t) { return t < 0? -t : t; }
+const ll modn = 1000000007;
+inline ll mod(ll x) { return x % modn; }
 const int MAX = 1000009, MAXV = 2009;
 int val[MAX], nx[MAX], head[MAXV], en;
 int lh[MAXV], nu[MAX], ln, d[MAXV], f[MAXV], tempo;
@@ -12,7 +22,7 @@ inline bool on_cyc(int e, int f) {
 	return is_anc(val[f], val[e ^ 1]) && is_anc(val[e], val[f]) && is_anc(val[f ^ 1], val[e ^ 1]) && is_anc(val[e], val[f ^ 1]);
 }
 
-inline void process(int e) {
+void process(int e) {
 	if(d[val[e]] > d[val[e ^ 1]]) return;
 	int x = ln;
 	for(int i = 0; i < x; i++) {
@@ -30,7 +40,7 @@ inline void process(int e) {
 			}
 		}
 		if(i == 0) { lh[i] = off; if(on != -1) lh[ln++] = on; continue; }
-		if(on > off) { int t = on; on = off; off = t; }
+		if(on > off) swap(on, off);
 		lh[i] = off;
 		if(on != -1) lh[ln++] = on;
 		//printf("done%d\n", i);
@@ -51,24 +61,15 @@ void dfs(int u, int pe) {
 	f[u] = tempo++;
 }
 
-inline void rint(int *x)
-{
-	register char c = getchar();
-	*x = 0;
-	for(; (c<48)||(c>57);c = getchar());
-	for(; (c>47)&&(c<58);c = getchar())
-		*x = (int)((((*x)<<1) + ((*x)<<3)) + c - 48);
-}
-
 int main() {
 	int i, n, m, a, b, j;
-	rint(&n); rint(&m);
+	scanf("%d %d", &n, &m);
 	if(n == 2) { puts("0"); return 0; }
 	for(i = 0; i < n; i++)
 		head[i] = lh[i] = -1;
 	tempo = 1;
 	for(i = 0; i < m; i++) {
-		rint(&a); rint(&b); a--; b--;
+		scanf("%d %d", &a, &b); a--; b--;
 		val[en] = b; nx[en] = head[a]; head[a] = en++;
 		val[en] = a; nx[en] = head[b]; head[b] = en++;
 	}
