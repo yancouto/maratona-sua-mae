@@ -29,7 +29,7 @@ int main() {
 		scanf("%lld %lld %lld %lld %lld", &R, &S, &X, &Y, &W);
 		ddd prob = 0.0;
 		for(; X <= Y; X++)
-			prob += (ddd)((ddd)pot[S-R+1][X] / (ddd)pot[S][X]) * (ddd)((ddd)fat[Y] / ((ddd)fat[Y-X] * (ddd)fat[X]));
+			prob += (ddd) (S-R+1)/S * (ddd)((ddd)fat[Y] / ((ddd)fat[Y-X] * (ddd)fat[X]));
 		prob *= (ddd)W;
 		if(prob > 1.0) puts("yes");
 		else puts("no");
