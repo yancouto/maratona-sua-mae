@@ -41,15 +41,15 @@ void join(int x, int y) {
 }
 
 int seen[MAXN];
-int kruskall() {
+int kruskall(int op) {
 	sort(ed.begin(), ed.end());
 	int ans = 0;
 	for(int i = 0; i < ed.size(); i++) {
 		u = ed[i].u; v = ed[i].v;
 		if(find(u) == find(v)) continue;
+		if(op && (mark[u] || mark[v])) continue; 
 		if(mark[u] && mark[v]) continue;
-		if(mark[u] && sz[find(u)] > 1) continue;
-		if(mark[v] && sz[find(v)] > 1) continue;
+		seen[u] = seen[v] = 1;
 		ans += ed[i].l;
 		join(ed[i].u, ed[i].v);
 	}
@@ -58,6 +58,7 @@ int kruskall() {
 
 void Initialize() {
 	memset(mark, 0, sizeof mark);
+	memset(seen, 0, sizeof seen);
 	ed.clear();
 	for(int i = 0; i < n; i++)
 		sz[i] = 1, id[i] = i;
@@ -74,12 +75,23 @@ int main() {
 			ed.pb(Edge(u, v, l));
 		}
 		if(n == 2 && m > 0) { printf("%d\n", ed[0].l); continue; }
-		int ans = kruskall();
+		if(n == 1) { puts("0"); continue; }
+		int ans = kruskall(1);
 		bool f = true;
-		for(int i = 1; i < n; i++) 
-			if(find(i) != find(i-1)) { ans = -1; break; }
+		int comp;
+		for(int i = 0; i < n; i++) {
+			if(f && !mark[i]) { comp = find(i); f = false; }
+			if(!mark[i] && find(i) != comp) { ans = -1; break; }
+		}
 		if(ans == -1) puts("impossible");
-		else printf("%d\n", ans);
+		else {
+			ans += kruskall(0);
+			for(int i = 0; i < n; i++)
+				if(!seen[i]) { ans = -1; break; }
+			if(ans == -1) puts("impossible");
+			else printf("%d\n", ans);
+		}
 	}
+
 	return 0;
 }
