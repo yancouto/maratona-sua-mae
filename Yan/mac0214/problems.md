@@ -1,5 +1,15 @@
 # Relatório de MAC0214 - Problemas
 
+## Semana 10 (5 - 11 Outubro)
+- Live Archive
+	- [671](../icpc/671.cpp) | [Euro Efficiency](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=671)
+	- [1411](../icpc/1411.cpp) | [Laserbox](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1411)
+	- [1417](../icpc/1417.cpp) | [Up the Stairs](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1417)
+	- [2303](../icpc/2303.cpp) | [Toll Road](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2303)
+	- [2950](../icpc/2950.cpp) | [Risk](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2950)
+- UVA
+	- [2661](../uva/2661.cpp) | [Etruscan Warriors Never Play Chess](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2661)
+
 ## Semana 9 (28 Setembro - 4 Outubro)
 - SPOJ
 	- [kqueryo](../spoj/kqueryo.cpp) | [K-Query Online](http://www.spoj.com/problems/KQUERYO/)
@@ -14,7 +24,7 @@
 	- [1393](../timus/1393.java) | [Average Common Prefix](http://acm.timus.ru/problem.aspx?space=1&num=1393)
 
 ## Semana 8 (21 - 27 Setembro)
-- ICPC
+- Live Archive
 	- [1526](../icpc/1526.cpp) | [Wild West](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1526)
 	- [2187](../icpc/2187.cpp) | [Lucky cities](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2187)
 	- [2930](../icpc/2930.cpp) | [Finite Fingerprints](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2930)
@@ -55,7 +65,7 @@
 - SPOJ
 	- [beads](../spoj/beads.cpp) | [Glass Beads](http://www.spoj.com/problems/BEADS/)
 	- [disubstr](../spoj/disubstr.cpp) | [Distinct Substrings](http://www.spoj.com/problems/BEADS/)
-- ICPC
+- Live Archive
 	- [1932](../icpc/1932.cpp) | [Emoticons :-)](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1932)
 	- [2478](../icpc/2478.cpp) | [File Recover](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2478)
 	- [2514](../icpc/2514.cpp) | [Stammering Aliens](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2514)
@@ -70,7 +80,7 @@
 - Codeforces
 	- [100739C](../codeforces/100739C.cpp) | [Broken robot](http://codeforces.com/problemset/gymProblem/100739/C)
 	- [100739L](../codeforces/100739L.cpp) | [Many recursions](http://codeforces.com/problemset/gymProblem/100739/L)
-- ICPC
+- Live Archive
 	- [1532](../icpc/1532.cpp) | [Word Rings](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1532)
 - SPOJ
 	- [lis2](../spoj/lis2.cpp) | [Another Longest Increasing Subsequence Problem](http://www.spoj.com/problems/LIS2/)
@@ -90,7 +100,7 @@
 	- [525C](../codeforces/525C.cpp) | [Ilya and Sticks](http://codeforces.com/contest/525/problem/C)
 - Codechef
 	- [cbars](../codechef/cbars.cpp) | [A Wonderful Chocolate](https://www.codechef.com/problems/CBARS/)
-- ICPC
+- Live Archive
 	- [4374](../icpc/4374.cpp) | [Graph](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4374)
 	- [4970](../icpc/4970.cpp) | [Indoorienteering](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4970)
 
@@ -102,7 +112,7 @@
 - UVA
 	- [456](../uva/456.cpp) | [King](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=456)
 	- [3081](../uva/3081.cpp) | [Rectangles](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3081)
-- ICPC
+- Live Archive
 	- [948](../icpc/948.cpp)  | [Roof](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=948)
 	- [1372](../icpc/1372.cpp) | [Stake Your Claim](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1372)
 	- [1373](../icpc/1373.cpp) | [ACM (ACronym Maker)](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1373)
