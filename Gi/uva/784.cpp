@@ -22,12 +22,16 @@ struct Word {
 Word woord[100];
 
 bool solve(int ww, int mdic, int mtxt) {
+<<<<<<< HEAD
 	printf("%d %s %d %d\n", ww, txt[woord[ww].ind], mdic, mtxt);
+=======
+>>>>>>> origin/master
 	if(ww == m) return true;
 	int w = woord[ww].ind;
 	int sz = strlen(txt[w]);
 	for(int i = 0; i < szd[sz].size(); i++) {
 		int d = szd[sz][i];
+<<<<<<< HEAD
 		printf("%s e %s\n", txt[w], dic[d]);
 		for(int j = 0; j < sz; j++) {
 			if(mdic & (1 << (dic[d][j]-'a')) && dt[dic[d][j]-'a'] != txt[w][j]) break;
@@ -38,6 +42,25 @@ bool solve(int ww, int mdic, int mtxt) {
 			mtxt |= (1 << (txt[w][j]-'a'));
 		}
 		if(solve(ww + 1, mdic, mtxt)) return true;
+=======
+		bool can = true;
+		int m1 = mdic, m2 = mtxt;
+		for(int j = 0; j < sz && can; j++) {
+			if(m1 & (1 << (dic[d][j]-'a')) && dt[dic[d][j]-'a'] != txt[w][j]) { 
+				can = false;
+				break;
+			}
+			dt[dic[d][j]-'a'] = txt[w][j];
+			m1 |= (1 << (dic[d][j]-'a'));
+			if(m2 & (1 << (txt[w][j]-'a')) && td[txt[w][j]-'a'] != dic[d][j]) { 
+				can = false;
+				break;
+			}	
+			td[txt[w][j]-'a'] = dic[d][j];
+			m2 |= (1 << (txt[w][j]-'a'));
+		}
+		if(can && solve(ww + 1, m1, m2)) return true;
+>>>>>>> origin/master
 	}
 	return false;
 }
@@ -50,7 +73,10 @@ int main() {
 	char input[100], word[100], in2[100];
 	fgets(input, 100, stdin);
 	sscanf(input, "%d", &n);
+<<<<<<< HEAD
 	printf("n = %d\n", n);
+=======
+>>>>>>> origin/master
 	for(int i = 0; i < n; i++) {
 		fgets(input, 100, stdin);
 		sscanf(input, "%s", dic[i]);

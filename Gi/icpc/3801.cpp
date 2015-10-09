@@ -11,10 +11,15 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 const int MAX = 1005;
+<<<<<<< HEAD
+=======
+const int oo = 200000000;
+>>>>>>> origin/master
 
 int n;
 int mat[MAX][MAX];
 int prec[MAX][MAX];
+<<<<<<< HEAD
 int memo[MAX][3];
 
 int solve(int i, int lst) {
@@ -23,6 +28,15 @@ int solve(int i, int lst) {
 	if(m != -1) return m;
 	m = max(solve(i+1, 0), ((lst)?0:prec[i-1]) + prec[i] + solve(i+1, 1));
 	return m;
+=======
+int memo[MAX][MAX];
+
+int solve(int r, int c) {
+	if(r < c) return 0;
+	int &m = memo[r][c];
+	if(m != -1) return m;
+	return max(solve(r - 1, c), prec[r][c] + solve(min(r + 1, n), c + 1));
+>>>>>>> origin/master
 }
 
 int main() {
@@ -40,7 +54,11 @@ int main() {
 				prec[l][c] = cur;
 			}
 		}
+<<<<<<< HEAD
 		printf("%d\n", max(solve(1, 1), 0));
+=======
+		printf("%d\n", solve(n, 1));
+>>>>>>> origin/master
 	}
 	return 0;
 }
