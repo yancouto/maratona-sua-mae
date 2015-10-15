@@ -43,14 +43,13 @@ int main() {
 		tempo++;
 		solve();
 		sort(p, p + n, [](int i, int j) { return dist[i] > dist[j]; });
-		double mn = 1/0.;
+		typedef long double ld;
+		ld mn = 1/0.;
 		if(dist[0] != INT_MAX) mn = dist[0];
-		for(i = n - 2; i >= 0; i--)
+		for(i = n - 2; i >= 0 && dist[p[i]] != INT_MAX; i--)
 			dist[p[i]] += dist[p[i + 1]];
-		for(i = 0; dist[p[i]] == INT_MAX; i++);
-		for(; i < n; i++)
-			mn = min(mn, double(n) / (n - i) * k + double(dist[p[i]]) / (n - i));
-		printf("%.3f\n", mn);
-
+		for(i++; i < n; i++)
+			mn = min(mn, ld(n) / (n - i) * ld(k) + ld(dist[p[i]]) / (n - i));
+		printf("%.3Lf\n", mn);
 	}
 }

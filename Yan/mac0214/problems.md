@@ -1,18 +1,17 @@
 # Relatório de MAC0214 - Problemas
 
-<<<<<<< HEAD
-=======
 ## Semana 10 (5 - 11 Outubro)
 - Live Archive
 	- [671](../icpc/671.cpp) | [Euro Efficiency](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=671)
+	- [1125](../icpc/1125.cpp) | [Word Encoding](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1125)
 	- [1411](../icpc/1411.cpp) | [Laserbox](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1411)
 	- [1417](../icpc/1417.cpp) | [Up the Stairs](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1417)
 	- [2303](../icpc/2303.cpp) | [Toll Road](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2303)
 	- [2950](../icpc/2950.cpp) | [Risk](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2950)
+	- [3752](../icpc/3752.cpp) | [Wealthy Family](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3752)
 - UVA
 	- [2661](../uva/2661.cpp) | [Etruscan Warriors Never Play Chess](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2661)
 
->>>>>>> origin/master
 ## Semana 9 (28 Setembro - 4 Outubro)
 - SPOJ
 	- [kqueryo](../spoj/kqueryo.cpp) | [K-Query Online](http://www.spoj.com/problems/KQUERYO/)
@@ -27,11 +26,7 @@
 	- [1393](../timus/1393.java) | [Average Common Prefix](http://acm.timus.ru/problem.aspx?space=1&num=1393)
 
 ## Semana 8 (21 - 27 Setembro)
-<<<<<<< HEAD
-- ICPC
-=======
 - Live Archive
->>>>>>> origin/master
 	- [1526](../icpc/1526.cpp) | [Wild West](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1526)
 	- [2187](../icpc/2187.cpp) | [Lucky cities](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2187)
 	- [2930](../icpc/2930.cpp) | [Finite Fingerprints](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2930)
@@ -72,11 +67,7 @@
 - SPOJ
 	- [beads](../spoj/beads.cpp) | [Glass Beads](http://www.spoj.com/problems/BEADS/)
 	- [disubstr](../spoj/disubstr.cpp) | [Distinct Substrings](http://www.spoj.com/problems/BEADS/)
-<<<<<<< HEAD
-- ICPC
-=======
 - Live Archive
->>>>>>> origin/master
 	- [1932](../icpc/1932.cpp) | [Emoticons :-)](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=1932)
 	- [2478](../icpc/2478.cpp) | [File Recover](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2478)
 	- [2514](../icpc/2514.cpp) | [Stammering Aliens](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2514)

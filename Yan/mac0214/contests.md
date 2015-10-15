@@ -1,10 +1,7 @@
 # Relatório de MAC0214 - Contests
 
-<<<<<<< HEAD
-=======
 ## Semana 10 (5 - 11 Outubro)
 
->>>>>>> origin/master
 ## Semana 9 (28 Setembro - 4 Outubro)
 
 #### Contest MaratonIME [LATAM 2011](http://ahmed-aly.com/Standings.jsp?ID=21451http://ahmed-aly.com/Standings.jsp?ID=21451) \#1 (5h)

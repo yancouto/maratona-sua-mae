@@ -1,19 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-<<<<<<< HEAD
-#define fst first
-#define snd second
-typedef unsigned long long ull;
 typedef long long ll;
-typedef pair<int, int> pii;
-#define pb push_back
-#define for_tests(t, tt) int t; scanf("%d", &t); for(int tt = 1; tt <= t; tt++)
-template<typename T> inline T abs(T t) { return t < 0? -t : t; }
-const ll modn = 1000000007;
-inline ll mod(ll x) { return x % modn; }
-=======
-typedef long long ll;
->>>>>>> origin/master
 const int MAX = 1000009, MAXV = 2009;
 int val[MAX], nx[MAX], head[MAXV], en;
 int lh[MAXV], nu[MAX], ln, d[MAXV], f[MAXV], tempo;
@@ -35,17 +22,9 @@ void process(int e) {
 			int k = lh[i];
 			lh[i] = nx[lh[i]];
 			if(on_cyc(e, val[k])) {
-<<<<<<< HEAD
-				//printf("(%d, %d) on (%d, %d) cyc\n", val[val[k]], val[val[k] ^ 1], val[e], val[e ^ 1]);
 				nu[val[k]]++;
 				nx[k] = on; on = k;
 			} else {
-				//printf("(%d, %d) non (%d, %d) cyc\n", val[val[k]], val[val[k] ^ 1], val[e], val[e ^ 1]);
-=======
-				nu[val[k]]++;
-				nx[k] = on; on = k;
-			} else {
->>>>>>> origin/master
 				nx[k] = off; off = k;
 			}
 		}
@@ -53,17 +32,12 @@ void process(int e) {
 		if(on > off) swap(on, off);
 		lh[i] = off;
 		if(on != -1) lh[ln++] = on;
-<<<<<<< HEAD
-		//printf("done%d\n", i);
-	}
-=======
 	}
 	x = 1;
 	for(int i = 1; i < ln; i++)
 		if(nx[lh[i]] != -1 || nu[val[lh[i]]] <= 1)
 			lh[x++] = lh[i];
 	ln = x;
->>>>>>> origin/master
 }
 
 void dfs(int u, int pe) {
@@ -72,10 +46,6 @@ void dfs(int u, int pe) {
 		if((e ^ 1) == pe) continue;
 		if(d[val[e]]) process(e);
 		else {
-<<<<<<< HEAD
-			//printf("using (%d, %d) == %d\n", val[e ^ 1], val[e], e);
-=======
->>>>>>> origin/master
 			val[en] = e; nx[en] = lh[0]; lh[0] = en++;
 			dfs(val[e], e);
 		}
@@ -101,19 +71,11 @@ int main() {
 	ll sz = 0;
 	for(i = lh[0]; i != -1; i = nx[i]) sz++;
 	tot += sz * ll(m - 1) - sz * (sz - 1) / 2;
-<<<<<<< HEAD
-	//printf("sz0 = %lld\n", sz);
-=======
->>>>>>> origin/master
 	for(i = 1; i < ln; i++) {
 		sz = 0;
 		for(j = lh[i]; j != -1; j = nx[j]) sz++;
 		if(sz && nu[val[lh[i]]] == 1) sz++;
 		tot += sz * (sz - 1) / 2;
-<<<<<<< HEAD
-		//printf("sz%d = %lld\n", i, sz);
-=======
->>>>>>> origin/master
 	}
 	printf("%lld\n", tot);
 }
