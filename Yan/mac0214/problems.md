@@ -1,5 +1,9 @@
 # Relatório de MAC0214 - Problemas
 
+## Semana 11 (12 - 18 Outubro)
+- Codeforces
+	- [589H](../codeforces/589H.cpp) | [Tourist Guide](http://codeforces.com/problemset/problem/589/H)
+
 ## Semana 10 (5 - 11 Outubro)
 - Live Archive
 	- [671](../icpc/671.cpp) | [Euro Efficiency](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=671)
@@ -11,6 +15,8 @@
 	- [3752](../icpc/3752.cpp) | [Wealthy Family](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=3752)
 - UVA
 	- [2661](../uva/2661.cpp) | [Etruscan Warriors Never Play Chess](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2661)
+- Codeforces
+	- [584D](../codeforces/584D.cpp) | [Dima and Lisa](http://codeforces.com/contest/584/problem/D)
 
 ## Semana 9 (28 Setembro - 4 Outubro)
 - SPOJ

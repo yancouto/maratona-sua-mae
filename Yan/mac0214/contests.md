@@ -1,5 +1,50 @@
 # Relatório de MAC0214 - Contests
 
+## Semana 11 (12 - 18 Outubro)
+
+#### Contest Codechef [October Cook Off](https://www.codechef.com/rankings/COOK63) \#19 (2h30)
+- [Almost Sorted Permutation](../codechef/asp.cpp)
+- [Word Stem](../codechef/stem.cpp)
+- [Palindrome Pairs](../codechef/pp.cpp)
+
+#### Contest Codeforces [NEERC](http://codeforces.com/contest/589/standings) \#93 (5h)
+- [Email Aliases](../codeforces/589A.cpp)
+- [Layer Cake](../codeforces/589B.cpp)
+- [Boulevard](../codeforces/589D.cpp)
+- [Gourmet and Banquet](../codeforces/589F.cpp)
+- [Hiring](../codeforces/589G.cpp)
+- [Lottery](../codeforces/589I.cpp)
+- [Cleaner Robot](../codeforces/589J.cpp)
+
+#### Contest MaratonIME [SWERC 2010](http://ahmed-aly.com/Standings.jsp?ID=21938) \#1 (5h)
+- [Lawn mower](../icpc/2955.cpp)
+- [Assembly line](../icpc/2962.cpp)
+- [Locks and keys](../icpc/2963.cpp)
+- [3-sided dice](../icpc/2964.cpp)
+
+#### Contest Topcoder [SRM 671](http://community.topcoder.com/stat?c=coder_room_stats&rd=16551&cr=40044946) \#? (1h30)
+- [BearCries](http://community.topcoder.com/stat?c=problem_solution&rm=327328&rd=16551&pm=14010&cr=40044946)
+
+#### Contest MaratonIME [Treino USP 3](http://ahmed-aly.com/Standings.jsp?ID=21911) \#1 (3h)
+- [Bring Your Own Horse](../icpc/2297.cpp)
+- [Trick or Treat](../2505.cpp)
+- [Distributing Ballot Boxes](../3833.cpp)
+
+#### Contest Codeforces [#326 Div1](http://codeforces.com/contest/587/standings) \#214 (2h30)
+- [Duff and Weight Lifting](../codeforces/587A.cpp)
+- [Duff in the Army](../codeforces/587C.cpp)
+
+#### Contest MaratonIME [CERC 2013](http://ahmed-aly.com/Standings.jsp?ID=21838) \#1 (5h)
+- [What does the fox say?](../icpc/4592.cpp)
+- [Magical GCD](../4593.cpp)
+- [Draughts](../4596.cpp)
+- [Digraphs](../4601.cpp)
+- [Bus](../4602.cpp)
+
+#### Contest Codeforces [#325 Div1](http://codeforces.com/contest/585/standings) \#249 (2h)
+- [Gennady the Dentist](../codeforces/585A.cpp)
+- [Phillip and Trains](../codeforces/585B.cpp)
+
 ## Semana 10 (5 - 11 Outubro)
 
 ## Semana 9 (28 Setembro - 4 Outubro)
