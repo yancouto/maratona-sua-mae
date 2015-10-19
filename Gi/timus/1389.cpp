@@ -13,39 +13,49 @@ inline ll mod(ll x) { return x % modn; }
 const int MAX = 100005;
 
 vector<int> g[MAX];
-vector<pii> ed;
+int ed[2*MAX][3];
 int memo[MAX][2], mm[MAX][2][2];
-int d[MAX];
+int d[MAX], ied;
 
 int solve(int no, int can) {
 	int &mem = memo[no][can];
 	if(mem != -1) return mem;
-	int sum1 = 0, sum2 = 0;	
+	int sum = 1000000, sum1 = 0, kid = 0;	
 	bool inn = false;
 	for(int i = 0; i < g[no].size(); i++) {
-		if(d[g[no][i]] <= d[no]) continue;
-		sum1 += solve(g[no][i], 1);
-		if(can) sum2 += solve(g[no][i], 0);
-		inn = true;
+		int x = ed[g[no][i]][1];
+		if(d[x] <= d[no]) continue;
+		int a = solve(x, 1), b = solve(x, 0);
+		sum1 += a; inn = true;
+		if(a - b < sum) { sum = a - b; kid = g[no][i]; }
 	}
+	if(!inn) return mem = 0;
+	mem = sum1;
 	mm[no][can][0] = sum1;
-	mm[no][can][1] = sum2 + inn;
-	if(can) mem = max(inn + sum2, sum1);
-	else mem = sum1;
-	printf("State %d %d retornando %d\n", no, can, mem);
+	if(can) mm[no][can][1] = kid;
+	if(can) mem = max(sum1, 1 + sum1 - sum);
 	return mem;
 }
 
-set<pii> edges;
 void build(int no, int can) {
 	int ans = solve(no, can);
-	bool inn = true;
-	for(int i = 0; i < g[no].size(); i++) {
-		if(d[g[no][i]] <= d[no]) continue;
-		build(g[no][i], ans == mm[no][can][0]);
-		if(ans == mm[no][can][1] && inn) {
-			edges.insert(pii(no, g[no][i]));
-			inn = false;
+	if(ans == mm[no][can][0]) {
+		for(int i = 0; i < g[no].size(); i++) {
+			int x = ed[g[no][i]][1];
+			if(d[x] <= d[no]) continue;
+			build(x, 1);
+		}
+	}
+	else {
+		int edge = mm[no][can][1];
+		build(ed[edge][1], 0);
+		if(ed[edge][2]) printf("%d %d\n", ed[edge][0], ed[edge][1]);
+		else printf("%d %d\n", ed[edge][1], ed[edge][0]);
+		for(int i = 0; i < g[no].size(); i++) {
+			int x = ed[g[no][i]][1];
+			if(d[x] <= d[no]) continue;
+			if(g[no][i] == mm[no][can][1]) continue;
+			build(x, 1);
 		}
 	}
 }
@@ -56,8 +66,9 @@ void dfs(int no) {
 	seen[no] = 1;
 	d[no] = beg++;
 	for(int i = 0; i < g[no].size(); i++) {
-		if(seen[g[no][i]]) continue;
-		dfs(g[no][i]);
+		int x = ed[g[no][i]][1];
+		if(seen[x]) continue;
+		dfs(x);
 	}
 }
 
@@ -67,16 +78,11 @@ int main() {
 	memset(memo, -1, sizeof memo);
 	for(i = 0; i < m; i++) {
 		scanf("%d %d", &u, &v);
-		ed.pb(pii(u, v));
-		g[u].pb(v); g[v].pb(u);
+		ed[ied][0] = u; ed[ied][1] = v; ed[ied][2] = 1 ; g[u].pb(ied); ied++;
+		ed[ied][0] = v; ed[ied][1] = u; ed[ied][2] = 0 ; g[v].pb(ied); ied++;
 	}
 	dfs(1);
 	printf("%d\n", solve(1, 1));	
 	build(1, 1);
-	for(int i = 0; i < ed.size(); i++) {
-		if(edges.count(ed[i])) printf("%d %d\n", ed[i].fst, ed[i].snd);
-		else if(edges.count(pii(ed[i].snd, ed[i].fst)))
-			printf("%d %d\n", ed[i].snd, ed[i].fst);
-	}
 	return 0;
 }
