@@ -7,6 +7,10 @@
 ## Semana 11 (12 - 18 Outubro)
 - Codeforces
 	- [589H](../codeforces/589H.cpp) | [Tourist Guide](http://codeforces.com/problemset/problem/589/H)
+- SPOJ
+	- [tornjevi](../spoj/tornjevi.cpp) | [TORNJEVI](http://www.spoj.com/problems/TORNJEVI/)
+- Live Archive
+	- [2075](../icpc/2075.cpp) | [Bridged Marble Rings](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2075)
 
 ## Semana 10 (5 - 11 Outubro)
 - Live Archive

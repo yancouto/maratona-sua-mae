@@ -1,3 +1,4 @@
+// TLE
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -13,13 +14,13 @@ const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
 
 namespace f {
-	const int maxv = 5009;
-	const int maxe = 30009 * 2;
-	typedef ll num;
-	num inf = LLONG_MAX;
+	const int maxv = 100009;
+	const int maxe = 300009 * 2;
+	typedef int num;
+	num inf = INT_MAX;
 	int n = maxv;
 
-	int to[maxe], en, nx[maxe], es[maxe], lv[maxv], qu[maxv];
+	int to[maxe], en, nx[maxe], es[maxe], lv[maxv], qu[maxv], cr[maxv];
 	num cp[maxe], fl[maxe];
 
 
@@ -29,6 +30,7 @@ namespace f {
 		int a = 0, b = 0;
 		qu[b++] = s;
 		while(a < b) {
+			cr[qu[a]] = es[qu[a]];
 			for(int i = es[qu[a]]; i != -1; i = nx[i]) {
 				if(cp[i] > fl[i] && lv[to[i]] == -1) {
 					lv[to[i]] = lv[qu[a]] + 1;
@@ -41,7 +43,6 @@ namespace f {
 		return false;
 	}
 
-	int cr[maxv];
 	num dfs(int u, int t, num mx) {
 		if(u == t) return mx;
 		for(int &i = cr[u]; i != -1; i = nx[i]) {
@@ -59,16 +60,14 @@ namespace f {
 
 	num max_flow(int s, int t) {
 		num fl = 0, a;
-		while(bfs(s, t)) {
-			for(int i = 0; i < n; i++) cr[i] = es[i];
+		while(bfs(s, t))
 			while(a = dfs(s, t, inf))
 				fl += a;
-		}
 		return fl;
 	}
 
 	void reset_all(int n2=maxv) { n = n2; en = 0; memset(es, -1, sizeof(int) * n); }
-	void reset_flow(int m=maxe/2) { memset(fl, 0, sizeof(num) * m*2); }
+	void reset_flow() { memset(fl, 0, sizeof(num) * en); }
 
 	void add_edge(int a, int b, num c, num rc=0) {
 		fl[en] = 0; to[en] = b; cp[en] = c;  nx[en] = es[a]; es[a] = en++;
@@ -77,13 +76,17 @@ namespace f {
 }
 
 int main() {
-	int i, n, m, a, b, c;
-	scanf("%d %d", &n, &m);
-	f::reset_all(n + 6);
-	for(i = 0; i < m; i++) {
-		scanf("%d %d %d", &a, &b, &c); a--; b--;
-		f::add_edge(a, b, c, c);
+	int i, n, m, p, a, b;
+	scanf("%d %d %d", &n, &m, &p);
+	f::reset_all(n + m + 2);
+	for(i = 0; i < n; i++)
+		f::add_edge(n + m, i, 1);
+	for(i = 0; i < m; i++)
+		f::add_edge(n + i, n + m + 1, 1);
+	for(i = 0; i < p; i++) {
+		scanf("%d %d", &a, &b); a--; b = b - 1 + n;
+		f::add_edge(a, b, 1);
 	}
-	printf("%lld\n", f::max_flow(0, n - 1));
-
+	printf("%d\n", f::max_flow(n + m, n + m + 1));
+	return 0;
 }

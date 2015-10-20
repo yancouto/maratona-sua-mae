@@ -37,7 +37,8 @@ void do0() {
 	for(i = 0; i < n; i++)
 		for(j = i + 1; j < n; j++)
 			for(k = j + 1; k < n; k++)
-				cur = min(cur, dist[i][j] + dist[j][k] + dist[k][i]);
+				if(cross(i, j, k) != 0)
+					cur = min(cur, dist[i][j] + dist[j][k] + dist[k][i]);
 	printf("%.2f\n", cur);
 }
 

@@ -11,15 +11,18 @@ typedef long double ld;
 template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ull modn = 1000000007;
 inline ull mod(ull x) { return x % modn; }
+#define max_v 210
+#define max_e 30000
+using namespace std;
 
 namespace f {
-	const int maxv = 5009;
-	const int maxe = 30009 * 2;
-	typedef ll num;
-	num inf = LLONG_MAX;
+	const int maxv = 100009;
+	const int maxe = 300009 * 2;
+	typedef int num;
+	num inf = INT_MAX;
 	int n = maxv;
 
-	int to[maxe], en, nx[maxe], es[maxe], lv[maxv], qu[maxv];
+	int to[maxe], en, nx[maxe], es[maxe], lv[maxv], qu[maxv], cr[maxv];
 	num cp[maxe], fl[maxe];
 
 
@@ -29,6 +32,7 @@ namespace f {
 		int a = 0, b = 0;
 		qu[b++] = s;
 		while(a < b) {
+			cr[qu[a]] = es[qu[a]];
 			for(int i = es[qu[a]]; i != -1; i = nx[i]) {
 				if(cp[i] > fl[i] && lv[to[i]] == -1) {
 					lv[to[i]] = lv[qu[a]] + 1;
@@ -41,7 +45,6 @@ namespace f {
 		return false;
 	}
 
-	int cr[maxv];
 	num dfs(int u, int t, num mx) {
 		if(u == t) return mx;
 		for(int &i = cr[u]; i != -1; i = nx[i]) {
@@ -59,16 +62,14 @@ namespace f {
 
 	num max_flow(int s, int t) {
 		num fl = 0, a;
-		while(bfs(s, t)) {
-			for(int i = 0; i < n; i++) cr[i] = es[i];
+		while(bfs(s, t))
 			while(a = dfs(s, t, inf))
 				fl += a;
-		}
 		return fl;
 	}
 
 	void reset_all(int n2=maxv) { n = n2; en = 0; memset(es, -1, sizeof(int) * n); }
-	void reset_flow(int m=maxe/2) { memset(fl, 0, sizeof(num) * m*2); }
+	void reset_flow() { memset(fl, 0, sizeof(num) * en); }
 
 	void add_edge(int a, int b, num c, num rc=0) {
 		fl[en] = 0; to[en] = b; cp[en] = c;  nx[en] = es[a]; es[a] = en++;
@@ -76,14 +77,49 @@ namespace f {
 	}
 }
 
-int main() {
-	int i, n, m, a, b, c;
-	scanf("%d %d", &n, &m);
-	f::reset_all(n + 6);
-	for(i = 0; i < m; i++) {
-		scanf("%d %d %d", &a, &b, &c); a--; b--;
-		f::add_edge(a, b, c, c);
-	}
-	printf("%lld\n", f::max_flow(0, n - 1));
 
+int n; double d;
+struct nest {
+	int x, y, n, m;
+	void read() { scanf("%d %d %d %d", &x, &y, &n, &m); }
+	bool reach(nest &o) {
+		return ((o.x-x)*(o.x-x)+(o.y-y)*(o.y-y)) <= d*d;
+	}
+}ns[102];
+
+int inf = 100000000;
+int main() {
+	int i, j;
+	for_tests(tt, ttt) {
+		scanf("%d %lf", &n, &d);
+		int tot = 0;
+		f::reset_all();
+		for(i = 1; i <= n; i++) {
+			ns[i].read();
+			tot += ns[i].n;
+			f::add_edge(2*i, 2*i+1, ns[i].m);
+			if(ns[i].n)
+				f::add_edge(0, 2*i, ns[i].n);
+		}
+		for(i = 1; i <= n; i++)
+			for(j = 1; j<= n; j++) {
+				if(i == j) continue;
+				if(!ns[i].reach(ns[j])) continue;
+				f::add_edge(i*2+1, j*2, f::inf);
+				f::add_edge(j*2+1, i*2, f::inf);
+			}
+		int qt = 0;
+		for(i = 1; i <= n; i++) {
+			f::reset_flow(f::en + 3);
+			int mf = f::max_flow(0, 2 * i);
+			if(mf == tot) {
+				if(qt) printf(" %d", i - 1);
+				else printf("%d", i - 1);
+				qt++;
+			}
+		}
+		if(qt) putchar('\n');
+		else puts("-1");
+	}
+	return 0;
 }

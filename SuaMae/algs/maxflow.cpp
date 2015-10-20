@@ -5,7 +5,7 @@ namespace f {
 	num inf = INT_MAX;
 	int n = maxv;
 
-	int to[maxe], en, nx[maxe], es[maxe], lv[maxv], qu[maxv];
+	int to[maxe], en, nx[maxe], es[maxe], lv[maxv], qu[maxv], cr[maxv];
 	num cp[maxe], fl[maxe];
 
 
@@ -15,6 +15,7 @@ namespace f {
 		int a = 0, b = 0;
 		qu[b++] = s;
 		while(a < b) {
+			cr[qu[a]] = es[qu[a]];
 			for(int i = es[qu[a]]; i != -1; i = nx[i]) {
 				if(cp[i] > fl[i] && lv[to[i]] == -1) {
 					lv[to[i]] = lv[qu[a]] + 1;
@@ -27,11 +28,8 @@ namespace f {
 		return false;
 	}
 
-	int us[maxv], te, cr[maxv];
 	num dfs(int u, int t, num mx) {
 		if(u == t) return mx;
-		if(us[u] == te) return 0;
-		us[u] = te;
 		for(int &i = cr[u]; i != -1; i = nx[i]) {
 			if(cp[i] > fl[i] && lv[to[i]] == lv[u] + 1) {
 				if(int a = dfs(to[i], t, min(mx, cp[i] - fl[i]))) {
@@ -47,17 +45,14 @@ namespace f {
 
 	num max_flow(int s, int t) {
 		num fl = 0, a;
-		while(bfs(s, t)) {
-			te++;
-			for(int i = 0; i < n; i++) cr[i] = es[i];
+		while(bfs(s, t))
 			while(a = dfs(s, t, inf))
-				fl += a, te++;
-		}
+				fl += a;
 		return fl;
 	}
 
 	void reset_all(int n2=maxv) { n = n2; en = 0; memset(es, -1, sizeof(int) * n); }
-	void reset_flow(int m=maxe/2) { memset(fl, 0, sizeof(num) * m*2); }
+	void reset_flow() { memset(fl, 0, sizeof(num) * en); }
 
 	void add_edge(int a, int b, num c, num rc=0) {
 		fl[en] = 0; to[en] = b; cp[en] = c;  nx[en] = es[a]; es[a] = en++;
