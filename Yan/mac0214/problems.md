@@ -1,5 +1,9 @@
 # Relatório de MAC0214 - Problemas
 
+## Semana 12 (19 - 25 Outubro)
+- Live Archive
+	- [2219](../icpc/2219.cpp) | [Traveling Shoemaker Problem](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2219)
+
 ## Semana 11 (12 - 18 Outubro)
 - Codeforces
 	- [589H](../codeforces/589H.cpp) | [Tourist Guide](http://codeforces.com/problemset/problem/589/H)
