@@ -3,14 +3,16 @@
 ## Semana 12 (19 - 25 Outubro)
 - Live Archive
 	- [2219](../icpc/2219.cpp) | [Traveling Shoemaker Problem](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2219)
-
-## Semana 11 (12 - 18 Outubro)
-- Codeforces
-	- [589H](../codeforces/589H.cpp) | [Tourist Guide](http://codeforces.com/problemset/problem/589/H)
+	- [4926](../icpc/4926.cpp) | [Maze Mayhem](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4926)
+	- [2075](../icpc/2075.cpp) | [Bridged Marble Rings](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2075)
 - SPOJ
 	- [tornjevi](../spoj/tornjevi.cpp) | [TORNJEVI](http://www.spoj.com/problems/TORNJEVI/)
-- Live Archive
-	- [2075](../icpc/2075.cpp) | [Bridged Marble Rings](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2075)
+- Codeforces
+	- [589H](../codeforces/589H.cpp) | [Tourist Guide](http://codeforces.com/problemset/problem/589/H)
+- UVA
+	- [2039](../uva/2039.cpp) | [Battle II](https://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=2039)
+
+## Semana 11 (12 - 18 Outubro)
 
 ## Semana 10 (5 - 11 Outubro)
 - Live Archive

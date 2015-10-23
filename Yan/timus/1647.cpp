@@ -32,11 +32,20 @@ double go(int i) {
 	double x = 4;
 	double a = dist[i][(i+1)%3], b = dist[i][(i+2)%3];
 	double p = tot / 2.;
-	for(int g = 0; g < 1000; g++)
-		x = x - (x * x - p * x + a * b / 2.) / (2 * x - p);
-	if(x > dist[i][(i + 1) % 3] + eps) return 1/0.;
-	ok = true;
-	return x;
+	double d = p * p - 2 * a * b;
+	if(abs(d) <= eps) d = 0;
+	if(d < 0) return -1;
+	d = sqrt(d);
+	double l = (p + d) / 2.;
+	if(l < a + eps && (p - l) < b + eps) return l;
+	l = p - l;
+	if(l < a + eps && (p - l) < b + eps) return l;
+	l = (p - d) / 2.;
+	if(abs(l) <= eps) l = 0;
+	if(l >= 0 && l < a + eps && (p - l) < b + eps) return l;
+	l = p - l;
+	if(l >= 0 && l < a + eps && (p - l) < b + eps) return l;
+	return -1;
 }
 
 ptd on_tr(double d) {
@@ -63,7 +72,7 @@ int main() {
 	ok = false;
 	for(i = 0; i < 3; i++) {
 		double l = go(i);
-		if(ok) {
+		if(l >= -.5) {
 			ptd pa = on_tr(l), pb = on_tr(l + tot / 2.);
 			puts("YES");
 			printf("%.15f %.15f\n", pa.x, pa.y);

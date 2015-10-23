@@ -1,5 +1,20 @@
 # Relatório de MAC0214 - Contests
 
+## Semana 12 (19 - 25 Outubro)
+
+#### Contest MaratonIME [Jakarta 2014](http://ahmed-aly.com/Standings.jsp?ID=22053) ([gidelfino](http://ahmed-aly.com/Profile.jsp?Username=gidelfino))\#2 (5h)
+- [Cluster Analysis](../../SuaMae/MaratonIME/21-10-15/cluster.cpp)
+- [Body Building](../../SuaMae/MaratonIME/21-10-15/body.cpp)
+- [Electric Bike](../../SuaMae/MaratonIME/21-10-15/bike.cpp)
+- [Kevin's Problem](../../SuaMae/MaratonIME/21-10-15/kevin.cpp)
+- [Cutting Tree](../../SuaMae/MaratonIME/21-10-15/cut.cpp)
+- [Double Swords](../../SuaMae/MaratonIME/21-10-15/sword.cpp)
+- [I Want That Cake](../../SuaMae/MaratonIME/21-10-15/cake.cpp)
+- [Leveling Ground](../../SuaMae/MaratonIME/21-10-15/ground.cpp)
+
+#### Contest Topcoder [SRM 672](http://community.topcoder.com/stat?c=last_match_sorted&rd=16552&dn=1&sq=Round_Statistics_Data&sc=16&sd=asc) \#? (1h30)
+- [Procrastination](http://community.topcoder.com/stat?c=problem_solution&rm=327396&rd=16552&pm=14072&cr=40044946)
+
 ## Semana 11 (12 - 18 Outubro)
 
 #### Contest Codechef [October Cook Off](https://www.codechef.com/rankings/COOK63) \#19 (2h30)
