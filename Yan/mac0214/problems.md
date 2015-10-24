@@ -2,9 +2,10 @@
 
 ## Semana 12 (19 - 25 Outubro)
 - Live Archive
-	- [2219](../icpc/2219.cpp) | [Traveling Shoemaker Problem](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2219)
-	- [4926](../icpc/4926.cpp) | [Maze Mayhem](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4926)
 	- [2075](../icpc/2075.cpp) | [Bridged Marble Rings](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2075)
+	- [2219](../icpc/2219.cpp) | [Traveling Shoemaker Problem](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2219)
+	- [4056](../icpc/4056.cpp) | [Alien Abduction](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4056)
+	- [4926](../icpc/4926.cpp) | [Maze Mayhem](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=4926)
 - SPOJ
 	- [tornjevi](../spoj/tornjevi.cpp) | [TORNJEVI](http://www.spoj.com/problems/TORNJEVI/)
 - Codeforces
