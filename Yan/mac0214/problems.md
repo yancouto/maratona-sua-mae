@@ -1,5 +1,14 @@
 # Relatório de MAC0214 - Problemas
 
+## Semana 13 (26 Outubro - 1 Novembro)
+- UVA
+	- [1260](../uva/1260.cpp) | [Manhattan](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1260)
+- Codeforces
+	- [295C](../codeforces/295C.cpp) | [Greg and Friends](http://codeforces.com/contest/295/problem/C)
+	- [585D](../codeforces/585D.cpp) | [Lizard Era: Beginning](http://codeforces.com/contest/585/problem/D)
+	- [590B](../codeforces/590B.cpp) | [Chip 'n Dale Rescue Rangers](http://codeforces.com/contest/590/problem/B)
+	- [590C](../codeforces/590C.cpp) | [Three States](http://codeforces.com/contest/590/problem/C)
+
 ## Semana 12 (19 - 25 Outubro)
 - Live Archive
 	- [2075](../icpc/2075.cpp) | [Bridged Marble Rings](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2075)

@@ -1,6 +1,22 @@
 # Relatório de MAC0214 - Contests
 
+## Semana 13 (26 Outubro - 1 Novembro)
+
+#### Contest Codeforces [#179 Div1](http://codeforces.com/contest/295/standings) \#471 (2h) (Virtual Participation)
+- [Greg and Array](../codeforces/295A.cpp)
+- [Greg and Graph](../codeforces/295B.cpp)
+
 ## Semana 12 (19 - 25 Outubro)
+
+#### Contest Codeforces [#327 Div1](http://codeforces.com/contest/590/standings) \#271 (2h)
+- [Median Smoothing](../codeforces/590A.cpp)
+
+#### Contest MaratonIME [Daejeon 2010](http://ahmed-aly.com/Standings.jsp?ID=22145) ([gidelfino](http://ahmed-aly.com/Profile.jsp?Username=gidelfino), [na2th](http://ahmed-aly.com/Profile.jsp?Username=na2th)) (5h)
+- [Sales](../../SuaMae/MaratonIME/24-10-15/sale.cpp)
+- [Password](../../SuaMae/MaratonIME/24-10-15/pswd.cpp)
+- [Mines](../../SuaMae/MaratonIME/24-10-15/mine.cpp)
+- [Binary Search Tree](../../SuaMae/MaratonIME/24-10-15/bst.cpp)
+- [Restaurant](../../SuaMae/MaratonIME/24-10-15/restaurant.cpp)
 
 #### Contest MaratonIME [Jakarta 2014](http://ahmed-aly.com/Standings.jsp?ID=22053) ([gidelfino](http://ahmed-aly.com/Profile.jsp?Username=gidelfino))\#2 (5h)
 - [Cluster Analysis](../../SuaMae/MaratonIME/21-10-15/cluster.cpp)

@@ -1,4 +1,3 @@
-// INCOMPLETO 
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -32,6 +31,7 @@ void dfs(int u) {
 	if(seen[u]) return;
 	seen[u] = true;
 	d[u] = low[u] = tempo++;
+	st[sn++] = u;
 	for(int v : adj[u]) {
 		dfs(v);
 		low[u] = min(low[u], low[v]);
