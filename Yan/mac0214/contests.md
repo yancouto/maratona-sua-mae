@@ -2,6 +2,13 @@
 
 ## Semana 13 (26 Outubro - 1 Novembro)
 
+#### Contest Codeforces [ASC 10](http://codeforces.com/gym/100212/standings) \#59 (5h) (Virtual Participation) ([velfke](http://ahmed-aly.com/Profile.jsp?Username=velfke), [victorsenam](http://ahmed-aly.com/Profile.jsp?Username=victorsenam))
+- [The Smart Bomb](../../SuaMae/MaratonIME/28-10-15/A/A.cpp)
+- [Long Dominoes](../../SuaMae/MaratonIME/28-10-15/E/E.cpp)
+- [Cracking SSH](../../SuaMae/MaratonIME/28-10-15/G/G.cpp)
+- [Trade](../../SuaMae/MaratonIME/28-10-15/I/I.cpp)
+- [Unfair Contest](../../SuaMae/MaratonIME/28-10-15/K/K.cpp)
+
 #### Contest Codeforces [#179 Div1](http://codeforces.com/contest/295/standings) \#471 (2h) (Virtual Participation)
 - [Greg and Array](../codeforces/295A.cpp)
 - [Greg and Graph](../codeforces/295B.cpp)

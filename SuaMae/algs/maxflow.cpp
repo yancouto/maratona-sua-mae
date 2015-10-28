@@ -13,13 +13,14 @@ namespace f {
 		memset(lv, -1, sizeof(int) * n);
 		lv[s] = 0;
 		int a = 0, b = 0;
-		qu[b++] = s;
+		qu[b++] = s; cr[s] = es[s];
 		while(a < b) {
 			cr[qu[a]] = es[qu[a]];
 			for(int i = es[qu[a]]; i != -1; i = nx[i]) {
 				if(cp[i] > fl[i] && lv[to[i]] == -1) {
 					lv[to[i]] = lv[qu[a]] + 1;
 					qu[b++] = to[i];
+					cr[to[i]] = es[to[i]];
 					if(to[i] == t) return true;
 				}
 			}
@@ -30,15 +31,13 @@ namespace f {
 
 	num dfs(int u, int t, num mx) {
 		if(u == t) return mx;
-		for(int &i = cr[u]; i != -1; i = nx[i]) {
-			if(cp[i] > fl[i] && lv[to[i]] == lv[u] + 1) {
+		for(int &i = cr[u]; i != -1; i = nx[i])
+			if(cp[i] > fl[i] && lv[to[i]] == lv[u] + 1)
 				if(int a = dfs(to[i], t, min(mx, cp[i] - fl[i]))) {
 					fl[i] += a;
 					fl[i ^ 1] -= a;
 					return a;
 				}
-			}
-		}
 		return 0;
 	}
 

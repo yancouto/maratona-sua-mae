@@ -8,6 +8,8 @@
 	- [585D](../codeforces/585D.cpp) | [Lizard Era: Beginning](http://codeforces.com/contest/585/problem/D)
 	- [590B](../codeforces/590B.cpp) | [Chip 'n Dale Rescue Rangers](http://codeforces.com/contest/590/problem/B)
 	- [590C](../codeforces/590C.cpp) | [Three States](http://codeforces.com/contest/590/problem/C)
+	- [100212D](../codeforces/100212D.cpp) | [More Divisors](http://codeforces.com/gym/100212/attachments)
+	- [100212F](../codeforces/100212F.cpp) | [The Magic Wheel](http://codeforces.com/gym/100212/attachments)
 
 ## Semana 12 (19 - 25 Outubro)
 - Live Archive
