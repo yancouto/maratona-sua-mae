@@ -1,6 +1,18 @@
 # Relatório de MAC0214 - Contests
 
+## Semana 14 (2 - 8 Novembro)
+
 ## Semana 13 (26 Outubro - 1 Novembro)
+
+#### Contest Codeforces [ASC 44](http://codeforces.com/gym/100518/standings) \#63 (5h) (Virtual Participation) ([gafeol](http://ahmed-aly.com/Profile.jsp?Username=gafeol), [gidelfino](http://ahmed-aly.com/Profile.jsp?Username=gidelfino))
+- [Braess's Paradox](../../SuaMae/MaratonIME/ASC-44/B/B.cpp)
+- [Funny Card Game](../../SuaMae/MaratonIME/ASC-44/F/F.cpp)
+
+#### Contest Codeforces [ESPC 2013](http://codeforces.com/gym/100283/standings) \#122 (5h) (Virtual Participation) ([victorsenam](http://ahmed-aly.com/Profile.jsp?Username=victorsenam))
+- [Ghanophobia](../../SuaMae/MaratonIME/ESPC-2013/E/E.cpp)
+- [Bakkar In The Army](../../SuaMae/MaratonIME/ESPC-2013/F/F.cpp)
+- [Cubes Shuffling](../../SuaMae/MaratonIME/ESPC-2013/K/K.cpp)
+- [Mahdi And The Teddy Bear](../../SuaMae/MaratonIME/ESPC-2013/E/E.cpp)
 
 #### Contest Codeforces [ASC 10](http://codeforces.com/gym/100212/standings) \#59 (5h) (Virtual Participation) ([velfke](http://ahmed-aly.com/Profile.jsp?Username=velfke), [victorsenam](http://ahmed-aly.com/Profile.jsp?Username=victorsenam))
 - [The Smart Bomb](../../SuaMae/MaratonIME/28-10-15/A/A.cpp)

@@ -1,5 +1,9 @@
 # Relatório de MAC0214 - Problemas
 
+## Semana 14 (2 - 8 Novembro)
+- Live Archive
+	- [2958](../icpc/2958.cpp) | [Fake scoreboard](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2958)
+
 ## Semana 13 (26 Outubro - 1 Novembro)
 - UVA
 	- [1260](../uva/1260.cpp) | [Manhattan](https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1260)

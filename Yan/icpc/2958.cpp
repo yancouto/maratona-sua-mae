@@ -1,4 +1,3 @@
-// incompleto
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -94,24 +93,21 @@ int main() {
 			gp[i] = f::add_edge(i + T, t, x);
 		}
 		for(i = 0; i < T; i++)
-			for(j = P - 1; j >= 0; j--)
+			for(j = P - 1; j >= 0; j--) {
 				f::add_edge(i, j + T, 1);
+			}
 		x = f::max_flow(s, t);
-		printf("mxf %d\n", x);
 		if(x != tt || x != tp) { puts("Impossible"); continue; }
 		memset(grid, 0, sizeof grid);
 		for(i = 0; i < T; i++) {
-			printf("vert %d\n", i);
 			using namespace f;
-			for(int e = es[i]; to[e] != s; e = nx[e]) {
-				if(fl[e] == 0)
-					continue;
+			for(int e = es[i]; e != -1; e = nx[e]) {
+				if(fl[e] == 0 && to[e] != s) cp[e] = 0;
+				if(to[e] == s || fl[e] == 0) continue;
 				assert(fl[e] == 1 && fl[e ^ 1] == -1);
-				cp[gt[e]]++; cp[gp[to[e] - T]]++;
-				printf("testing without -> %d\n", to[e]);
+				cp[gt[i]]++; cp[gp[to[e] - T]]++;
 				if(!f::max_flow(s, t)) {
-					printf("putting it back...\n");
-					cp[gt[e]]--; cp[gp[to[e] - T]]--;
+					cp[gt[i]]--; cp[gp[to[e] - T]]--;
 					grid[i][to[e] - T] = 1;
 				}
 			}
@@ -122,5 +118,4 @@ int main() {
 			putchar('\n');
 		}
 	}
-
 }
