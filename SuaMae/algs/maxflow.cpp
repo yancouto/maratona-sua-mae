@@ -15,7 +15,6 @@ namespace f {
 		int a = 0, b = 0;
 		qu[b++] = s; cr[s] = es[s];
 		while(a < b) {
-			cr[qu[a]] = es[qu[a]];
 			for(int i = es[qu[a]]; i != -1; i = nx[i]) {
 				if(cp[i] > fl[i] && lv[to[i]] == -1) {
 					lv[to[i]] = lv[qu[a]] + 1;

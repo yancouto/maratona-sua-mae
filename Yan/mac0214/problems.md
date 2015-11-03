@@ -10,6 +10,8 @@
 	- [590C](../codeforces/590C.cpp) | [Three States](http://codeforces.com/contest/590/problem/C)
 	- [100212D](../codeforces/100212D.cpp) | [More Divisors](http://codeforces.com/gym/100212/attachments)
 	- [100212F](../codeforces/100212F.cpp) | [The Magic Wheel](http://codeforces.com/gym/100212/attachments)
+- Live Archive
+	- [2960](../icpc/2960.cpp) | [Jumping monkey](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2960)
 
 ## Semana 12 (19 - 25 Outubro)
 - Live Archive
