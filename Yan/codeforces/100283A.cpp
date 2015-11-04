@@ -1,4 +1,3 @@
-// WA??????
 #include <bits/stdc++.h>
 using namespace std;
 int a[1009], mx, n;
@@ -8,9 +7,10 @@ bool pos(double r) {
 	for(int i = 0; i < n; i++) {
 		double s = a[i] / (2. * r);
 		double al = asin(s);
-		cur += al * 2.;
+		assert(al >= 0.);
+		cur += al;
 	}
-	return cur - 2. * pi <= eps;
+	return cur <= pi;
 }
 
 int main() {
@@ -27,7 +27,7 @@ int main() {
 		}
 		printf("Case %d: ", tt);
 		if(mx * 2 >= tot) { puts("can't form a convex polygon"); continue; }
-		double l = mx / 2., r = 10000000;
+		double l = mx / 2., r = 10000000.;
 		while(r - l > eps) {
 			double m = (l + r) / 2;
 			if(pos(m)) r = m;

@@ -3,6 +3,8 @@
 ## Semana 14 (2 - 8 Novembro)
 - Live Archive
 	- [2958](../icpc/2958.cpp) | [Fake scoreboard](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2958)
+- Codeforces
+	- [100283A](../codeforces/100283A.cpp) | [Rasheda And The Zeriba](http://codeforces.com/gym/100283/problem/A)
 
 ## Semana 13 (26 Outubro - 1 Novembro)
 - UVA
