@@ -2,6 +2,10 @@
 
 ## Semana 14 (2 - 8 Novembro)
 
+#### Contest Codeforces [#329 Div2](http://codeforces.com/contest/593/standings) \#753  (2h)
+- [2Char](../codeforces/593A.cpp)
+- [Anton and Lines](../codeforces/593B.cpp)
+
 ## Semana 13 (26 Outubro - 1 Novembro)
 
 #### Contest Codeforces [ASC 44](http://codeforces.com/gym/100518/standings) \#63 (5h) (Virtual Participation) ([gafeol](http://ahmed-aly.com/Profile.jsp?Username=gafeol), [gidelfino](http://ahmed-aly.com/Profile.jsp?Username=gidelfino))

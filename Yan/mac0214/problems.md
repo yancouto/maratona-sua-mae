@@ -4,6 +4,7 @@
 - Live Archive
 	- [2958](../icpc/2958.cpp) | [Fake scoreboard](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2958)
 - Codeforces
+	- [593D](../codeforces/593D.cpp) | [Happy Tree Party](http://codeforces.com/gym/593/problem/D)
 	- [100283A](../codeforces/100283A.cpp) | [Rasheda And The Zeriba](http://codeforces.com/gym/100283/problem/A)
 
 ## Semana 13 (26 Outubro - 1 Novembro)
