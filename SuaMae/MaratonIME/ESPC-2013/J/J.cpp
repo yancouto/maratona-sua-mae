@@ -1,9 +1,8 @@
 #include <bits/stdc++.h>
-
-
 using namespace std;
 typedef double num;
 const double eps = 1e-7;
+
 struct cmp {
 	bool operator() (double a, double b) {
 		if(abs(b - a) <= eps) return false;

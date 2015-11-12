@@ -1,5 +1,9 @@
 # Relatório de MAC0214 - Problemas
 
+## Semana 15 (9 - 15 Novembro)
+- Codeforces
+	- [582A](../codeforces/582A.cpp) | [GCD Table](http://codeforces.com/contest/582/problem/A)
+
 ## Semana 14 (2 - 8 Novembro)
 - Live Archive
 	- [2958](../icpc/2958.cpp) | [Fake scoreboard](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=2958)
