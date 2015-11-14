@@ -12,15 +12,16 @@ int dist(int i, int j) {
 }
 
 bool lex_less(int i, int j) {
-	if(y[i] != y[j]) return y[i] < y[j];
-	return x[i] < x[j];
+	if(x[i] != x[j]) return x[i] < x[j];
+	return y[i] < y[j];
 }
 
 int bi;
 bool cross_cmp(int i, int j) {
 	int c = cross(bi, i, j);
 	if(c != 0) return c > 0;
-	return dist(bi, i) < dist(bi, j);
+	if(x[i] != x[j]) return x[i] < x[j];
+	return y[i] > y[j];
 }
 
 int st[N], sn;
@@ -34,9 +35,9 @@ int main() {
 	while(n > 2) {
 		swap(p, pp);
 		swap(p[0], *min_element(p, p + n, lex_less));
+		bi = p[0];
 		sort(p + 1, p + n, cross_cmp);
 		sn = 0;
-		bi = p[0];
 		st[sn++] = p[0];
 		int k = 0;
 		for(i = 1; i < n; i++) {

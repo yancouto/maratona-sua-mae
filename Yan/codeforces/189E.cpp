@@ -12,13 +12,21 @@ const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 const int N = 100009;
 
+struct edge {
+	int a, b, cost;
+	void set(int aa, int bb, int cc) { a = aa; b = bb; cost = cc; }
+	bool operator < (edge o) const { return cost < o.cost; }
+} es[N << 2];
+int en;
+
 int S[N], sz[N];
 int find(int i) {
 	if(S[S[i]] != S[i]) S[i] = find(S[i]);
 	return S[i];
 }
 void join(int a, int b) {
-	if((a = find(a)) == (b = find(b))) return;
+	a = find(a); b = find(b);
+	if(a == b) return;
 	if(sz[a] < sz[b]) swap(a, b);
 	sz[a] += sz[b];
 	S[b] = a;
@@ -40,11 +48,17 @@ int bfs() {
 				dist[v] = dist[u] + 1;
 				q.push(v);
 				mrk[v] = mrk[u];
-			} else if(find(mrk[v]) != find(mrk[u])) {
-				join(mrk[v], mrk[u]);
-				if(find(0) == find(k - 1)) return dist[v] + dist[u] + 1;
+			} else {
+				es[en++].set(mrk[v], mrk[u], dist[v] + dist[u] + 1);
 			}
 		}
+	}
+	sort(es, es + en);
+	for(int i = 0; i < en; i++) {
+		edge &e = es[i];
+		if(find(e.a) == find(e.b)) continue;
+		join(e.a, e.b);
+		if(find(0) == find(k - 1)) return e.cost;
 	}
 	return -1;
 }
@@ -56,6 +70,7 @@ int main() {
 		scanf("%d", &pos[i]); pos[i]--;
 		S[i] = i; sz[i] = 1;
 	}
+	S[k] = i; sz[k] = 1;
 	for(i = 0; i < m; i++) {
 		scanf("%d %d", &u, &v);
 		adj[--u].pb(--v);
