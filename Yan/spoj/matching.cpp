@@ -15,7 +15,8 @@ const int E = 150009, N = 50009;
 int es[N], en, to[E], nx[E], M[N << 1];
 
 int qu[N], n, m, dist[N];
-bool bfs() {
+int cur[N];
+inline bool bfs() {
 	int a = 0, b = 0, i;
 	for(i = 0; i < n; i++) {
 		dist[i] = -1;
@@ -25,6 +26,7 @@ bool bfs() {
 	bool ok = false;
 	while(a < b) {
 		int v = qu[a++];
+		cur[v] = es[v];
 		for(int e = es[v]; e != -1; e = nx[e]) {
 			if(M[to[e]] == to[e]) ok = true;
 			else if(dist[M[to[e]]] == -1) {
@@ -36,7 +38,6 @@ bool bfs() {
 	return ok;
 }
 
-int cur[N];
 bool dfs(int u) {
 	for(int &e = cur[u]; e != -1; e = nx[e]) {
 		if(M[to[e]] == to[e]) {
@@ -52,10 +53,9 @@ bool dfs(int u) {
 	return false;
 }
 
-int max_match() {
+inline int max_match() {
 	int m = 0, i;
 	while(bfs()) {
-		for(i = 0; i < n; i++) cur[i] = es[i];
 		for(i = 0; i < n; i++)
 			if(M[i] == i && dfs(i))
 				m++;
@@ -63,17 +63,30 @@ int max_match() {
 	return m;
 }
 
-void add_edge(int a, int b) {
+inline void add_edge(int a, int b) {
 	nx[en] = es[a]; to[en] = b; es[a] = en++;
+}
+
+//tryhard
+inline int get() {
+	char c;
+	while(isspace(c = getchar_unlocked()));
+	int num = c - '0';
+	while(isdigit(c = getchar_unlocked()))
+		num = (num << 3) + (num << 1) + c - '0';
+	return num;
 }
 
 int main() {
 	int i, p, a, b;
-	scanf("%d %d %d", &n, &m, &p);
+	n = get(); m = get(); p = get();
+	//scanf("%d %d %d", &n, &m, &p);
 	for(i = 0; i < n; i++) es[i] = -1;
 	for(i = 0; i < n + m; i++) M[i] = i;
 	for(i = 0; i < p; i++) {
-		scanf("%d %d", &a, &b); a--; b = b - 1 + n;
+		a = get() - 1;
+		b = get() - 1 + n;
+		//scanf("%d %d", &a, &b); a--; b = b - 1 + n;
 		add_edge(a, b);
 	}
 	printf("%d\n", max_match());
