@@ -27,8 +27,8 @@ inline int ant(int i, int ac){
 	else{
 		if(x[i]-h>=x[i-1]+h)
 			return h;
-		else 
-			return x[i-1]+h-x[i];
+		else
+			return x[i]-(x[i-1]+h);
 	}
 }
 
@@ -46,27 +46,28 @@ inline int nxt(int i,int ac){
 			return x[i+1]-x[i];
 	}
 }
-
-inline int analisae(int i,int f, int l,int r){
-	if(proxe[i]>f)
-		return x[f]-x[i] + nxt(f,r); /*falta adicionar o h */
-	else
-		return (esq[i]-x[i]);
+inline int analisae(int i,int f,int l,int r){
+    if(proxe[i]>f)
+        return x[f]-x[i] + nxt(f,r);
+    else
+        return (esq[i]-x[i]);
 }
 
-inline int analisad(int i,int f, int l,int r){
+inline int analisad(int i,int f,int l,int r){
 	if(i>proxd[f])
-		return x[f]-x[i] + ant(i,l); /* falta adicionar o h */
-	else 
+		return x[f]-x[i] + ant(i,l);
+	else
 		return (x[f]-dir[f]);
 }
 
 double go(int i,int f,int l,int r){
 	if(i>f) return 0;
 	if(dp[i][f][l][r] == -1){
-		double *ans = &dp[i][f][l][r];
+		double *ans;
+		ans = &dp[i][f][l][r];
 		*ans = 0.0;
-		*ans += 0.5*(p*(go(i+1,f,0,r)+ant(i,l)  +  go(i,proxd[f],l,0)+analisad(i,f,l,r)) + (1-p)*(go(proxe[i],f,1,r)+analisae(i,f,l,r)  +  go(i,f-1,l,1)+nxt(f,r)));
+		*ans += 0.5*(p*(go(i+1,f,0,r)+ant(i,l)) + (1-p)*(go(proxe[i],f,1,r)+analisae(i,f,l,r)));
+		*ans += 0.5*(p*(go(i,proxd[f],l,0)+analisad(i,f,l,r)) + (1-p)*(go(i,f-1,l,1)+nxt(f,r)));
 	}
 	return dp[i][f][l][r];
 }
@@ -87,7 +88,7 @@ int main (){
 	for(int a=1;a<=n;a++)
 		scanf("%d", &x[a]);
 	x[0] = -2*DEZ - 10;
-	x[n+1] = 2*DEZ + 10; 
+	x[n+1] = 2*DEZ + 10;
 	sort(&x[1],&x[n+1]);
 	for(int a=n;a>0;a--){
 		if(h+x[a] > x[a+1]){
@@ -109,6 +110,6 @@ int main (){
 			dir[a] = x[a]-h;
 		}
 	}
-	printf("%.15f\n", go(1,n,0,1));
+	printf("%.9f\n", go(1,n,0,1));
 	return 0;
 }
