@@ -1,5 +1,27 @@
 # Relatório de MAC0214 - Contests
 
+## Semana 16 (16 - 22 Novembro)
+
+#### Contest Codeforces [#332 Div2](http://codeforces.com/contest/599/standings) \#47 (2h)
+- [Patrick and Shopping](../codeforces/599A.cpp)
+- [Spongebob and Joke](../codeforces/599B.cpp)
+- [Day at the Beach](../codeforces/599C.cpp)
+- [Spongebob and Squares](../codeforces/599D.cpp)
+
+#### Contest Topcoder [SRM 673] (https://community.topcoder.com/stat?c=coder_room_stats&rd=16616&cr=40044946) \#135 (1h30)
+- [BearCavalry](https://community.topcoder.com/stat?c=problem_solution&rm=327509&rd=16616&pm=14081&cr=40044946)
+
+## Semana 15 (9 - 15 Novembro)
+
+#### Contest Codeforces [#331 Div2](http://codeforces.com/contest/596/standings) \#43 (2h)
+- [Wilbur and Swimming Pool](../codeforces/596A.cpp)
+- [Wilbur and Array](../codeforces/596B.cpp)
+- [Wilbur and Points](../codeforces/596C.cpp)
+- [Wilbur and Trees](../codeforces/596D.cpp)
+
+#### Maratona de Programação [Final Brasileira](http://maratona.ime.usp.br/resultados15/reports/final_scoreboard.html) \#5 (Brasil) \#10 (America Latina) (5h)
+- Código não disponível - [Enunciados](http://maratona.ime.usp.br/resultados15/contest_onesided.pdf)
+
 ## Semana 14 (2 - 8 Novembro)
 
 #### Contest Codeforces [#329 Div2](http://codeforces.com/contest/593/standings) \#753  (2h)
@@ -51,7 +73,7 @@
 - [I Want That Cake](../../SuaMae/MaratonIME/21-10-15/cake.cpp)
 - [Leveling Ground](../../SuaMae/MaratonIME/21-10-15/ground.cpp)
 
-#### Contest Topcoder [SRM 672](http://community.topcoder.com/stat?c=last_match_sorted&rd=16552&dn=1&sq=Round_Statistics_Data&sc=16&sd=asc) \#? (1h30)
+#### Contest Topcoder [SRM 672](https://community.topcoder.com/stat?c=round_stats&rd=16552&dn=1) \#113 (1h30)
 - [Procrastination](http://community.topcoder.com/stat?c=problem_solution&rm=327396&rd=16552&pm=14072&cr=40044946)
 
 ## Semana 11 (12 - 18 Outubro)
