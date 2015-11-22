@@ -2,6 +2,12 @@
 
 ## Semana 16 (16 - 22 Novembro)
 
+#### Contest Codechef [November Cook-Off](https://www.codechef.com/rankings/COOK64) \#12 (2h30)
+- [Sereja and Array and Subtracting](../codechef/seaarasu.cpp)
+- [Sereja and Line](../codechef/sealine.cpp)
+- [Sereja and Tree 2](../codechef/seatr2.cpp)
+- [Sereja and Pairs](../codechef/seapair.cpp)
+
 #### Contest Codeforces [#332 Div2](http://codeforces.com/contest/599/standings) \#47 (2h)
 - [Patrick and Shopping](../codeforces/599A.cpp)
 - [Spongebob and Joke](../codeforces/599B.cpp)
