@@ -12,33 +12,28 @@ const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 const int N = 10005;
 
-int n, x, y, ip;
+int n;
 pii p[N];
+ll x, y;
 int f[N];
 
-bool dir(int i, int j, int k) {
-	return p[i].x * p[j].y + p[i].y * p[k].y + p[j].x * p[k].y - (p[k].x * p[j].y + p[k].y * p[i].x + p[j].x * p[i].y) > 0;
-}
-
 bool comp(int a, int b) {
-	return x * p[a].y + y * p[b].y + p[a].x * p[b].y - (p[b].x * p[a].y + p[b].y * x + p[a].x * y) > 0;
+	return (x * p[a].y + y * p[b].x + p[a].x * p[b].y - (p[b].x * p[a].y + p[b].y * x + p[a].x * y)) > 0;
 }
 
 int main() {
-	int i, ii = 0;
+	int i, ii = 0, j;
 	scanf("%d", &n);
-	for(i = 0; i < n; i++) {
-		scanf("%lld %lld", &p[i].x, &p[i].y);
-		f[i] = i;
-	}
+	if(n == 2) { puts("1 2"); return 0; }
+	for(i = 0; i < n; i++) 
+		scanf("%lld %lld", &p[i].x, &p[i].y), f[i] = i;
 	for(i = 1; i < n; i++)
 		if(p[i].y < p[ii].y) ii = i;
 		else if(p[i].y == p[ii].y && p[i].x < p[ii].x) ii = i;	
 	x = p[ii].x; y = p[ii].y;
-	printf("Base %d %d\n", x, y);
-	sort(f, f + n, comp); 
-	for(i = 0; i < n; i++)
-		printf("%d %d\n", p[f[i]].x, p[f[i]].y);
-	printf("%d %d\n", f[0] + 1, f[n/2]);
+	for(i = ii + 1; i < n; i++) 
+		swap(f[i], f[i-1]); 
+	sort(f, f + n - 1, comp); 
+	printf("%d %d\n", f[n-1] + 1, f[n/2 - 1] + 1);
 	return 0;
 }
