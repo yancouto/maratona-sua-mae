@@ -1,5 +1,11 @@
 # Relatório de MAC0214 - Problemas
 
+## Semana 16 (16 - 22 Novembro)
+- URI
+	- [1746](../uri/1746.cpp) | [Dividing the Names](https://www.urionlinejudge.com.br/judge/en/problems/view/1746)
+- Live Archive
+	- [3820](../icpc/3820.cpp) | [Binary Matrix](https://icpcarchive.ecs.baylor.edu/index.php?option=onlinejudge&page=show_problem&problem=3820)
+
 ## Semana 15 (9 - 15 Novembro)
 - Codeforces
 	- [582A](../codeforces/582A.cpp) | [GCD Table](http://codeforces.com/contest/582/problem/A)
