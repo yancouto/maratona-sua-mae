@@ -30,11 +30,10 @@ bool increase(int b) {
 		int n_b = MA[a];
 		MB[b] = a;
 		MA[a] = b;
-		if(n_b == -1) break;
+		if(n_b == -1) return true;
 		b = n_b;
 		a = PB[b];
 	}
-	return true;
 }
 
 // O(n)

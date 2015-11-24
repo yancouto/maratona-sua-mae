@@ -1,5 +1,11 @@
 # Relatório de MAC0214 - Contests
 
+## Semana 17 (23 - 29 Novembro)
+
+#### Contest Codeforces [#333 Div1](http://codeforces.com/contest/601/standings) \#178 (2h) (Virtual Participation)
+- [The Two Routes](../codeforces/601A.cpp)
+- [Kleofas and the n-thlon](../codeforces/601C.cpp)
+
 ## Semana 16 (16 - 22 Novembro)
 
 #### Contest Codechef [November Cook-Off](https://www.codechef.com/rankings/COOK64) \#12 (2h30)
