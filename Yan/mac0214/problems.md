@@ -1,5 +1,10 @@
 # Relatório de MAC0214 - Problemas
 
+## Semana 17 (23 - 29 Novembro)
+- Kattis
+	- [undetected](../kattis/undetected.cpp) | [UnDetected](https://open.kattis.com/problems/undetected)
+	- [cantinaofbabel](../kattis/cantinaofbabel.cpp) | [Cantina of Babel](https://open.kattis.com/problems/cantinaofbabel)
+
 ## Semana 16 (16 - 22 Novembro)
 - URI
 	- [1746](../uri/1746.cpp) | [Dividing the Names](https://www.urionlinejudge.com.br/judge/en/problems/view/1746)

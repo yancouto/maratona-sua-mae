@@ -2,6 +2,11 @@
 
 ## Semana 17 (23 - 29 Novembro)
 
+#### Contest Codeforces [#213 Div1](http://codeforces.com/contest/364/standings) \#18 (2h) (Virtual Participation)
+- [Matrix](../codeforces/364A.cpp)
+- [Free Market](../codeforces/364B.cpp)
+- [Beautiful Set](../codeforces/364C.cpp)
+
 #### Contest Codeforces [#333 Div1](http://codeforces.com/contest/601/standings) \#178 (2h) (Virtual Participation)
 - [The Two Routes](../codeforces/601A.cpp)
 - [Kleofas and the n-thlon](../codeforces/601C.cpp)
