@@ -16,8 +16,11 @@
 ## Semana 15 (9 - 15 Novembro)
 - Codeforces
 	- [582A](../codeforces/582A.cpp) | [GCD Table](http://codeforces.com/contest/582/problem/A)
+	- [321E](../codeforces/321E.cpp) | [Ciel and Gondolas](http://codeforces.com/problemset/problem/321/E)
 - SPOJ
 	- [matching](../spoj/matching.cpp) | [Fast Maximum Matching](http://www.spoj.com/problems/MATCHING/)
+- ZOJ
+	- [2860](../zoj/2860.cpp) | [Breaking Strings](http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=2860)
 
 ## Semana 14 (2 - 8 Novembro)
 - Live Archive
