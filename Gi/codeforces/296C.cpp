@@ -10,45 +10,41 @@ typedef pair<int, int> pii;
 template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
-const int N = 100005;
+const int N = 100010;
 
-int n, m, k, a, b;
-int l[N], r[N], d[N];
+ll n, m, k, a, b;
+ll l[N], r[N], d[N];
 ll bitop[N], bitv[N];
 ll v[N];
 
-void update(ll bit[N], int p, int x) {
-	for(int i = p; i < n; i += i&-i)
+void update(ll bit[N], ll p, ll x, ll nn) {
+	for(ll i = p; i <= nn; i += i&(-i))
 		bit[i] += x;
 }
 
-ll get(ll bit[N], int p) {
+ll get(ll bit[N], ll p) {
 	ll ret = 0;
-	for(int i = p; i > 0; i -= i&-i)
+	for(ll i = p; i > 0; i -= i&(-i))
 		ret += bit[i];
 	return ret;
 }
 
 int main() {
-	int i;
-	scanf("%d %d %d", &n, &m, &k);
+	ll i;
+	scanf("%lld %lld %lld", &n, &m, &k);
 	for(i = 0; i < n; i++) scanf("%lld", &v[i]);
-	for(i = 0; i < m; i++) scanf("%d %d %d", &l[i], &r[i], &d[i]);
+	for(i = 0; i < m; i++) scanf("%lld %lld %lld", &l[i], &r[i], &d[i]);
 	for(i = 0; i < k; i++) {
-		scanf("%d %d", &a, &b);
-		printf("Inserindo %d e tira %d\n", a, b + 1);
-		update(bitop, a, 1);
-		printf("get %lld\n", get(bitop, 1));
-		update(bitop, b + 1, -1);
+		scanf("%lld %lld", &a, &b);
+		update(bitop, a, 1, m);
+		update(bitop, b + 1, -1, m);
 	}
 	for(i = 0; i < m; i++) {
-		printf("operacao %d %d %d\n", l[i], r[i], d[i]);
-		printf("get = %lld\n", get(bitop, i + 1));
 		ll val = d[i] * get(bitop, i + 1);
-		update(bitv, l[i], val);
-		update(bitv, r[i] + 1, -val); 
+		update(bitv, l[i], val, n);
+		update(bitv, r[i] + 1, -val, n); 
 	}
-	for(int i = 0; i < n; i++) 
+	for(i = 0; i < n; i++) 
 		printf("%lld ", v[i] + get(bitv, i + 1));
 	putchar('\n');
 	return 0;
