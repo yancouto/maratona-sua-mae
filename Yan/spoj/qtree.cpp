@@ -11,6 +11,10 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 
+const int N = 10009;
+vector<pii> adj[N];
+int vs[N], nv[N], pai[N][15], ev[N], cost[N], c[N];
+
 int dfs(int u, int p, int nv) {
 	int i; int &f = vs[u];
 	::nv[u] = nv;
@@ -39,9 +43,10 @@ int lca(int u, int v) {
 			u = pai[u][i], v = pai[v][i];
 	return pai[u][0];
 }
+
 int cs[N], ch[N], ct[N], tr[N << 2], L[N << 2], R[N << 2], tc, cur, vc[N], vp[N], pr[N];
 void build(int i, int l, int r) {
-	if(l == r) return (void) tr[i] = pr[l];
+	if(l == r) return (void) (tr[i] = pr[l]);
 	int m = (l + r) / 2;
 	build(L[i] = tc++, l, m);
 	build(R[i] = tc++, m + 1, r);
@@ -56,22 +61,23 @@ int get(int i, int l, int r, int ql, int qr) {
 }
 
 void set_t(int i, int l, int r, int p, int x) {
-	if(l == r) return (void) tr[i] = x;
+	if(l == r) return (void) (tr[i] = x);
 	int m = (l + r) / 2;
 	if(p <= m) set_t(L[i], l, m, p, x);
 	else set_t(R[i], m + 1, r, p, x);
 }
 
 void hld(int u) {
+	printf("cur=%d cs[cur]=%d\n", cur, cs[cur]);
 	vc[u] = cur;
 	vp[u] = cs[cur]++;
-	pr[vp[u]] = (!!vp[u]) * cost[u];
-	if(adj[u].empty()) return build(ct[cur] = tc++, 0, cs[cur] - 1);
+	pr[vp[u]] = cost[u];
+	if(adj[u].empty()) return build(ct[cur] = tc++, 1, cs[cur] - 1);
 	int bi = 0;
 	for(int i = 1; i < adj[u].size(); i++)
-		if(so[adj[u][i].fst] > so[adj[u][bi].fst])
+		if(vs[adj[u][i].fst] > vs[adj[u][bi].fst])
 			bi = i;
-	hld(bi);
+	hld(adj[u][bi].fst);
 	for(pii p : adj[u])
 		if(p.fst != bi) {
 			cur++;
@@ -82,8 +88,11 @@ void hld(int u) {
 int path(int a, int b) {
 	int mx = INT_MIN;
 	while(a != b) {
-		if(cp[a]) {
+		if(vp[a]) {
 			int c = vc[a]; int d = ch[c];
+			if(vc[b] == c) d = b;
+			mx = max(mx, get(ct[c], 1, cs[c] - 1, vp[d] + 1, vp[a]));
+			a = d;
 		} else {
 			mx = max(mx, cost[a]);
 			a = pai[a][0];
@@ -94,6 +103,7 @@ int path(int a, int b) {
 
 
 int main() {
+	int i, n, a, b;
 	for_tests(t, tt) {
 		scanf("%d", &n);
 		for(i = 0; i < n; i++) adj[i].clear(), cs[i] = 0, vs[i] = 1;
@@ -104,11 +114,12 @@ int main() {
 		}
 		dfs(0, 0, 0);
 		tc = cur = 0;
-		hld(0);
+		printf("%d\n", cs[0]);
+		hld(0); char c;
 		while(scanf(" %c%*s %d %d", &c, &a, &b) == 3) {
 			if(c == 'C') {
 				int v = ev[--a]; int ch = vc[v];
-				if(cp[v]) set_t(ct[ch], 0, cs[ch] - 1, vp[v], b);
+				if(vp[v]) set_t(ct[ch], 1, cs[ch] - 1, vp[v], b);
 				else cost[v] = b;
 			} else {
 				int c = lca(--a, --b);
