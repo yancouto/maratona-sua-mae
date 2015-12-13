@@ -42,7 +42,7 @@ int main(){
 			if(dp[i][k].v == -1) continue;
 			for(int tip =0;tip<2;tip++){
 				for(int bas = 1;i+p[bas][tip] < MAXN;bas++){
-					if(dp[i+p[bas][tip]][k+1].v > dp[  
+					if(dp[i+p[bas][tip]][k+1].v > dp[
 				}	
 			}
 		}
