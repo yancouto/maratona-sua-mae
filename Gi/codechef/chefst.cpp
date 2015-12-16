@@ -12,16 +12,13 @@ const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 
 int main() {
-	int n, k, i, j, ans;
-	int a[100005];
-	scanf("%d %d", &n, &k);
-	for(i = 0; i < n; i++) scanf("%d", &a[i]);
-	i = 0; j = n-1, ans = 0;
-	while(i <= j) {
-		if((j+1)/2 + 1 <= k) ans = max(ans, a[j]), j--;
-		else { ans = max(ans, a[i] + a[j]); i++; j--; }
-		k--;
+	for_tests(t, tt) {
+		ll n1, n2, m;
+		scanf("%lld %lld %lld", &n1, &n2, &m);
+		if(n1 > n2) swap(n1, n2);
+		ll sum = m * (m + 1) / 2;
+		if(sum <= n1) printf("%lld\n", n1 - sum + n2 - sum);
+		else printf("%lld\n", n2 - n1);
 	}
-	printf("%d\n", ans);
 	return 0;
 }

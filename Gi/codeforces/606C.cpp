@@ -10,18 +10,23 @@ typedef pair<int, int> pii;
 template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
+const int N = 100005;
+
+int n, v[N];
 
 int main() {
-	int n, k, i, j, ans;
-	int a[100005];
-	scanf("%d %d", &n, &k);
-	for(i = 0; i < n; i++) scanf("%d", &a[i]);
-	i = 0; j = n-1, ans = 0;
-	while(i <= j) {
-		if((j+1)/2 + 1 <= k) ans = max(ans, a[j]), j--;
-		else { ans = max(ans, a[i] + a[j]); i++; j--; }
-		k--;
-	}
-	printf("%d\n", ans);
+	int i, j, x;
+	scanf("%d", &n);
+	for(i = 0; i < n; i++) 
+		scanf("%d", &x), v[x-1] = i;
+	if(n == 1) { puts("0"); return 0; }
+	int mm = 0, l = 0;
+	for(i = 1; i < n; i++)
+		if(v[i] < v[i-1]) {
+			mm = max(mm, i - l);
+			l = i;
+		}
+		else mm = max(mm, i - l + 1);
+	printf("%d\n", n - mm);
 	return 0;
 }

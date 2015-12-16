@@ -11,17 +11,21 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 
+int n, i, j, p[3000010];
+
 int main() {
-	int n, k, i, j, ans;
-	int a[100005];
-	scanf("%d %d", &n, &k);
-	for(i = 0; i < n; i++) scanf("%d", &a[i]);
-	i = 0; j = n-1, ans = 0;
-	while(i <= j) {
-		if((j+1)/2 + 1 <= k) ans = max(ans, a[j]), j--;
-		else { ans = max(ans, a[i] + a[j]); i++; j--; }
-		k--;
+	scanf("%d", &n);
+	for(i = 1; i <= n; i++) p[i] = i;
+	for(i = 2; i <= n; i++) {
+		int cur = p[i-1], ncur;
+		for(j = i - 1; j <= n + i - 2; j += i) {
+			ncur = p[j + i];
+			if(j + i <= n + i - 2) p[j + i] = cur;
+			else p[n + i - 1] = cur;
+			cur = ncur;
+		}
 	}
-	printf("%d\n", ans);
-	return 0;
+	for(i = 1; i <= n; i++) printf("%d ", p[n-1+i]);
+	putchar('\n');
+	return 0;	
 }
