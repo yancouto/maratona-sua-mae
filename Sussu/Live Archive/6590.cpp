@@ -11,71 +11,63 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 
-int n, npod['z'+10]['z'+10], mrk['z'+10];
+const int MAXN  = 'z' + 10;
 
-vector<int> adj['z'+10], rev['z'+10];
+int n, mrk[MAXN][45], pod[MAXN][MAXN];
 
-stack<int> s;
+vector<int> adj[MAXN], res;
 
-queue<int> res;
-
-void dfs(int v){
-	mrk[v] = 1;
-	for(int a = 0;a<adj[v].size();a++){
-		int nxt = adj[v][a];
-		if(mrk[nxt]) continue;
-		dfs(nxt);
-	}
-	s.push(v);
-}
-
-void go(int v){
-	mrk[v] = 2;
-	if(res.size() == 1) res.clear();
-	else return;
-	res.push(v);
-	for(int a = 0;a<rev[v].size();a++){
-		int nxt = rev[v][a];
-		if(mrk[nxt] == 2) continue;
-		res.push(nxt);
-		go(nxt);
+void go(int v,int ant,int d){
+	if(mrk[v][d] != -1) return ;
+	if(d >= 40) return;
+	mrk[v][d] = ant;
+	for(int a='a';a<='z';a++){
+		if(pod[v][a]){
+			go(a,v,d+1);
+		}
 	}
 }
 
 int main (){
-	printf("z - %d\n", 'z');
 	for_tests(t,tt){
+		memset(mrk,-1,sizeof(mrk));
 		scanf("%d", &n);
-
-		for(int a = 'a';a<='z';a++){
-			mrk[a] = 0;
+		for(int a = 'a';a <='z';a++){
+			adj[a].clear();
 			for(int b = 'a';b<='z';b++){
-				npod[a][b] = 0;
+				pod[a][b] = 1;
 			}
 		}
 
 		for(int a=0;a<n;a++){
 			char c1, c2;
 			scanf(" %c%c", &c1, &c2);
-			npod[c1][c2] = 1;
+			pod[c1][c2] = 0;
 		}
-		are.clear();	
-		for(int a = 'a';a<='z';a++){
-			for(int b = 'a';b<='z';b++){
-				if(!npod[a][b]){
-					are[a].pb(b);
-					rev[b].pb(a);
+		for(int a='a';a<='z';a++){
+			go(a,0,1);
+		}
+		res.clear();
+		int flag = 1;
+		for(int d=39;flag && d>=0;d--){
+			for(int a = 'a';flag && a <= 'z';a++){
+				if(mrk[a][d] != -1){
+					flag = 1;
+					while(a){
+						res.pb(a);
+						a = mrk[a][d];
+						d--;
+					}
 				}
 			}
 		}
-		for(int a = 'a';a<='z';a++){
-			if(mrk[a] == 0)
-				dfs(a);
-		}
-		while(!s.empty()){
-			int v = s.front();
-			s.pop();
-			go(v);
+		int sz = res.size() - (res.size()%2 == 0);
+		int tam = sz/2;
+		for(int l = 0; l <= tam ; l++){
+			for(int i = sz-1 - l; i >= (sz-1 - l - tam); i--){
+				printf("%c", res[i]);
+			}
+			printf("\n");
 		}
 	}
 }

@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 #define fst first
 #define snd second
 typedef unsigned long long ull;
@@ -11,53 +12,84 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 
-const int N = 500009;
-int nx[N], best[N], seen[N], d0[N], dn[N];
-vector<int> adj[N];
-void dfs(int u, int d) {
-	if(seen[u] == 2) return;
-	seen[u] = 2;
-	best[u] = dn[u] = d;
-	for(int v : adj[u]) {
-		dfs(v, d + 1);
-		if(d0[v] == INT_MAX)
-			best[u] = max(best[u], best[v]);
+const int MAXN = 500010*2, INF = 0x3f3f3f3f;
+
+vector <int> adj[MAXN], prox[MAXN];
+
+int d0[MAXN], dn[MAXN], mai, mrk[MAXN], maid[MAXN], n, maislonge;
+
+void go(int v,int d){
+	mrk[v] = 1;
+	d0[v] = d;
+	mai = max(mai,d0[v]);
+	for(int a=0;a<prox[v].size();a++){
+		int nxt = prox[v][a];
+		if(mrk[nxt] != 1){
+			go(nxt,d+1);
+		}
 	}
 }
 
+int distn(int v,int d){
+	mrk[v] = 1;
+	dn[v] = d;
+	maid[v] = d;
+	for(int a=0;a<adj[v].size();a++){
+		int nxt = adj[v][a];
+		if(mrk[nxt] != 1 && d0[nxt]>=d0[v]){
+			distn(nxt,d+1);
+			maid[v] = max(maid[v],maid[nxt]);
+		}
+	}
+	for(int a=0;a<adj[v].size();a++){
+		int nxt = adj[v][a];
+		if(mrk[nxt]!=1 && d0[nxt]<d0[v]){
+			distn(nxt,d+1);
+		}
+	}
+	return dn[v];
+}
 
-int main() {
-	int i, n;
-	for_tests(t, tt) {
+int main (){
+	for_tests(t,tt){
 		scanf("%d", &n);
-		for(i = 0; i <= n; i++) {
-			adj[i].clear();
-			d0[i] = dn[i] = INT_MAX;
-			seen[i] = 0;
+		memset(d0, INF,sizeof(d0));
+		memset(dn,INF,sizeof(dn));
+		for(int a=0;a<=n;a++){
+			adj[a].clear();
+			prox[a].clear();
 		}
-		for(i = 0; i < n; i++) {
-			scanf("%d", &nx[i]);
-			if(nx[i] == -1) nx[i] = n;
-			adj[nx[i]].pb(i);
+		for(int a=0;a<n;a++){
+			int i;
+			scanf("%d", &i);
+			if(i == -1) i = n;
+			prox[a].pb(i);
+			adj[i].pb(a);
 		}
-		int v = 0, d = 0;
-		while(!seen[v]) {
-			seen[v] = 1;
-			d0[v] = d++;
-			if(v == n) break;
-			v = nx[v];
+		mai = -1;
+		memset(mrk,0,sizeof(mrk));
+		go(0,0);
+		memset(mrk,0,sizeof(mrk));
+		if(d0[n] == INF){
+			// tano ciclo
+			int aux = mai;
+
+			distn(n,0);
+			printf("%d\n", aux+maid[n]+1);
 		}
-		dfs(n, 0);
-		if(d0[n] == INT_MAX)
-			printf("%d\n", d + best[n]);
-		else {
-			v = 0;
-			int res = 0;
-			while(v != n) {
-				v = nx[v];
-				res = max(res, d0[v] + best[v]);
+		else{
+			maislonge = 0;
+			distn(n,0);
+		//	printf("%d\n", maislonge);
+			int v = 0, res = dn[0]+maid[n], d=0;
+			while(v!=n){
+				int nxt = prox[v][0];
+				v = nxt;
+				d++;
+				res = max(res,d+maid[v]);
 			}
 			printf("%d\n", res);
 		}
 	}
+	return 0;
 }
