@@ -12,35 +12,36 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 
-ll n, m;
+ll n, m, res;
 
-ll pa(ll a){
+inline ll neg(ll val){
+	while(val < 0ll)
+		val += modn;
+	return val;
+}
+
+inline ll pa(ll i,ll f){
 	ll ans = 0;
-	if(a%2){
-		ans = mod(mod(a)*mod((a+1)/2));
-	}
-	else{
-		ans = mod(mod(a/2)*mod(a+1));
-	}
+	if(f < i) return ans;
+	if((f+i)%2ll==0ll)
+		ans = mod(mod((f+i)/2ll)*mod(f-i+1ll));
+	else
+		ans = mod(mod(f+i)*mod((f-i+1ll)/2ll));
 	return ans;
 }
 
-int main (){
+int main(){
 	cin >> n >> m;
-	ll ant = n, atu, d = 1, res=0;
-	if(m > n){
-		res = mod(mod(m-n)*mod(n));
-		m = n;
+	res = mod(mod(n)*mod(m));
+	ll ult;
+	//accumulate with i = 1 -> sqrt(n)
+	for(ll a=1ll;a <= m && a*a <= n;a++){
+		ult = (n/a);
+		res = neg(res - mod((ll)(n/a)*a));
 	}
-	while(ant > 10000){
-		d++;
-		atu = (n/d)+1;
-		if(m >= ant){
-			res = mod(res + mod(pa(n%atu)));
-			ant = atu-1;
-		}
+	//accumulate w/ (n/i) = 1 -> sqrt(n)
+	for(ll a=1ll;a*a < n && a < ult;a++){
+		res = neg(res - mod(a*pa((n/(a+1ll)) + 1ll, min((ll)(n/a),m))));
 	}
-	for(int a=1;a<ant;a++){
-		res = mod(res + n%a);
-	}
+	cout << res;
 }
