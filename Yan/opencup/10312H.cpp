@@ -11,8 +11,8 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 const int N = 302;
-typedef int num;
-const num inf = 100000000;
+typedef double num;
+const num inf = 1/0.;
 int n, MA[N], MB[N], PB[N], mn[N];
 num c[N][N], d[N];
 
@@ -106,11 +106,26 @@ num min_match() {
 	return all;
 }
 
+namespace g{
+int y[1000];
+};
+int x[1000];
+double dist(int i, int j) {
+	using g::y;
+	return sqrt((x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) * (y[i] - y[j]));
+}
+
 int main() {
 	int i, j;
 	scanf("%d", &n);
+	scanf("%*d %*d");
+	using g::y;
+	for(i = 0; i < n; i++)
+		scanf("%d %d %d %d", &x[2*i], &y[2*i], &x[2*i+1], &y[2*i+1]);
+	double t = 0;
+	for(i = 0; i < n; i++) t += dist(2*i, 2*i+1);
 	for(i = 0; i < n; i++)
 		for(j = 0; j < n; j++)
-			scanf("%d", &c[i][j]);
-	printf("%d\n", min_match());
+			c[i][j] = dist(2*i, 2*j+1);
+	printf("%.10f\n", min_match() + t);
 }

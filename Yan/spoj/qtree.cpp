@@ -10,7 +10,7 @@ typedef pair<int, int> pii;
 template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
-const int N = 1000009;
+const int N = 10009;
 
 vector<pii> adj[N];
 int nv[N], c[N], so[N], pai[N];
@@ -83,6 +83,9 @@ int main() {
 	int i, n, c, x, y;
 	for_tests(t, tt) {
 		scanf("%d", &n);
+		tn = 0;
+		for(i = 0; i < n; i++) adj[i].clear();
+		memset(cs, 0, sizeof cs);
 		for(i = 0; i < n - 1; i++) {
 			scanf("%d %d %d", &a[i], &b[i], &c); a[i]--; b[i]--;
 			adj[a[i]].pb(pii(b[i], c));
