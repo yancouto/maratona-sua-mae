@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+  #include <bits/stdc++.h>
 using namespace std;
 #define fst first
 #define snd second
@@ -14,7 +14,7 @@ inline ll mod(ll x) { return x % modn; }
 
 const int MAXN = 100010;
 
-int n, s[MAXN], ind[MAXN], raiz, degt;
+int n, s[MAXN], ind[MAXN], raiz, degt, raiz[5];
 
 // nfe  = tot do filho da esq + 1
 /* upe = {
@@ -30,8 +30,9 @@ struct arv{
 	int l, r;
 	int lz;
 	arv(){};
-	arv(int xx, int yy){
-		x = xx; y = yy;
+	arv(int xx){
+		x = xx; 
+		y = rand();
 		nfe = 1;
 		pai = l = r = 0;
 		lz = 0;
@@ -68,10 +69,10 @@ void upd(arv u){
 	}
 }
 
-arv find(arv v){
-	arv u = tree[raiz];
+arv find(arv v, int ind){
+	arv u = tree[raiz[ind]];
 	upd(u);
-	u = tree[raiz];
+	u = tree[raiz[ind]];
 	while(!(v.x < u.x && u.l == 0) && !(v.x > u.x && u.r == 0)){
 		if(v.x < u.x) u = tree[u.l];
 		else u = tree[u.r];
@@ -80,34 +81,54 @@ arv find(arv v){
 	return u;
 }
 
-void rotateRight(arv u, arv v){
+void rotateRight(arv u, arv v, int ind){
 	tree[u.x].pai = v.x;
 	tree[v.x].pai = u.pai;
 
+	tree[v.l].pai = u.x;
+	if(u.pai == 0)
+		raiz[ind] = v.x; 
+	else if(tree[u.pai].l == u.x)
+		tree[u.pai].l = v.x;
+	else if(tree[u.pai].r == u.x)
+		tree[u.pai].r = v.x;
+
 	tree[u.x].r = v.l;
+	tree[v.l].pai = u.x;
 	tree[v.x].l = u.x;
 
 	upd(tree[u.x]);
 	upd(tree[v.x]);
+	upd(tree[v.l]);
 }
 
-void rotateLeft(arv u, arv v){
+void rotateLeft(arv u, arv v, int ind){
 	tree[u.x].pai = v.x;
 	tree[v.x].pai = u.pai;
 
+	tree[v.l].pai = u.x;
+	if(u.pai == 0)
+		raiz[ind] = v.x; 
+	else if(tree[u.pai].l == u.x)
+		tree[u.pai].l = v.x;
+	else if(tree[u.pai].r == u.x)
+		tree[u.pai].r = v.x;
+
 	tree[v.x].r = u.x;
+	tree[v.l].pai = u.x;
 	tree[u.x].l = v.r;
 
 	upd(tree[u.x]);
 	upd(tree[v.x]);
+	upd(tree[v.l]);
 }
 
-int balance(arv v){
+int balance(arv v, int ind){
 	if(v.pai == 0) return;
 	arv u = tree[v.pai];
 	while(v.pai != 0 && u.y > v.y ){
-		if( v == u.l ) rotateRight(u, v);
-		else rotateLeft(u, v);
+		if( v == u.l ) rotateRight(u, v, ind);
+		else rotateLeft(u, v, ind);
 		v = tree[v.x];
 		if(tree[v.x].pai != 0) u = tree[tree[v.x].pai];
 	}
@@ -122,13 +143,13 @@ void addupd(int x){
 	}
 }
 
-void insert(int x){
-	arv v = tree[x] = arv(x, rand());
-	if(raiz == 0){
-		raiz = x;
+void insert(int x, int ind){
+	arv v = tree[x] = arv(x);
+	if(raiz[ind] == 0){
+		raiz[ind] = x;
 		return ;
 	}
-	arv u = find(tree[x]);
+	arv u = find(tree[x], ind);
 	if(x > u.x){
 		tree[u.x].r = x;
 		tree[x].pai = u.x;
@@ -137,31 +158,21 @@ void insert(int x){
 		tree[u.x].l = x;
 		tree[x].pai = u.x;
 	}
-	addupd( balance(tree[x]) );
+	addupd( balance(tree[x], ind) );
 }
 
-void inv(int x, int i, int j, int l, int r){
-	arv v = tree[x];
-	if(i > r || j < l || x == 0) return ;
-	upd(v);
-	if( i >= l && j <= r ){
-		tree[x].lz = 1 - tree[x].lz;
-		return;
-	}
-	inv(v.l, i, i + tree[v.l].tot, )
-
-}
+void split(int x)
 
 int main (){
 	while(scanf("%d", &n)!=EOF && n!=0){
-		raiz = 0;
+		raiz[0] = raiz[1] = raiz[2] = 0;
 		for(int a=0;a<n;a++){
 			scanf("%d", &s[a]);
 			ind[a] = a+1;
 		}
 		stable_sort(ind, ind+n, cmp);
 		for(int a=0;a<n;a++){
-			insert(a+1);
+			insert(a+1, 0);
 		}
 	}
 }
