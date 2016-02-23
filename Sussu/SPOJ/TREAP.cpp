@@ -14,10 +14,13 @@ inline ll mod(ll x) { return x % modn; }
 
 const int MAXN = 2000010;
 
+int raiz[5];
+
 struct arv{
 	int x, y;
 	int l, r, p;
 	int mn, mx;
+	int rmn;
 	arv(){};
 	arv(int xx){
 		x = xx;
@@ -27,3 +30,42 @@ struct arv{
 		r = 0;
 	};
 } tree[MAXN];
+
+int find(int vx,int ind){
+	int u = raiz[ind];
+	while((vx <= tree[u].x && tree[u].l != 0) || (vx > tree[u].x && tree[u].r)){
+		if(vx <= tree[u].x) u = tree[u].l;
+		else u = tree[u].r;
+	}
+	return u;
+}
+
+void insert(int v, int ind){
+	if(raiz[ind] == 0){
+		raiz[ind] = v;
+		return;
+	}
+	int u = find(tree[v].x, ind);
+}
+
+int main (){
+	scanf("%d", &n);
+	for(int a=1;a<=n;a++){
+		char tip;
+		int k, i, j;
+		scanf("%c", tip);
+		if(tip == 'I'){
+			scanf("%d", &k);
+			tree[a] = arv(k);
+			insert(a);
+		}
+		else if(tip == 'D'){
+			scanf("%d", &k);
+			remove(k);
+		}
+		else{
+			scanf("%d%d", &i, &j);
+			qry(i, j, tip);
+		}
+	}
+}
