@@ -15,38 +15,37 @@ const int MAXN = 100010;
 
 const double PI = acos(-1);
 
-int n, deg;
+int n, v[MAXN], tree[MAXN*4];
 
-struct bolo{
-	ll r, h, res, v, i;
-	bolo(){}
-	bolo(int rr, int hh, int ii){
+struct cil{
+	ll r, h, v, i;
+	cil(){}
+	cil(int rr, int hh, int ii){
 		r = rr;
-		i = ii;
 		h = hh;
 		v = rr*rr*hh;
-		res = rr*rr*hh;
+		i = ii;
 	}
-} s[MAXN], fil[MAXN];
+}  s[MAXN];
 
-bool cmp(bolo a, bolo b){
-	return ((a.v != b.v && a.v > b.v) || ( a.v == b.v && a.i<b.i)); 
+bool cmp(cil a, cil b){
+	return a.v < b.v;
 }
 
-ll dp[MAXN];
-
-ll go(int i){
-	if(i == n) return 0;
-	if(dp[i] != -1) return dp[i];
-}
+void upd(int idx,int i, int j, int l, ll val){
+	if(
+}	
 
 int main (){
 	scanf("%d", &n);
-	deg = 0;
-	for(int a=0;a<n;a++){
-		scanf("%lld%lld", &s[a].r, &s[a].h);
-		s[a] = bolo(s[a].r, s[a].h, a);
+	for(int a=1;a<=n;a++){
+		int r, h;
+		scanf("%d%d", &r, &h);
+		s[a] = cil(r, h, a);
 	}
-	sort(s[a], s[a]+n, cmp);
-	go(0);
+	sort(s, s+n, cmp);
+	for(int a=0;a<n;a++){
+		res = max(s[a].v, qry(1, 1, n, 1, s[a].i) + s[a].v); 
+		upd(1, 1, n, s[a].i, res);
+	}
 }

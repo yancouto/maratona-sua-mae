@@ -136,10 +136,15 @@ void insert(int v, int ind){
 
 void split(int i, int idx){
 	int cnt = 0;
-	if(idx != 0) cnt += tree[raiz[idx-1]].t;
+	if(idx != 0) cnt -= tree[raiz[idx-1]].t;
 	int v = raiz[idx];
 	while(tree[tree[v].l].t + 1 != cnt){
-		
+		if(cnt < tree[tree[v].l].t + 1)
+			v = tree[v].l;
+		else{
+			v = tree[v].r;
+			cnt -= v.t+1;
+		}
 	}
 }
 
