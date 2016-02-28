@@ -49,7 +49,7 @@ int main (){
 	}
 	dep = cnt;
 	ll res = 0;
-	//printf("%d %d\n", ant, dep);
+	printf("%d %d\n", ant, dep);
 	while(ant + dep <= n-m){
 		for(int szi = ant; szi+dep <= n-m; szi++){
 			int szf = n-m - szi;
