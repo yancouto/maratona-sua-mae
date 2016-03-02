@@ -1,81 +1,94 @@
-// TLE
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
 #define snd second
-typedef pair<int, int> pii;
 typedef unsigned long long ull;
 typedef long long ll;
-typedef long double ld;
+typedef pair<int, int> pii;
 #define pb push_back
 #define for_tests(t, tt) int t; scanf("%d", &t); for(int tt = 1; tt <= t; tt++)
 template<typename T> inline T abs(T t) { return t < 0? -t : t; }
-const ull modn = 1000000007;
-inline ull mod(ull x) { return x % modn; }
-int N, M, B, K, R, T;
+const ll modn = 1000000007;
+inline ll mod(ll x) { return x % modn; }
+
 struct ed {
-	int b, t, m;
-	ed() {}
-	ed(int a, int bb, int c) : b(a), t(bb), m(c) {}
+	int v, t, m;
 };
-vector<ed> adj[102];
-int salt[6][102];
+
+int p[6][103];
+
+vector<ed> adj[105];
 
 struct no {
-	int i, k, t, m, s;
-	bool co;
-	no() {}
-	no(int a, int b, int c, int d, int e, bool h) : i(a), k(b), t(c), m(d), s(e), co(h) {}
-	bool operator < (const no &o) const {
-		return !((t == o.t)? m > o.m : t < o.t);
-	}
+	int i, t, b, k;
 };
 
-int seen[102][6][202][5][2], tempo;
-int solve() {
-	priority_queue<no> pq;
-	tempo++;
-	pq.push(no(0, 0, 0, R, 0, false));
-	while(!pq.empty()) {
-		no x = pq.top();
-		pq.pop();
-		if(x.t > T || (x.k && (x.i == 0 || x.i == N - 1))) continue;
-		if(x.i == N - 1 && x.t == T) return x.m;
-		if(seen[x.i][x.k][x.t][x.s][x.co] == tempo) continue;
-		seen[x.i][x.k][x.t][x.s][x.co] = tempo;
-		if(!x.co) {
-			if(x.s < B && x.i != 0 && x.i != N - 1 && x.m >= salt[x.k][x.i])
-				pq.push(no(x.i, x.k, x.t, x.m - salt[x.k][x.i], x.s + 1, true));
-			if(x.s && x.i && x.i != N - 1)
-				pq.push(no(x.i, x.k, x.t, x.m + salt[x.k][x.i], x.s - 1, true));
-		}
-		if(x.i && x.i != N - 1)
-			pq.push(no(x.i, (x.k + 1) % K, x.t + 1, x.m, x.s, false));
-		for(int i = 0; i < adj[x.i].size(); i++) {
-			ed &e = adj[x.i][i];
-			if(x.m >= e.m && x.t + e.t <= T)
-				pq.push(no(e.b, x.k, x.t + e.t, x.m - e.m, x.s, false));
-			 
+deque<no> q;
+int N, M, B, K, R, T;
+int seen[102][202][6][6];
+void dfs(no x) {
+	if(seen[x.i][x.t][x.b][x.k]) return;
+	seen[x.i][x.t][x.b][x.k] = 1;
+	if(!x.t) return;
+	if((x.i == 0 || x.i == N - 1) && x.k) return;
+	if(x.i == N - 1) return;
+	dfs(no{x.i, x.t - 1, x.b, x.k});
+	dfs(no{x.i, x.t - 1, x.b, (x.k + 1) % K});
+	if(x.b && x.i && x.i != N - 1) dfs(no{x.i, x.t - 1, x.b - 1, (x.k + 1) % K});
+	if(x.b != B && x.i && x.i != N - 1) dfs(no{x.i, x.t - 1, x.b + 1, (x.k + 1) % K});
+	for(ed e : adj[x.i]) {
+		if(x.t < e.t) continue;
+		dfs(no{e.v, x.t - e.t, x.b, x.k});
+		if(x.b && e.v && e.v != N - 1) dfs({e.v, x.t - e.t, x.b - 1, x.k});
+		if(x.b != B && e.v && e.v != N - 1) dfs({e.v, x.t - e.t, x.b + 1, x.k});
+	}
+	q.push_front(x);
+}
+
+inline void maxe(int &x, int val) {
+	x = max(x, val);
+}
+
+void solve() {
+	memset(seen, -1, sizeof seen);
+	seen[0][T][0][0] = R;
+	for(no x : q) {
+		if(seen[x.i][x.t][x.b][x.k] < 0) continue;
+		int d = seen[x.i][x.t][x.b][x.k];
+		//printf("(%d, %d, %d, %d) = %d\n", x.i, x.t, x.b, x.k, d);
+		maxe(seen[x.i][x.t - 1][x.b][x.k], d);
+		maxe(seen[x.i][x.t - 1][x.b][(x.k + 1) % K], d);
+		if(x.b && x.i && x.i != N - 1) maxe(seen[x.i][x.t - 1][x.b - 1][(x.k + 1) % K], d + p[(x.k + 1) % K][x.i]);
+		if(x.b != B && x.i && x.i != N - 1 && d >= p[(x.k + 1) % K][x.i]) maxe(seen[x.i][x.t - 1][x.b + 1][(x.k + 1) % K], d - p[(x.k + 1) % K][x.i]);
+		for(ed e : adj[x.i]) {
+			if(x.t < e.t || d < e.m) continue;
+			maxe(seen[e.v][x.t - e.t][x.b][x.k], d - e.m);
+			if(x.b && e.v && e.v != N - 1) maxe(seen[e.v][x.t - e.t][x.b - 1][x.k], d - e.m + p[x.k][e.v]);
+			if(x.b != B && e.v && e.v != N - 1 && d - e.m >= p[x.k][e.v]) maxe(seen[e.v][x.t - e.t][x.b + 1][x.k], d - e.m - p[x.k][e.v]);
 		}
 	}
-	return -1;
 }
+
+
 
 int main() {
 	int i, j, a, b, t, m;
-	for_tests(c, cn) {
+	for_tests(tk, tt) {
+		memset(seen, 0, sizeof seen); q.clear();
 		scanf("%d %d %d %d %d %d", &N, &M, &B, &K, &R, &T);
-		for(i = 0; i < N; i++) adj[i].clear();
 		for(i = 0; i < K; i++)
 			for(j = 0; j < N; j++)
-				scanf("%d", &salt[i][j]);
+				scanf("%d", &p[i][j]);
 		for(i = 0; i < M; i++) {
-			scanf("%d %d %d %d", &a, &b, &t, &m);
-			adj[--a].pb(ed(--b, t, m));
-			adj[b].pb(ed(a, t, m));
+			scanf("%d %d %d %d", &a, &b, &t, &m); a--; b--;
+			adj[a].pb(ed{b, t, m});
 		}
-		int mx = solve();
-		if(mx == -1) printf("Case #%d: Forever Alone\n", cn);
-		else printf("Case #%d: %d\n", cn, mx);
+		printf("Case #%d: ", tt);
+		dfs(no{0, T, 0, 0});
+		solve();
+		int x = seen[N - 1][0][0][0];
+		if(x == -1) puts("Forever Alone");
+		else printf("%d\n", x);
+		for(i = 0; i < N; i++) adj[i].clear();
 	}
 }
