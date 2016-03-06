@@ -12,52 +12,36 @@ const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 const int MAX = 26;
 
-int N, np, np2;
-ll v[MAX], cura[MAX], curb[MAX];
-vector<ll> prec[1100000][2];
+int N;
+ll v[MAX];
+map<int, ll> mp;
 
 inline int half(int n) { return n/2 + (n%2); }
 
-void show() {
-	int i, j;
-	for(i = 0; i < np; i++) {
-		if(i == np2) puts("Segunda parte--------------");
-		for(j = 0; j < prec[i][0].size(); j++)
-			printf("%lld ", prec[i][0][j]);
-		printf("-----");
-		for(j = 0; j < prec[i][1].size(); j++)
-			printf("%lld ", prec[i][1][j]);
-		putchar('\n');
-	}
+void go(ll a, ll b) {
+	if(mp.count(a-b)) mp[a-b] = max(mp[a-b], a); 
+	else mp[a-b] = a;
 }
 
-void add_c(int a, int b, int took) {
-	for(int i = 0; i < a; i++)
-		prec[np][0].pb(cura[i]);
-	for(int i = 0; i < b; i++)
-		prec[np][1].pb(curb[i]);
-	np++;
+void solve(int i, ll a, ll b) {
+	if(i == half(N)) { go(a, b); return; }
+	solve(i + 1, a + v[i], b);
+	solve(i + 1, a, b + v[i]);
+	solve(i + 1, a, b);
 }
 
-void solve(int i, int a, int b, int took, int lim) {
-	if(i == lim) { add_c(a, b, took); return; }
-	cura[a] = v[i];
-	solve(i + 1, a + 1, b, took + 1, lim);
-	curb[b] = v[i];
-	solve(i + 1, a, b + 1, took + 1, lim);
-	solve(i + 1, a, b, took, lim);
+ll go2(ll a, ll b) {
+	if(mp.count(a-b)) return b + mp[a-b];
+	return 0;
 }
 
-pii give(int i) {
-	int j; ll suma, sumb;
-	suma = sumb = 0;
-	for(j = 0; j < prec[i][0].size(); j++) 
-		suma += prec[i][0][j];
-	for(j = 0; j < prec[i][1].size(); j++)
-		sumb += prec[i][1][j];
-	return pii(suma, sumb);
+ll solve2(int i, ll a, ll b) {
+	if(i == N) return go2(a, b);
+	ll ret = solve2(i + 1, a + v[i], b);
+	ret = max(ret, solve2(i + 1, a, b + v[i]));
+	ret = max(ret, solve2(i + 1, a, b));
+	return ret;
 }
-
 
 int main() {
 	int i, j;
@@ -67,28 +51,9 @@ int main() {
 		ll tot = 0;
 		for(i = 0; i < N; i++) 
 			scanf("%lld", &v[i]),	tot += v[i];
-		solve(0, 0, 0, 0, half(N)); 
-		np2 = np;
-		solve(half(N), 0, 0, 0, N); 
-		map<ll, pii> mp;
-		printf("NP %d\n", np);
-		for(i = 0; i < np2; i++) {
-			pii cur = give(i);
-			ll a = cur.fst, b = cur.snd;
-			if(mp.count(a-b)) mp[a-b] = max(mp[a-b], pii(a, b));
-			else mp[a-b] = pii(a, b);
-		}
-		ll ans = mp[0].fst;
-		for(i = np2; i < np; i++) {
-			pii cur = give(i);
-			ll a = cur.fst, b = cur.snd;
-			if(mp.count(a-b)) { 
-				ans = max(ans, a + mp[a-b].snd);
-				if(2*ans == tot)
-					printf("aCHEI (%lld) (%lld, %lld) (%lld, %lld)\n", a-b, a, b, mp[a-b].fst, mp[a-b].snd);
-			}
-		}
-		printf("%lld\n", tot - ans*2);
+		mp.clear();
+		solve(0, 0, 0);
+		printf("%lld\n", tot - solve2(half(N), 0, 0)*2);
 	}
 	return 0;
 }
