@@ -26,13 +26,13 @@ int main (){
 	int ans = 0;
 
 	int res = 0;
-	int i=n-1, f=0, cus = -A;
+	int i=n-1, f=0, cus = 0;
 
 	while(f < n){
-		int nxtc = A + 1;
+		int nxtc = 1;
 		if(s[f] == 'w')
 			nxtc += B;
-		if(cus + nxtc <= t){
+		if(f*A + cus + nxtc <= t){
 			cus += nxtc;
 			f++;
 			res++;
@@ -46,31 +46,29 @@ int main (){
 		printf("%d\n", n);
 		return 0;
 	}
-	int cusv = f*A;
 	while(f > 0){
 		while(1){
 			int nxtc = 1;
 			if(s[i] == 'w')
 				nxtc += B;
-			if(cus + nxtc + cusv <= t){
+			//printf("ve se %d %d %d %d + %d <= %d ?\n", cus, nxtc, (f-1)*A,  (n-i)*A, min((f-1)*A, (n-i)*A), t);
+			if(cus + nxtc + (f-1)*A + (n-i)*A + min((f-1)*A, (n-i)*A)  <= t){
 				cus += nxtc;
 				i--;
 				res++;
-				cusv += A;
 				ans = max(res, ans);
-				//printf("pega %d %d - res = %d cus %d cusv %d\n", f, i, res, cus, cusv);
+				//printf("1 pega %d %d - res = %d cus %d\n", f, i, res, cus);
 			}
 			else
 				break;
 		}
-		//printf("pega %d %d - res = %d cus %d cusv %d\n", f, i, res, cus, cusv);
-		cus -= A + 1;
+		cus--;
 		if(s[f-1] == 'w'){
 			cus -= B;
 		}
-		cusv -= A;
 		f--;
 		res--;
+		//printf("2 pega %d %d - res = %d cus %d\n", f, i, res, cus);
 	}
 
 	printf("%d\n", ans);

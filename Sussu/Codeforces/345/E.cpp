@@ -22,7 +22,7 @@ struct mt{
 	mt(){}
 	mt(int ii, int jj, int vv){
 		i = ii; j = jj; v = vv;
-		ind = ii*n + jj;
+		ind = ii*m + jj;
 	}
 	bool operator < (mt other) const{
 		return v < other.v;
@@ -53,17 +53,20 @@ int main (){
 	scanf("%d %d", &n, &m);
 	for(int a=0;a<n;a++){
 		for(int b=0;b<m;b++){
-			pai[a*n+b] = a*n+b; sz[a*n+b] = 1;
+			pai[a*m+b] = a*m+b; sz[a*m+b] = 1;
 			mt cel;
 			scanf("%d", &cel.v);
 			cel = mt(a, b, cel.v);
+			//printf("%d cel %d %d %d\n", cel.ind, cel.i, cel.j, cel.v);
 			v.pb(cel);
 			if(mrkl.find(pii(cel.v, cel.i)) != mrkl.end()){
+			//	printf("L Achei join %d %d de mesmo v %d\n", mrkl[pii(cel.v, cel.i)], cel.ind, cel.v);
 				join(mrkl[pii(cel.v, cel.i)], cel.ind);
 			}
 			mrkl[pii(cel.v, cel.i)] = cel.ind;
 
 			if(mrkc.find(pii(cel.v, cel.j)) != mrkc.end()){
+			//	printf("C Achei join %d %d de mesmo v %d\n", mrkc[pii(cel.v, cel.j)], cel.ind, cel.v);
 				join(mrkc[pii(cel.v, cel.j)], cel.ind);
 			}
 			mrkc[pii(cel.v, cel.j)] = cel.ind;
@@ -71,21 +74,29 @@ int main (){
 	}
 	sort(v.begin(), v.end());
 	int ans = 0;
+	memset(maxv, -1, sizeof(maxv));
 	for(int a=0;a < v.size();a++){
+		//printf("ind %d raiz %d\n", v[a].ind, raiz(v[a].ind));
 		int cor = v[a].v;
-		for(int b=a;b<v.size() && v[b].v == cor;b++){
-			int r = raiz(v[b].ind);
-			maxv[r] = max(maxv[r], l[v[b].i]+1);
-			maxv[r] = max(maxv[r], c[v[b].j]+1);
+		if(maxv[raiz(v[a].ind)] == -1){
+		//	printf("passa por: ");
+			for(int b=a;b<v.size() && v[b].v == cor;b++){
+				//printf("%d ", b);
+				int r = raiz(v[b].ind);
+				maxv[r] = max(maxv[r], l[v[b].i]+1);
+				maxv[r] = max(maxv[r], c[v[b].j]+1);
+			}
+			//printf("\n");
 		}
-		l[v[a].i] = maxv[raiz(v[a].ind)];
-		c[v[a].j] = maxv[raiz(v[a].ind)];
+		l[v[a].i] = max(l[v[a].i], maxv[raiz(v[a].ind)]);
+		c[v[a].j] = max(c[v[a].j], maxv[raiz(v[a].ind)]);
+		//printf("seto %d  l[%d] %d e c[%d] %d\n", v[a].ind, v[a].i, v[a].j, l[v[a].i], c[v[a].j]);
 		res.pb(mt(v[a].i, v[a].j, l[v[a].i]));
 	}
 	sort(res.begin(), res.end(), cmp);
 	int cnt = 0;
 	for(int a=0;a<res.size();a++){
-		if(a%(n-1)==0) printf("\n");
+		if(a%m==0) printf("\n");
 		printf("%d ", res[a].v);
 	}
 }
