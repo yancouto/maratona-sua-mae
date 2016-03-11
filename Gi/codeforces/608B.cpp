@@ -12,15 +12,25 @@ const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 const int N = 200010;
 
-int ub, zb, ua, za;
+int sum[N];
 
 int main() {
 	int i;
+	ll ans = 0;
 	char a[N], b[N];
+	scanf("%s %s", a, b);
 	int na = strlen(a);
 	int nb = strlen(b);
+	for(i = 0; i < nb; i++) 
+		sum[i] = (i?sum[i-1]:0) + b[i] - '0';
 	for(i = 0; i < na; i++) {
-		ans += abs(a[i] - b[i]);
+		int end = nb - na + i;
+		if(a[i] == '0')
+			ans += sum[end] - (i?sum[i-1]:0);
+		else 
+			ans += end - i + 1 - (sum[end] - (i?sum[i-1]:0));
 	}
+	cout << ans << '\n';
 	return 0;
+
 }
