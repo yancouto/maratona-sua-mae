@@ -13,67 +13,92 @@ inline ll mod(ll x) { return x % modn; }
 
 const int MAXN = 1010;
 
-int n, m, ent[10], deg, bit[MAXN][MAXN], M[MAXN][MAXN];
-char lin[10000];
+int n, m, ent[10], deg;
+char lin[1000100];
+
+ll f[10010010], bit[MAXN][MAXN], M[MAXN][MAXN];
+
+
+void pre() {
+	f[0] = 1;
+	for(int i = 1; i < 10010006; i++)
+		f[i] = mod(f[i - 1] * i);
+}
 
 void le(){
 	int cnt = 0;
 	int num = 0;
 	while(1){
-		if(lin[cnt] == ' ' && lin[cnt+1] == ' ') break;
-		printf("'%c' %d\n", lin[cnt], cnt);
-		if(lin[cnt] == ' '){
-			cnt++;
-			continue;
-		}
+		//if(lin[cnt] == ' ' && lin[cnt+1] == ' ') break;
+		if(lin[cnt] == '\0') break;
+		while(lin[cnt] == ' ') cnt++;
+		//printf("'%c' %d %d\n", lin[cnt], lin[cnt], cnt);
 		num *= 10;
 		num += lin[cnt]-'0';
 		cnt++;
-		if(lin[cnt] == ' ' || lin[cnt] == '\n'){
+		if(lin[cnt] == ' ' || lin[cnt] == '\0'){
+			//printf("ent[%d] = %d\n", deg, num);
 			ent[deg++] = num;
 			num = 0;
 		}
 	}
 }
 
-void updy(int x, int y, int val){
-	while( y < MAXN ){
+void updy(int x, int y, ll val){
+	while( y < MAXN-3 ){
 		bit[x][y] += val;
 		y += (y&-y);
 	}
 }
 
-void upd(int x, int y, int val){
-	while( x < MAXN ){
+void upd(int x, int y, ll val){
+	while( x < MAXN-3 ){
 		updy(x, y, val);
 		x += (x&-x);
 	}
 }
 
-int qryy(int x, int y){
-	int ans = 0;
+ll qryy(int x, int y){
+	ll ans = 0;
 	while(y > 0){
 		ans += bit[x][y];
 		y -= (y&-y);
 	}
+	return ans;
 }
 
-int qry(int x, int y){
-	int ans = 0;
+ll qry(int x, int y){
+	ll ans = 0;
 	while( x > 0 ){
 		ans += qryy(x, y);
 		x -= (x&-x);
 	}
+	return ans;
+}
+
+ll expo(ll base, ll e){
+	if(e == 0) return 1;
+	ll ans = expo(base, e/2);
+	ans = mod(ans*ans);
+	if(e&1) ans = mod(ans*base);
+	return ans;
+}
+
+ll fat(int v){
+	return f[v];
+}
+
+ll calc(int nn, int kk){
+	return mod(mod(fat(nn+kk-1)*expo(fat(kk), modn-2))*expo(fat(nn-1), modn-2));
 }
 
 int main (){
+	pre();
+	int test = 0;
 	scanf("%d%d", &n, &m);
-	while(1){
+	while(scanf(" %[^\n]", lin)!= EOF){
 		deg = 0;
-		scanf("\n");
 		//fgets(lin, 50, stdin);
-		scanf(" %[^\n]", lin);
-		printf("'%s'\n", lin);
 		le();
 		if(deg == 3){
 			upd(ent[0], ent[1], ent[2]);
@@ -85,8 +110,11 @@ int main (){
 		}
 		else{
 			int nn = qry(ent[2], ent[3]) + qry(ent[0]-1, ent[1]-1) - qry(ent[2], ent[1]-1) - qry(ent[0]-1, ent[3]);
+			//printf("qry(%d, %d) %d + qry(%d, %d) %d - qry(%d, %d) %d - qry(%d, %d) %d\n", ent[2], ent[3], qry(ent[2], ent[3]), ent[0]-1, ent[1]-1, qry(ent[0]-1, ent[1]-1), 
+			//	ent[2], ent[1]-1, qry(ent[2], ent[1]-1), ent[0]-1, ent[3], qry(ent[0]-1, ent[3]));
 			int kk = ent[4];
-			printf("Day: n bonecos %d n cenouras %d\n", nn, kk);
+			//printf("Day: n bonecos %d n cenouras %d\n", nn, kk);
+			printf("Day #%d: %lld\n", ++test, calc(nn, kk));
 		}
 	}
 }
