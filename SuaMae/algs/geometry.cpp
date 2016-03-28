@@ -48,7 +48,26 @@ temp struct line {
 		return point<double>((o.b * c - b * o.c)/d, (a * o.c - o.a * c)/d);
 	}
 };
-typedef point<int> pti;
-typedef point<double> ptd;
 typedef line<int> lni;
 typedef line<double> lnd;
+typedef point<int> pti;
+typedef point<double> ptd;
+
+// convex hull - modifique como necessario
+void convex_hull(pti p[], pti st[], int n) {
+	sort(p, p + n);
+	int sn = 0;
+	for(int i = 0; i < n; i++) {
+		while(sn >= 2 && cross(st[sn - 2], st[sn - 1], p[i]) > 0)
+			sn--;
+		st[sn++] = p[i];
+	}
+	int k = sn;
+	for(int i = n - 2; i >= 0; i--) {
+		while(sn > k && cross(st[sn - 2], st[sn - 1], p[i]) > 0)
+			sn--;
+		st[sn++] = p[i];
+	}
+	sn--;
+	// st[0..sn-1] agora tem o convex hull dos pontos p
+}
