@@ -18,20 +18,26 @@ temp struct point {
 		double cs = cos(deg), sn = sin(deg);
 		return point<double>(x*cs - y*sn, x*sn + y*cs);
 	}
-	num distSqr(ptn o) const { return (*this - o) * (*this - o); }
+	num dist_sqr(ptn o) const { return (*this - o) * (*this - o); }
 	bool operator < (ptn o) const { return x < o.x || (x == o.x && y < o.y); }
 };
+typedef point<int> pti;
+typedef point<double> ptd;
 temp inline num cross(ptn a, ptn b, ptn c) { return (c - a) ^ (b - a); }
-temp inline bool betweenSeg(ptn a, ptn b, ptn c) { return cross(a, b, c) == 0 && ((b - c) * (a - c) <= 0); }
-temp double distSegSqr(ptn a, ptn b, ptn c) {
-	if((b - a) * (c - b) > 0) return b.distSqr(c);
-	if((a - b) * (c - a) > 0) return a.distSqr(c);
+// o ponto c esta no segmento [a, b]?
+temp inline bool between_seg(ptn a, ptn b, ptn c) { return cross(a, b, c) == 0 && ((b - c) * (a - c) <= 0); }
+// sqr dist de c pro segmento [a, b]
+temp double dist_seg_sqr(ptn a, ptn b, ptn c) {
+	if((b - a) * (c - b) > 0) return b.dist_sqr(c);
+	if((a - b) * (c - a) > 0) return a.dist_sqr(c);
 	double d = (b - a) ^ (c - a);
 	return d * d / ((b - a) * (b - a));
 }
-temp bool intersectSeg(ptn a, ptn b, ptn c, ptn d) {
-	if(betweenSeg(a, b, c) || betweenSeg(a, b, d) || betweenSeg(c, d, a) || betweenSeg(c, d, b)) return true;
-	if(((cross(a, b, c) > 0) ^ (cross(a, b, d) > 0)) && ((cross(c, d, a) > 0) ^ (cross(c, d, b) > 0))) return true;
+temp num sign(num x) { return (x > 0) - (x < 0); }
+// [a, b] intersecta [c, d]?
+temp bool inter_seg(ptn a, ptn b, ptn c, ptn d) {
+	if(between_seg(a, b, c) || between_seg(a, b, d) || between_seg(c, d, a) || between_seg(c, d, b)) return true;
+	if((sign(cross(a, b, c)) * sign(cross(a, b, d)) == -1) && (sign(cross(c, d, a)) * sign(cross(c, d, b)) == -1)) return true;
 	return false;
 }
 
@@ -44,14 +50,12 @@ temp struct line {
 	bool parallel(const line &o) const { return a * o.b - o.a * b == 0; }
 	point<double> inter(line o) {
 		double d = a * o.b - o.a * b;
-		if(d == 0) return point<double>(0, 0); //fudeu
+		if(d == 0) return point<double>(0, 0); // fudeu
 		return point<double>((o.b * c - b * o.c)/d, (a * o.c - o.a * c)/d);
 	}
 };
 typedef line<int> lni;
 typedef line<double> lnd;
-typedef point<int> pti;
-typedef point<double> ptd;
 
 // convex hull - modifique como necessario
 void convex_hull(pti p[], pti st[], int n) {
