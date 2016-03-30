@@ -33,7 +33,7 @@ temp double dist_seg_sqr(ptn a, ptn b, ptn c) {
 	double d = (b - a) ^ (c - a);
 	return d * d / ((b - a) * (b - a));
 }
-temp num sign(num x) { return (x > 0) - (x < 0); }
+temp int sign(num x) { return (x > 0) - (x < 0); }
 // [a, b] intersecta [c, d]?
 temp bool inter_seg(ptn a, ptn b, ptn c, ptn d) {
 	if(between_seg(a, b, c) || between_seg(a, b, d) || between_seg(c, d, a) || between_seg(c, d, b)) return true;
