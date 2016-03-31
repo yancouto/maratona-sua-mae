@@ -30,7 +30,7 @@ temp struct point {
 		return point<double>(x*cs - y*sn, x*sn + y*cs);
 	}
 	num dist_sqr(ptn o) const { return (*this - o) * (*this - o); }
-	ptn norm() const { return *this / ((*this) * (*this)); }
+	ptn norm() const { return *this / sqrt(x * x + y * y); }
 	bool operator < (ptn o) const { return x < o.x || (x == o.x && y < o.y); }
 };
 typedef point<int> pti;
@@ -84,60 +84,39 @@ double mn_dist(ptd p) {
 typedef pair<double, int> pdi;
 #define out second
 ptd get(ptd a, ptd b, double d) {
+	//printf("%.4f of %.4f\n(%.4f, %.4f) (%.4f, %.4f) (%.4f, %.4f)\n", d, sqrt(a.dist_sqr(b)), a.x, a.y, (((b-a).norm()*d)+a).x, (((b-a).norm()*d)+a).y, b.x, b.y);
 	return (((b - a).norm() * d) + a);
 }
 
 double tern(ptd a, ptd b, double l, double r) {
-	//printf("(%.0f, %.0f).(%.0f, %.0f)\n%.5f .. %.5f\n", a.x, a.y, b.x, b.y, l, r);
 	for(int i = 0; i < 50; i++) {
 		double m1 = (2.*l + r) / 3.;
 		double m2 = (l + 2.*r) / 3.;
-		if(mn_dist(get(a, b, m1)) < mn_dist(get(a, b, m2))) l = m1;
+		if(sqrt(mn_dist(get(a, b, m1))) < sqrt(mn_dist(get(a, b, m2)))) l = m1;
 		else r = m2;
 	}
-	//printf("ans %.5f\n", sqrt(mn_dist(get(a, b, (l + r) / 2.))));
 	return sqrt(mn_dist(get(a, b, (l + r) / 2.)));
 }
 
 bool in;
 double ans;
 void process(pti a, pti b) {
-	//printf("IN (%d, %d) (%d, %d)\n", a.x, a.y, b.x, b.y);
 	ptd da(a), db(b);
 	vector<pdi> v;
 	int i, j;
 	for(i = 0; i < c; i++)
 		for(j = 0; j < m[i]; j++) {
 			if(((b - a) ^ (C[i][j + 1] - C[i][j])) == 0) {
-				if(!inter_seg(a, b, C[i][j], C[i][j + 1])) continue;
-				//printf("parallel to %d.%d but inter\n", i, j);
-				ptd pa(C[i][j]), pb(C[i][j + 1]);
-				if(((db - da) * (pa - da)) < 0) pa = a;
-				if(((db - da) * (pb - da)) < 0) pb = a;
-				if(((pb - da) * (pb - da)) < ((pa - da) * (pa - da))) pa = pb;
-				v.pb(pdi(min((pa - da) * (pa - da), (pb - da) * (pb - da)), false));
 			} else if(inter_seg(a, b, C[i][j], C[i][j + 1])) {
-				//printf("inter %d.%d (%d, %d) (%d, %d)\n", i, j, C[i][j].x, C[i][j].y, C[i][j+1].x, C[i][j+1].y);
 				ptd p = lnd(a, b).inter(lnd(C[i][j], C[i][j + 1]));
-				// TALVEZ MUDAR
 				bool ou = ((db - p) ^ (ptd(C[i][j + 1]) - p)) < 0;
 				v.pb(pdi((p - da) * (p - da), ou));
-				//printf("%.5f -- %d\n", v.back().fst, v.back().out);
 			}
 		}
 	v.pb(pdi((db - da) * (db - da), false));
 	v.pb(pdi(0, !in));
-	sort(v.begin(), v.end());
-	j = 0;
-	for(i = 0; i < v.size() - 1; i++) {
-		if((v[i + 1].fst - v[i].fst) <= 1e-9) {
-			v[i].snd |= v[i + 1].snd;
-			i++;
-		}
+	for(i = 0; i < v.size(); i++)
 		v[i].fst = sqrt(v[i].fst);
-		v[j++] = v[i];
-	}
-	while(i > j) v.pop_back(), i--;
 	sort(v.begin(), v.end());
 	for(i = 0; i < v.size() - 1; i++) {
 		pdi g = v[i];
@@ -145,7 +124,6 @@ void process(pti a, pti b) {
 			in = false;
 			ans = max(ans, tern(da, db, g.fst, v[i + 1].fst));
 		} else in = true;
-		//printf("(%.0f, %.0f).(%.0f, %.0f) -- %.5f in %d\n", da.x, da.y, db.x, db.y, g.fst, in);
 	}
 }
 
@@ -163,7 +141,6 @@ int main() {
 			ll tot = 0;
 			for(j = 1; j < m[i] - 1; j++)
 				tot += cross(C[i][0], C[i][j], C[i][j + 1]);
-			//if(tot < 0) printf("inv %d\n", i);
 			if(tot < 0) reverse(C[i] + 1, C[i] + m[i]);
 		}
 		ans = 0.;
