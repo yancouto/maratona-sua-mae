@@ -12,7 +12,7 @@ const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 #define dmg first
 #define len second
-const int N = 61234;
+const int N = 112345;
 
 vector<int> adj[N];
 int D[N], L[N], to[N];
@@ -25,7 +25,7 @@ struct info {
 	void clear() { p.clear(); d = l = 0; p.insert(pii(0, 0)); }
 	void join(info &o);
 	void add(pii a);
-	int bs(pii a);
+	ll bs(pii a);
 } st[N];
 
 void info::add(pii a) {
@@ -37,11 +37,12 @@ void info::add(pii a) {
 		p.erase(next(it));
 }
 
-int info::bs(pii a) {
-	a.len = -a.len;
+ll info::bs(pii a) {
 	int M = m - a.dmg - d;
 	auto it = p.upper_bound(pii(M, INT_MAX));
-	if(it != p.begin()) return -it->len + l;
+	if(it != p.begin()) assert(prev(it)->dmg + d + a.dmg <= m);
+	if(it != p.begin()) return -prev(it)->len + l - a.len;
+	else return -1e8;
 }
 
 void info::join(info &o) {
@@ -53,7 +54,8 @@ void info::join(info &o) {
 	for(pii a : o.p) {
 		a.dmg += o.d;
 		a.len -= o.l;
-		best = max<ll>(best, bs(a) + (-a.len));
+		//printf("dmg=%d len=%d and got %d\n", a.dmg, -a.len, bs(a));
+		best = max<ll>(best, bs(a));
 		add(a);
 	}
 }
@@ -65,7 +67,9 @@ void dfs(int u, int p) {
 		dfs(to[e], u);
 		st[to[e]].d += D[e];
 		st[to[e]].l += L[e];
+		//printf("joining %d to son %d\n\n", u+1, to[e]+1);
 		st[u].join(st[to[e]]);
+		//puts("------------------------\n\n");
 	}
 }
 
