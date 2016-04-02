@@ -1,48 +1,53 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define fst first
-#define snd second
+#define dmg first
+#define len second
 typedef unsigned long long ull;
 typedef long long ll;
-typedef pair<int, int> pii;
+typedef pair<ll, ll> pii;
 #define pb push_back
 #define for_tests(t, tt) int t; scanf("%d", &t); for(int tt = 1; tt <= t; tt++)
 template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
-#define dmg first
-#define len second
 const int N = 112345;
 
-vector<int> adj[N];
-int D[N], L[N], to[N];
+struct edge { int v, d, l; };
+vector<edge> adj[N];
 
-int m;
-ll best;
+struct cmp {
+	bool operator()(pii a, pii b) const {
+		if(a.dmg != b.dmg) return a.dmg < b.dmg;
+		return a.len > b.len;
+	}
+};
+
+
+ll best, m;
 struct info {
-	set<pii> p;
-	int d, l;
-	void clear() { p.clear(); d = l = 0; p.insert(pii(0, 0)); }
+	ll d, l;
+	set<pii, cmp> p;
 	void join(info &o);
 	void add(pii a);
-	ll bs(pii a);
+	void bs(pii a);
+	void reset() { d = l = 0; p.clear(); p.insert(pii(0ll, 0ll)); }
 } st[N];
+
+void info::bs(pii a) {
+	ll M = m - a.dmg - d;
+	auto it = p.upper_bound(pii(M, LLONG_MIN));	
+	if(it != p.begin() && a.dmg + prev(it)->dmg + d <= m)
+		best = max(best, a.len + (prev(it)->len + l));
+}
 
 void info::add(pii a) {
 	a.dmg -= d;
-	a.len += l;
-	auto it = p.insert(a).fst;
-	if(it != p.begin() && -prev(it)->len >= -a.len) { p.erase(it); return; }
-	while(next(it) != p.end() && -a.len >= -next(it)->len)
+	a.len -= l;
+	if(p.count(a)) return;
+	auto it = p.insert(a).first;
+	if(it != p.begin() && prev(it)->len >= a.len) { p.erase(it); return; }
+	while(next(it) != p.end() && a.len >= next(it)->len)
 		p.erase(next(it));
-}
-
-ll info::bs(pii a) {
-	int M = m - a.dmg - d;
-	auto it = p.upper_bound(pii(M, INT_MAX));
-	if(it != p.begin()) assert(prev(it)->dmg + d + a.dmg <= m);
-	if(it != p.begin()) return -prev(it)->len + l - a.len;
-	else return -1e8;
 }
 
 void info::join(info &o) {
@@ -52,42 +57,40 @@ void info::join(info &o) {
 		swap(l, o.l);
 	}
 	for(pii a : o.p) {
-		a.dmg += o.d;
-		a.len -= o.l;
-		//printf("dmg=%d len=%d and got %d\n", a.dmg, -a.len, bs(a));
-		best = max<ll>(best, bs(a));
+		a.dmg += o.d; a.len += o.l;
+		bs(a);
+	}
+	for(pii a : o.p) {
+		a.dmg += o.d; a.len += o.l;
 		add(a);
 	}
 }
 
+
 void dfs(int u, int p) {
-	st[u].clear();
-	for(int e : adj[u]) {
-		if(to[e] == p) continue;
-		dfs(to[e], u);
-		st[to[e]].d += D[e];
-		st[to[e]].l += L[e];
-		//printf("joining %d to son %d\n\n", u+1, to[e]+1);
-		st[u].join(st[to[e]]);
-		//puts("------------------------\n\n");
+	st[u].reset();
+	for(edge e : adj[u]) {
+		if(e.v == p) continue;
+		dfs(e.v, u);
+		st[e.v].d += e.d;
+		st[e.v].l += e.l;
+		st[u].join(st[e.v]);
 	}
 }
 
 int main() {
-	int i, n, a, b, l, d;
+	int i, n, a, b, d, l;
 	for_tests(t, tt) {
-		scanf("%d %d", &n, &m);
-		best = 0;
-		for(i = 0; i < n; i++) adj[i].clear();
+		scanf("%d %lld", &n, &m);
 		for(i = 0; i < n - 1; i++) {
-			scanf("%d %d %d %d", &a, &b, &d, &l);
-			a--; b--;
-			D[2*i] = D[2*i+1] = d;
-			L[2*i] = L[2*i+1] = l;
-			to[2*i] = b; to[2*i+1] = a;
-			adj[a].pb(2*i); adj[b].pb(2*i+1);
+			scanf("%d %d %d %d", &a, &b, &d, &l); a--; b--;
+			adj[a].pb(edge{b, d, l});
+			adj[b].pb(edge{a, d, l});
 		}
-		dfs(0, 0);
+		best = 0;
+		dfs(0, -1);
 		printf("Case %d: %lld\n", tt, best);
+		for(i = 0; i < n; i++) adj[i].clear();
 	}
+
 }
