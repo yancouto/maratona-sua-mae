@@ -10,75 +10,128 @@ typedef pair<int, int> pii;
 template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
-string t[100009];
 
-typedef pii hs;
-#define i first
-#define st second
-inline int sz(hs p) { return t[p.i].size() - p.st; }
-int base;
+namespace sf {
+const int NS = 112345;
+const int N = 1123456;
 
-vector<int> h[100009];
+int cn, cd, cc, li, ns, en, es[N];
+inline int r(int b, int si) { return b == N? es[si] : b; }
+string s[NS];
+struct edge {
+	int a, b;
+	int n, si;
+	inline int len() { return r(b, si) - a + 1; }
+	inline char operator[](int i) { return s[si][a + i]; }
+	inline string str() { return s[si].substr(a, b - a + 1); }
+};
 
-inline int get(hs a, int d) {
-	ll hh = h[a.i][a.st + d - 1];
-	if(a.st) hh = mod(hh - h[a.i][a.st - 1] + modn);
-	return hh;
-}
+int suf[N], p[N];
+ll val[N];
+map<char, edge> tr[N];
+int si;
 
-inline bool eqh(hs a, hs b, int s) {
-	return get(a, s) == get(b, s);
-}
-
-int lcp(hs a, hs b) {
-	if(t[a.i][a.st] != t[b.i][b.st]) return 0;
-	int l = 1, r = min(sz(a), sz(b));
-	while(l < r) {
-		int m = (l + r + 1) / 2;
-		if(eqh(a, b, m)) l = m;
-		else r = m - 1;
+void add() {
+	int &e = es[si];
+	string &s = sf::s[si];
+	e++;
+	for(; li <= e; li++) {
+		if(ns && cd == 0) suf[ns] = cn, ns = 0;
+		if(cd? tr[cn][cc][cd] == s[e] : tr[cn].count(s[e])) {
+			if(cd++ == 0) cc = s[e];
+			if(cd == tr[cn][cc].len()) cd = 0, cn = tr[cn][cc].n;
+			break;
+		}
+		tr[en].clear();
+		if(cd) {
+			if(ns) suf[ns] = en;
+			tr[en + 1].clear();
+			edge &ed = tr[cn][cc];
+			char w = ed[cd];
+			tr[en][w] = ed;
+			tr[en][w].a += cd;
+			tr[en][s[e]] = edge{e, N, en + 1, si};
+			p[en] = cn;
+			p[en + 1] = p[tr[cn][cc].n] = en;
+			ns = en;
+			ed.b = ed.a + cd - 1;
+			ed.n = en++; en++;
+			int g = cn? e - cd : li + 1;
+			cn = suf[cn];
+			while(tr[cn].count(cc = s[g]) && g + tr[cn][s[g]].len() <= e) {
+				g += tr[cn][cc].len();
+				cn = tr[cn][cc].n;
+			}
+			cd = e - g;
+		} else {
+			p[en] = cn;
+			tr[cn][s[e]] = edge{e, N, en++, si};
+			cn = suf[cn];
+		}
 	}
-	return l;
 }
 
-bool hless(hs a, hs b) {
-	int s = lcp(a, b);
-	if(s == sz(a) || s == sz(b)) return sz(a) < sz(b);
-	return t[a.i][a.st + s] < t[b.i][b.st + s];
+void reset() {
+	tr[0].clear();
+	en = 1; si = -1;
 }
 
-int c[100009];
+void sufftree(string ss) {
+	si++;
+	es[si] = -1;
+	ss += '$';
+	s[si] = ss;
+	ns = cn = cd = cc = li = 0;
+	for(int i = 0; i < ss.size(); i++) add();
+}
+
+// chame pra todas strings pra marcar os finais
+void proc(string &s, int si, int c) {
+	cn = cc = cd = 0;
+	for(char c : s) {
+		if(cd++ == 0) cc = c;
+		if(cd == tr[cn][cc].len()) cd = 0, cn = tr[cn][cc].n;
+	}
+	val[cn] += c; // marque o fim de si no vert cn
+	for(int i = 1; i < s.size(); i++) {
+		cn = p[cn];
+		int g = cn? s.size() - tr[cn][cc].len() : i;
+		cn = suf[cn];
+		while(g != s.size()) {
+			cc = s[g];
+			g += tr[cn][cc].len();
+			cn = tr[cn][cc].n;
+		}
+		val[cn] += c; // marque o fim de si no vert cn
+	}
+}
+
+ll mx = 0;
+
+ll dfs(int u, ll sz) {
+	for(auto &e : tr[u])
+		val[u] += dfs(e.snd.n, sz + e.snd.len());
+	if(tr[u].empty()) sz--;
+	mx = max(mx, val[u] * sz);
+	return val[u];
+}
+
+};
+
 char s[500009];
-hs vs[500009];
-int vn;
-ll acc[500009];
-
-typedef pii da;
-#define pre second
 
 int main() {
-	int i, j, n;
-	base = 263 + (rand() % 200);
+	int i, n, x;
 	scanf("%d", &n);
+	sf::reset();
 	for(i = 0; i < n; i++) {
-		scanf("%s", &s);
-		t[i].append(s);
-		h[i].resize(t[i].size());
-		ll hh = 0;
-		for(j = 0; j < t[i].size(); j++)
-			h[i][j] = (hh = mod(hh * base + t[i][j])),
-			vs[vn++] = hs(i, j);
+		scanf("%s", s);
+		sf::sufftree(s);
 	}
-	for(i = 0; i < n; i++)
-		scanf("%d", &c[i]);
-	sort(vs, vs + vn, hless);
-	for(i = 0; i < vn; i++) 
-		acc[i] = c[vs[i].i] + (i? acc[i - 1] : 0ll);
-	set<int> vals;
-	da st[500009]; int sn = 0;
-	for(i = vn - 1; i >= 0; i--) {
-		da d(i, sz(vs[i]));
-
+	for(i = 0; i < n; i++) {
+		scanf("%d", &x);
+		sf::proc(sf::s[i], i, x);
 	}
-	printf("%lld\n", b);
+	sf::dfs(0, 0);
+	printf("%I64d\n", sf::mx);
 }
