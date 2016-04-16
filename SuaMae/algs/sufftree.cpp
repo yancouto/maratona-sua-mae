@@ -2,7 +2,7 @@ namespace sf {
 const int NS = 112345;
 const int N = 212345;
 
-int cn, cd, cc, li, ns, en, es[N];
+int cn, cd, cc, li, ns, en = 1, es[N];
 inline int r(int b, int si) { return b == N? es[si] : b; }
 string s[NS];
 struct edge {
@@ -14,7 +14,7 @@ struct edge {
 
 int suf[N], p[N];
 map<char, edge> tr[N];
-int si;
+int si = -1;
 
 void add() {
 	int &e = es[si];
