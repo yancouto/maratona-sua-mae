@@ -11,11 +11,18 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 
-const int MAXN = 110;
+const int MAXN = 510;
+int CNT = 10004;
+
+int n, S, T;
+
+struct itv{
+	int i, j;
+} seq[MAXN];
 
 namespace f {
-	const int maxv = 100009;
-	const int maxe = 300009 * 2;
+	const int maxv = 500009;
+	const int maxe = 900009 * 2;
 	typedef int num;
 	num inf = INT_MAX;
 	int n = maxv;
@@ -73,37 +80,41 @@ namespace f {
 	}
 }
 
-int n;
 
-int main (){
-	f::reset_all();
+void pre(){
 	f::reset_flow();
-	scanf("%d", &n);
-	int s = 10002, t = 10003;
-	for(int a=0;a<=10000;a++){
-		f::add_edge(s, a, 1);
-	}
-	int CNT = 10004;
+	f::reset_all();
+	for(int a=0;a<=10000;a++)
+		f::add_edge(S, a, 1);
+
 	for(int a=0;a<n;a++){
-		int i, fi;
-		scanf("%d%d", &i, &fi);
-		for(int b=i;b<fi;b++){
+		for(int b = seq[a].i; b < seq[a].j;b++){
 			f::add_edge(b, a+CNT, 1);
 		}
 	}
+}
+
+int main (){
+	scanf("%d", &n);
+	int mind = INT_MAX;
+	S = 10001;
+	T  = 10002;
+	for(int a=0;a<n;a++){
+		scanf("%d%d", &seq[a].i, &seq[a].j);
+		mind = min(mind, seq[a].j-seq[a].i);
+	}
 	int i = 0, j = 10001;
 	while(i < j){
+		pre();
 		int m = (i+j+1)/2;
-		for(int a=0+CNT;a<n+CNT;a++){
-			f::add_edge(a, t, m);
-		}
-		if(f::max_flow(s, t) == m*n)
+		for(int a=CNT;a<n+CNT;a++)
+			f::add_edge(a, T, m);
+		int flow = f::max_flow(S, T);
+		//printf("%d %d 	%d - flow %d\n", i,m, j, flow);
+		if(flow == m*n)
 			i = m;
 		else
 			j = m-1;
-
-		printf("%d %d flow %d\n", i, j, f::max_flow(s, t));
-		f::reset_flow();
 	}
-	printf("%d\n", i);
+	printf("%d\n", i*n);
 }
