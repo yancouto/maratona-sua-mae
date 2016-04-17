@@ -26,6 +26,10 @@ struct ares{
 
 vector<ares> v[MAXN];
 
+void go(int v){
+	for(ares nxt:)
+}
+
 int main (){
 	scanf("%d%d", &n, &m);
 	for(int a=0;a<n-1;a++){
