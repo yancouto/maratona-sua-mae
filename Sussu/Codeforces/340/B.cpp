@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -11,13 +12,26 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 
-int n, x, i, sm;
+const int MAXN = 1010;
 
-int main() {
-	while(scanf("%d", &n) != EOF) {
-		for(i = 0; i < n; i++)
-			scanf("%d", &x), sm += x;
-		if(sm%2) puts("No");
-		else puts("Yes");
-	return 0;
+int n, s[MAXN];
+
+int main (){
+	scanf("%d", &n);
+	ll ult = n+1;
+	ll res = 1;
+	for(ll a=0;a<n;a++){
+		scanf("%d", &s[a]);
+		if(s[a] == 1){
+			if(ult == n+1){
+				ult = a;
+				continue;
+			}
+			res *= (a - ult);
+			ult = a;
+		}
+	}
+	if(ult == n+1) res = 0;
+	cout << res;
 }
+

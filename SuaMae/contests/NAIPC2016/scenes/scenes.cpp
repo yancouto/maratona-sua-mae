@@ -11,13 +11,23 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 
-int n, x, i, sm;
+int n, h, w;
+
+ll memo[112][10009];
+ll solve(int w, int n) {
+	if(w == 0) return 1;
+	ll &r = memo[w][n];
+	if(r != -1) return r;
+	r = 0;
+	for(int i = 0; i <= n && i <= h; i++)
+		r += solve(w - 1, n - i);
+	return r = mod(r);
+}
 
 int main() {
-	while(scanf("%d", &n) != EOF) {
-		for(i = 0; i < n; i++)
-			scanf("%d", &x), sm += x;
-		if(sm%2) puts("No");
-		else puts("Yes");
-	return 0;
+	memset(memo, -1, sizeof memo);
+	scanf("%d %d %d", &n, &w, &h);
+	ll a = solve(w, n);
+	ll eq = min(n / w, h);
+	printf("%d\n", (int) mod(a - eq - 1 + modn));
 }

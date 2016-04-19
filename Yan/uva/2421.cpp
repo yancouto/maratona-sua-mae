@@ -10,14 +10,24 @@ typedef pair<int, int> pii;
 template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
-
-int n, x, i, sm;
+const int N = 4023456;
+int p[N];
+int dv[N];
+ll t[N];
 
 int main() {
-	while(scanf("%d", &n) != EOF) {
-		for(i = 0; i < n; i++)
-			scanf("%d", &x), sm += x;
-		if(sm%2) puts("No");
-		else puts("Yes");
-	return 0;
+	int i, j, n;
+	for(i = 1; i < N; i++)
+		p[i] = i;
+	for(i = 2; i < N; i++)
+		if(!dv[i])
+			for(j = i; j < N; j += i)
+				p[j] = (p[j] / i) * (i - 1), dv[j] = 1;
+	for(i = 1; i < N; i++)
+		for(j = i; j < N; j += i)
+			t[j] += ll(p[i]) * ll(j / i);
+	for(i = 1; i < N; i++)
+		t[i] += t[i - 1] - i;
+	while(scanf("%d", &n) != EOF && n)
+		printf("%lld\n", t[n]);
 }

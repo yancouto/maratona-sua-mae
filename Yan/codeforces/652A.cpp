@@ -11,13 +11,16 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 
-int n, x, i, sm;
-
 int main() {
-	while(scanf("%d", &n) != EOF) {
-		for(i = 0; i < n; i++)
-			scanf("%d", &x), sm += x;
-		if(sm%2) puts("No");
-		else puts("Yes");
-	return 0;
+	ll h1, h2, a, b;
+	scanf("%I64d %I64d", &h1, &h2);
+	scanf("%I64d %I64d", &a, &b);
+	for(int d = 0; d < 1000000; d++) {
+		if(d) h1 += a * 4ll;
+		h1 += 8ll * a;
+		//if(h1 < h2 && h1 + 8ll * a >= h2) { printf("%d\n", d); return 0; }
+		if(h1 >= h2) { printf("%d\n", d); return 0; }
+		h1 -= b * 12ll;
+	}
+	puts("-1");
 }
