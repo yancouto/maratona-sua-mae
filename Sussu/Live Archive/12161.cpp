@@ -38,13 +38,13 @@ int dfs(int v, int p){
 int divi(int v, int p){
 	int mai = -1, imai;
 	for(ares nxt: adj[v]){
-		if(nxt.v == p) continue;
+		if(nxt.v == p || proi[nxt.v]) continue;
 		if(sz[nxt.v] > mai){
 			mai = sz[nxt.v];
 			imai = nxt.v;
 		}
 	}
-	if(mai == -1 || sz[imai] < nv/2)
+	if(mai < nv/2)
 		return v;
 	return divi(imai, v);
 }
@@ -67,12 +67,13 @@ struct track{
 	}
 } md, smd;
 
-vector<track> cam[MAXN], esc[MAXN];
+vector<track> cam, esc;
 
 int go(int v, int p, int v2, int d, int c){
+	//printf("chegay %d %d %d %d %d\n", v, p, v2, d, c);
 	sz[v] = 1;
 	if(c <= m)
-		cam[v2].pb(track(v, v2, d, c));
+		cam.pb(track(v, v2, d, c));
 	//printf("boto em cam v %d pai %d v2 %d d %d c%d\n", v, p, v2, d, c);
 	for(ares nxt: adj[v]){
 		if(nxt.v == p || proi[nxt.v]) continue;
@@ -81,23 +82,34 @@ int go(int v, int p, int v2, int d, int c){
 	return sz[v];
 }
 
+inline int bb(int i, int j, int val){
+	while(i < j){
+		int m = (i+j+1)/2;
+		if(esc[m].c + val <= ::m)
+			i = m;
+		else
+			j = m-1;
+	}
+	return i;
+}
+
+queue<int> s;
+
 int main (){
 	for_tests(t, tt){
 		int res = 0;
 		scanf("%d%d", &n, &m);
 		for(int a=1;a<=n;a++){
-			sz[a] = 0;
 			adj[a].clear();
 			proi[a] = 0;
 		}
 		for(int a=0;a<n-1;a++){
 			int i, j, l, c;
-			scanf("%d %d%d%d", &i, &j, &c, &l);
+			scanf("%d%d%d%d", &i, &j, &c, &l);
 			adj[i].pb(ares(j, l, c));
 			adj[j].pb(ares(i, l, c));
 		}
 		dfs(1, 0);
-		queue<int> s;
 		s.push(1);
 		while(!s.empty()){
 			int r = s.front();
@@ -106,28 +118,31 @@ int main (){
 			int v = divi(r, 0);
 			//printf("divido em %d\n", v);
 			//se o caminho otimo passar por v
-			sz[v] = 0;
+			sz[v] = 1;
 			for(ares nxt: adj[v]){
 				if(proi[nxt.v]) continue;
 				sz[v] += go(nxt.v, v, nxt.v, nxt.d, nxt.c);
 			}
-			for(ares nxt: adj[v]){
-				if(proi[nxt.v]) continue;
-				sort(cam[nxt.v].begin(), cam[nxt.v].end());
-				for(int i=1;i<acm[nxt.v].size();i++){
-					
+
+			cam.pb(track(v, v, 0, 0));
+			sort(cam.begin(), cam.end());
+			int j = cam.size()-1;
+			for(int a = 0;a<=j;a++){
+				if(esc.empty() || esc[esc.size()-1].d < cam[a].d){
+					esc.pb(cam[a]);
+					//printf("esc bota %d\n", cam[a].v);
 				}
 			}
-			for(int j=0;j<cam.size();j++){
-				for(int i=0;i<j;i++){
-					if(cam[i].c + cam[j].c > m) break;
-					if(cam[i].v2 == cam[j].v2) continue;
-					res = max(res, cam[i].d + cam[j].d);
-			//		printf("res max= %d + %d cmp %d %d\n", cam[i].d, cam[j].d, i, j);
+
+			for(int a=0;a<cam.size();a++){
+				int i = bb(0, esc.size()-1, cam[a].c);
+				if(esc[i].v2 != cam[a].v2){
+					//printf("res v %d %d  e v %d %d\n", esc[i].v, esc[i].d, cam[a].v, cam[a].d);
+					res = max(res, esc[i].d + cam[a].d);
 				}
 			}
 			cam.clear();
-
+			esc.clear();
 			//se o caminho nao passar por v
 			proi[v] = 1;
 			for(ares nxt: adj[v]){
@@ -135,6 +150,7 @@ int main (){
 				s.push(nxt.v);
 			}
 		}
-		printf("%d\n", res);
+		printf("Case %d: %d\n", tt, res);
 	}
+	return 0;
 }
