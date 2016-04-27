@@ -1,12 +1,13 @@
 namespace f {
 
-const int N = 10000, M = 100000 * 2;
+const int N = , M =  * 2;
 typedef int val;
 typedef int num;
 int es[N], to[M], nx[M], en, pai[N];
 val fl[M], cp[M];
 num cs[M], d[N];
-const num inf = 1e8;
+const num inf = 1e8, eps = 0;
+const val infv = INT_MAX;
 int seen[N], tempo;
 int qu[N];
 
@@ -22,19 +23,18 @@ bool spfa(int s, int t) {
 		int u = qu[a++]; if(a == N) a = 0;
 		seen[u] = 0;
 		for(int e = es[u]; e != -1; e = nx[e])
-			if(cp[e] - fl[e] > val(0) && d[u] + cs[e] < d[to[e]]) {
+			if(cp[e] - fl[e] > val(0) && d[u] + cs[e] < d[to[e]] - eps) {
 				d[to[e]] = d[u] + cs[e]; pai[to[e]] = e ^ 1;
 				if(seen[to[e]] < tempo) { seen[to[e]] = tempo; qu[b++] = to[e]; if(b == N) b = 0; }
 			}
 	}
 	if(d[t] == inf) return false;
-	tot += d[t];
-	int u = t;
-	while(u != s) {
-		fl[pai[u]]--;
-		fl[pai[u] ^ 1]++;
-		u = to[pai[u]];
-	}
+	val mx = infv;
+	for(int u = t; u != s; u = to[pai[u]])
+		mx = min(mx, cp[pai[u] ^ 1] - fl[pai[u] ^ 1]);
+	tot += d[t] * val(mx);
+	for(int u = t; u != s; u = to[pai[u]])
+		fl[pai[u]] -= mx, fl[pai[u] ^ 1] += mx;
 	return true;
 }
 
@@ -50,8 +50,8 @@ num mncost(int s, int t) {
 	return tot;
 }
 
-void add_edge(int u, int v, val c, val rc, num s) {
-	fl[en] = 0; cp[en] =  c; to[en] = v; nx[en] = es[u]; cs[en] =  s; es[u] = en++;
-	fl[en] = 0; cp[en] = rc; to[en] = u; nx[en] = es[v]; cs[en] = -s; es[v] = en++;
+void add_edge(int u, int v, val c, num s) {
+	fl[en] = 0; cp[en] = c; to[en] = v; nx[en] = es[u]; cs[en] =  s; es[u] = en++;
+	fl[en] = 0; cp[en] = 0; to[en] = u; nx[en] = es[v]; cs[en] = -s; es[v] = en++;
 }
 }

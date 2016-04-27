@@ -13,13 +13,13 @@ inline ll mod(ll x) { return x % modn; }
 
 namespace f {
 
-const int N = 1000, M = 100000 * 2;
+const int N = 100000, M = 100000 * 2;
 typedef int val;
-typedef ll num;
+typedef double num;
 int es[N], to[M], nx[M], en, pai[N];
 val fl[M], cp[M];
 num cs[M], d[N];
-const num inf = 1e18;
+const num inf = 1e18, eps = 1e-6;
 const val infv = INT_MAX;
 int seen[N], tempo;
 int qu[N];
@@ -36,7 +36,7 @@ bool spfa(int s, int t) {
 		int u = qu[a++]; if(a == N) a = 0;
 		seen[u] = 0;
 		for(int e = es[u]; e != -1; e = nx[e])
-			if(cp[e] - fl[e] > val(0) && d[u] + cs[e] < d[to[e]]) {
+			if(cp[e] - fl[e] > val(0) && d[u] + cs[e] < d[to[e]] - eps) {
 				d[to[e]] = d[u] + cs[e]; pai[to[e]] = e ^ 1;
 				if(seen[to[e]] < tempo) { seen[to[e]] = tempo; qu[b++] = to[e]; if(b == N) b = 0; }
 			}
@@ -56,6 +56,10 @@ void init(int n) {
 	memset(es, -1, sizeof(int) * n);
 }
 
+void reset() {
+	memset(fl, 0, sizeof(val) * en);
+}
+
 val flow;
 num mncost(int s, int t) {
 	tot = 0; flow = 0;
@@ -69,22 +73,32 @@ void add_edge(int u, int v, val c, val rc, num s) {
 }
 }
 
-using f::N;
 int main() {
-	int i, n, m, a, b, k; ll c;
-	for_tests(t, tt) {
-		if(tt > 1) putchar('\n');
-		scanf("%d %d", &n, &m);
-		f::init(f::N);
-		scanf("%d", &k);
-		for(i = 0; i < n; i++)
-			f::add_edge(N-1, i, 1, 0, 0);
-		for(i = 0; i < m; i++)
-			f::add_edge(i + n, N-2, 1, 0, 0);
-		for(i = 0; i < k; i++) {
-			scanf("%d %d %lld", &a, &b, &c);
-			f::add_edge(a, b + n, 1, 0, c);
+	int i, j, n, m, x, tt = 0; double v;
+	while(scanf("%d %d", &n, &m) != EOF && n) {
+		f::init(n + m + n * m  + 100);
+		int S = n + m + n * m + 50;
+		int T = n + m + n * m + 70;
+		int off = n + n * m;
+		for(i = 0; i < n; i++) {
+			scanf("%d", &x);
+			f::add_edge(S, i, x, 0, 0);
 		}
-		printf("%lld\n", f::mncost(N-1, N-2));
+		for(i = 0; i < m; i++) {
+			scanf("%d", &x);
+			f::add_edge(off + i, T, x, 0, 0);
+		}
+		for(i = 0; i < n; i++)
+			for(j = 0; j < m; j++) {
+				scanf("%lf", &v);
+				if(v < -.5) continue;
+				f::add_edge(i, n + i * m + j, f::infv, 0, v);
+				f::add_edge(n + i * m + j, off + j, 1e8, 0, 0);
+			}
+		double mn = f::mncost(S, T);
+		for(i = 0; i < f::en; i++)
+			f::fl[i] = 0,
+			f::cs[i] *= -1.;
+		printf("Problem %d: %.2f to %.2f\n", ++tt, mn, -f::mncost(S, T));
 	}
 }
