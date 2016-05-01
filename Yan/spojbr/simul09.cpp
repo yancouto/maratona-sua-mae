@@ -16,9 +16,9 @@ int l[N], r[N], b[N], id[N], sz[N];
 ll val[N];
 
 struct inter {
-	int l, r;
+	ll l, r;
 	ll val() { return (ll(l + r) * ll(sz())) / 2ll; }
-	int sz() { return abs(r - l) + 1; }
+	ll sz() { return abs(r - l) + 1; }
 	bool brk(vector<inter> &v, int &s) {
 		s -= sz();
 		if(s == 0) { s = 1e9 + 10; v.pb(*this); return true; }
@@ -27,18 +27,18 @@ struct inter {
 		if(l <= r) {
 			v.pb({l, l + s - 1});
 			v.pb({l + s, r});
+			assert(l <= l + s - 1 && l + s <= r);
 		} else {
 			v.pb({l, l - s + 1});
 			v.pb({l - s, r});
+			assert(l >= l - s + 1 && l - s >= r);
 		}
 		s = 1e9 + 10;
 		return true;
 	}
 	void swap(inter &o) {
-		if(this == &o) { std::swap(l, r); return; }
-		std::swap(*this, o);
-		std::swap(l, r);
-		std::swap(o.l, o.r);
+		std::swap(l, o.r);
+		std::swap(o.l, r);
 	}
 };
 
@@ -47,9 +47,9 @@ int break_at(vector<inter> &v, int s) {
 	vector<inter> nv;
 	int j = -1;
 	for(int i = 0; i < v.size(); i++)
-		if(v[i].brk(nv, s) && j == -1)
-			j = i;
-	if(j == -1) j = nv.size() - 1;
+		if(v[i].brk(nv, s))
+			assert(j == -1), j = i;
+	assert(j != -1);
 	nv.swap(v);
 	return j;
 }
@@ -65,7 +65,7 @@ int main() {
 	int i, n, m, j, bn = 0, sn = 0, L, R;
 	scanf("%d %d", &n, &m);
 	vector<inter> v;
-	v.pb({1, n});
+	v.pb({1ll, n});
 	for(i = 0; i < m; i++) {
 		scanf(" %c %d %d", &op[i], &L, &R);
 		//printf("%c %d %d\n", op[i], L, R);
@@ -76,9 +76,12 @@ int main() {
 		//puts("SECOND BREAK");
 		deb(v);
 		//printf("FROM %d TO %d\n", l, r);
+		for(j = 0; j < v.size(); j++)
+			assert(v[j].sz() > 0);
 		if(op[i] == 'I') {
-			for(; l <= r; l++, r--)
+			for(; l < r; l++, r--)
 				v[l].swap(v[r]);
+			if(l == r) swap(v[l].l, v[l].r);
 		} else {
 			ll tot = 0;
 			for(; l <= r; l++)
