@@ -1,8 +1,8 @@
 namespace f {
-	const int maxv = 100009;
-	const int maxe = 300009 * 2;
+	const int maxv = ;
+	const int maxe =  * 2;
 	typedef int num;
-	num inf = INT_MAX;
+	num inf = /*INT_MAX*/;
 	int n = maxv;
 
 	int to[maxe], en, nx[maxe], es[maxe], lv[maxv], qu[maxv], cr[maxv];
@@ -32,7 +32,7 @@ namespace f {
 		if(u == t) return mx;
 		for(int &i = cr[u]; i != -1; i = nx[i])
 			if(cp[i] > fl[i] && lv[to[i]] == lv[u] + 1)
-				if(int a = dfs(to[i], t, min(mx, cp[i] - fl[i]))) {
+				if(num a = dfs(to[i], t, min(mx, cp[i] - fl[i]))) {
 					fl[i] += a;
 					fl[i ^ 1] -= a;
 					return a;
