@@ -15,8 +15,8 @@ inline ll mod(ll x) { return x % modn; }
 int n, m;
 
 struct qry{
-	int i, j;
-	qry(int ii, int jj){
+	ll i, j;
+	qry(ll ii, ll jj){
 		i = ii;
 		j = jj;
 	}
@@ -25,21 +25,58 @@ struct qry{
 
 vector <qry> s;
 
+vector <qry> ind;
+
+inline ll inv(ll v,qry l){
+	return l.j - (v - l.i);
+}
+
 int main (){
 	scanf("%d%d", &n, &m);
 
 	for(int a=0;a<m;a++){
 		char t;
-		int i, j;
-		scanf(" %c %d %d", &t, &i, &j);
+		ll i, j;
+		scanf(" %c %lld %lld", &t, &i, &j);
 		if(t == 'I')
 			s.pb(qry(i, j));
 		else{
-			vector <qry>
-			int tam = s.size()-1;
-			for(int a = tam;a>=0;a--){
-
+			ind.clear();
+			ind.pb(qry(i, j));
+			for(int a = s.size()-1;a>=0;a--){
+				qry q = s[a];
+				int tam = ind.size();
+				for(int b = 0;b<tam;b++){
+					qry lim = ind[b];
+					if((lim.i <= q.i && lim.j >= q.j) || q.i > lim.j || q.j < lim.i)
+						continue;
+					if(lim.i > q.i && lim.j < q.j){
+						ll ii = inv(lim.j, q);
+						ll jj = inv(lim.i, q);
+						ind[b] = qry(ii, jj);
+					}
+					else if(lim.i <= q.i){
+						ll ii = inv(lim.j, q);
+						ll jj = inv(q.i, q);
+						ind[b] = qry(ii, jj);
+						if(q.i == lim.i) continue;
+						ind.pb(qry(lim.i, q.i-1));
+					}
+					else if(lim.i > q.i){
+						ll ii = inv(q.j, q);
+						ll jj = inv(lim.i, q);
+						ind[b] = qry(ii, jj);
+						if(q.j == lim.j) continue;
+						ind.pb(qry(q.j+1, lim.j));
+					}
+				}
 			}
+			ll res = 0;
+			for(qry i: ind){
+				//printf("%d %d\n", i.i, i.j);
+				res += ((i.i + i.j)*(i.j - i.i + 1))/2;
+			}
+			printf("%lld\n", res);
 		}
 	}
 }
