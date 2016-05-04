@@ -77,24 +77,24 @@ void build(int bm, int k) {
 }
 
 int main(int argn, char **args) {
-	srand(atoi(args[1]));
+	//srand(atoi(args[1]));
 	int i, j, k, K;
 	for_tests(tn, tt) {
-		memset(memo2, -1, sizeof memo2);
+		//memset(memo2, -1, sizeof memo2);
 		scanf("%d %d", &n, &K);
 		for(i = 0; i < n; i++) {
-			//scanf("%d %d", &v[i], &c[i]), p[i] = i;
-			p[i] = i; c[i] = rand() % 1000; v[i] = rand() % 2000;
-			printf("%d %d\n", v[i], c[i]);
+			scanf("%d %d", &v[i], &c[i]), p[i] = i;
+			//p[i] = i; c[i] = rand() % 1000; v[i] = rand() % 2000;
+			//printf("%d %d\n", v[i], c[i]);
 		}
-		sort(p, p + n, [](int i, int j) { return v[i] - c[i] > v[j] - c[j]; });
-		//for(i = n - 1; i >= 0; i--)
-		//	for(k = 0; k <= K; k++)
-		//		M(i, k) = max(M(i + 1, k), min(v[p[i]], M(i + 1, k - 1)) - c[p[i]]);
-		//printf("%d\n", M(0, K));
-		memset(memo, -1, sizeof memo);
-		printf("%d\n", solve(0, 0, K));
-		printf("%d BRUT\n", brut(0, K));
-		if(solve(0, 0, K) != brut(0, K)) build(0, K), build2(0, 0, K);
+		sort(p, p + n, [](int i, int j) { return v[i] < v[j]; });
+		for(i = n - 1; i >= 0; i--)
+			for(k = 0; k <= K; k++)
+				M(i, k) = max(M(i + 1, k), min(v[p[i]], M(i + 1, k - 1)) - c[p[i]]);
+		printf("%d\n", M(0, K));
+		//memset(memo, -1, sizeof memo);
+		//printf("%d\n", solve(0, 0, K));
+		//printf("%d BRUT\n", brut(0, K));
+		//if(M(0, K) != brut(0, K)) build(0, K), build2(0, 0, K);
 	}
 }
