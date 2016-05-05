@@ -3,12 +3,12 @@ const int NS = ;
 const int N = ;
 
 int cn, cd, ns, en = 1;
-string s[NS];
+string S[NS];
 struct edge {
 	int a, b;
 	int v, si;
 	inline int len() { return b - a + 1; }
-	inline char operator[](int i) { return s[si][a + i]; }
+	inline char operator[](int i) { return S[si][a + i]; }
 } ce;
 
 int suf[N], p[N];
@@ -16,7 +16,7 @@ map<char, edge> tr[N];
 int si = -1;
 
 void sufftree(string s) {
-	s += '$'; ::s[++si] = s;
+	s += '$'; S[++si] = s;
 	ns = cn = cd = 0; int i = 0, j, n = s.size();
 	for(j = 0; j < n; j++)
 		for(; i <= j; i++) {
