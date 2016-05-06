@@ -12,14 +12,15 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 
+string d[] = {"ZERO", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"};
+char S[10009];
+
 int main() {
-	int i, n, a, b;
-	scanf("%d %d %d", &n, &a, &b);
-	while(b != 0) {
-		if(b > 0) a++, b--;
-		else a--, b++;
-		if(a == n + 1) a = 1;
-		if(a == 0) a = n;
+	int i, n;
+	scanf("%*d");
+	while(scanf("%s", S) != EOF) {
+		string s = S;
+		sort(s.begin(), s.end());
+		cout << s << endl;
 	}
-	printf("%d\n", a);
 }
