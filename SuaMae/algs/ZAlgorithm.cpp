@@ -1,4 +1,4 @@
-const int MAXS = 6543210;
+const int MAXS = ;
 
 int L, R, Z[MAXS];
 

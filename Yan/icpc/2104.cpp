@@ -82,7 +82,7 @@ bool check() {
 	bool any = false; int ct = 0;
 	for(int i = 0; i < n; i++)
 		for(int j = 0; j < m; j++) {
-			ct += !a[i][j];
+			ct += (!a[i][j]);
 			if(!any && !a[i][j]) {
 				any = true;
 				t++; all = 0;
@@ -128,7 +128,10 @@ int main() {
 		vector<pii> v; v.pb(pii(0, 0));
 		gen(v, i - 1, i);
 	}
+	bool fst = true;
 	while(scanf("%d %d", &n, &m) != EOF && n) {
+		if(!fst) putchar('\n');
+		fst = false;
 		sn = 0;
 		for(i = 0; i < n; i++)
 			for(j = 0; j < m; j++)
@@ -144,7 +147,7 @@ int main() {
 						if(!valid(ni, nj) || g[ni][nj] != '.')  break;
 						for(d = 0; d < 4; d++) {
 							int i2 = ni + di[d], j2 = nj + dj[d];
-							if(pii(i2, j2) != pii(i, j) && valid(i2, j2) &&  g[i2][j2] != '.')
+							if(pii(i2, j2) != pii(i, j) && valid(i2, j2) && g[i2][j2] != '.')
 								break;
 						}
 						if(d < 4) break;
@@ -153,13 +156,12 @@ int main() {
 				}
 				ord[sn++] = pii(i, j);
 			}
-		bt(0);
+		assert(bt(0));
 		for(i = 0; i < n; i++) {
 			for(j = 0; j < m; j++)
 				if(!a[i][j]) putchar('#');
 				else putchar(g[i][j]);
 			putchar('\n');
 		}
-		putchar('\n');
 	}
 }

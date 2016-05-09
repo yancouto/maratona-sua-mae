@@ -1,4 +1,4 @@
-const int N = 302;
+const int N = ;
 typedef int num;
 const num inf = 100000000;
 int n, MA[N], MB[N], PB[N], mn[N];
