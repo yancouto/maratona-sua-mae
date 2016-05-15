@@ -1,9 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define fst first
+#define snd second
+typedef unsigned long long ull;
+typedef long long ll;
+typedef pair<int, int> pii;
+#define pb push_back
+#define for_tests(t, tt) int t; scanf("%d", &t); for(int tt = 1; tt <= t; tt++)
+template<typename T> inline T abs(T t) { return t < 0? -t : t; }
+const ll modn = 1000000007;
+inline ll mod(ll x) { return x % modn; }
+
 
 namespace sf {
-const int NS = ;
-const int N =  * 2;
+const int NS = 112345;
+const int N = 612345 * 2;
 
 int cn, cd, ns, en = 1, lst;
 string S[NS]; int si = -1;
@@ -73,4 +84,35 @@ void add_string(string s) {
 			}
 		}
 }
+
+ll mx = 0;
+ll val[N];
+
+ll dfs(int u, ll sz) {
+	for(auto &e : t[u].adj)
+		val[u] += dfs(e.snd, sz + t[e.snd].len());
+	if(t[u].adj.empty()) sz--;
+	mx = max(mx, val[u] * sz);
+	return val[u];
+}
+
 };
+
+
+char s[500009];
+
+int main() {
+	int i, n, x;
+	scanf("%d", &n);
+	for(i = 0; i < n; i++) {
+		scanf("%s", s);
+		sf::add_string(s);
+	}
+	for(i = 0; i < n; i++) {
+		scanf("%d", &x);
+		for(int j = 0; j < sf::S[i].size(); j++)
+			sf::val[sf::sufn[i][j]] += x;
+	}
+	sf::dfs(0, 0);
+	printf("%I64d\n", sf::mx);
+}
