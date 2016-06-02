@@ -35,7 +35,7 @@ bool spfa(int s, int t) {
 	tot += d[t] * val(mx);
 	for(int u = t; u != s; u = to[pai[u]])
 		fl[pai[u]] -= mx, fl[pai[u] ^ 1] += mx;
-	return true;
+	return mx;
 }
 
 void init(int n) {
@@ -46,7 +46,7 @@ void init(int n) {
 val flow;
 num mncost(int s, int t) {
 	tot = 0; flow = 0;
-	while(spfa(s, t)) flow++;
+	while(val a = spfa(s, t)) flow += a;
 	return tot;
 }
 
