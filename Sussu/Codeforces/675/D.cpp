@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -5,28 +6,38 @@ using namespace std;
 typedef unsigned long long ull;
 typedef long long ll;
 typedef pair<int, int> pii;
-typedef pair<int, pii> piii;
-typedef pair<int, piii> piiii;
 #define pb push_back
-#define mp make_pair
 #define for_tests(t, tt) int t; scanf("%d", &t); for(int tt = 1; tt <= t; tt++)
 template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 
-const int MAXN = 100010;
+const int MAXN = 112345;
 
-int n, adj[MAXN], deg[MAXN];
+int n, s[MAXN];
 
-int main(){
+set <int> v;
+
+map <int, int> ind;
+
+int main (){
 	scanf("%d", &n);
+	v.insert(-1);
+	v.insert(1000000001);
+	ind[-1] = -1;
+	ind[1000000001] = -1;
 	for(int a=0;a<n;a++){
-		int c;
-		scanf("%d", &c);
-		deg[c]++;
+		scanf("%d", &s[a]);
+		ind[s[a]] = a;
+		if(a==0){
+			v.insert(s[a]);
+			continue;
+		}
+		if(ind[*(--v.lower_bound(s[a]))] > ind[*v.lower_bound(s[a])])
+			printf("%d ", *(--v.lower_bound(s[a])));
+		else
+			printf("%d ", *v.lower_bound(s[a]));
+		v.insert(s[a]);
 	}
-	for(int a=1;a<=n;a++){
-		if(!deg[a])
-			printf("%d ", a);
-	}
+
 }
