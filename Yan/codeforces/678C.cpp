@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 using namespace std;
 #define fst first
@@ -16,7 +15,18 @@ inline ll mod(ll x) { return x % modn; }
 #	define debug(args...) fprintf(stderr, args)
 #endif
 
+ll mdc(ll a, ll b) {
+	if(b == 0) return a;
+	return mdc(b, a % b);
+}
+
 int main() {
-	int i, j, n;
-	scanf("%d", &n);
+	ll n, a, b, p, q;
+	scanf("%lld %lld %lld %lld %lld", &n, &a, &b, &p, &q);
+	ll tot = 0;
+	tot += ((n / a) - (n / (a * b / mdc(a, b)))) * p;
+	tot += ((n / b) - (n / (a * b / mdc(a, b)))) * q;
+	tot += (n / (a * b / mdc(a, b))) * max(p, q);
+	printf("%lld\n", tot);
+
 }

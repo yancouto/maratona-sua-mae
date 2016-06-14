@@ -16,11 +16,10 @@ inline ll mod(ll x) { return x % modn; }
 #	define debug(args...) fprintf(stderr, args)
 #endif
 
-const int N = 612345;
+const int N = 1123456, M = 112345;
 
-int S[N], sz[N], ct;
-int st[N], sn;
-
+int a[N], b[N], lst[M], o[N], op[N], ans[N], cmp;
+int S[M], sz[M], st[M], sn;
 inline int find(int i) {
 	while(S[i] != i) i = S[i];
 	return i;
@@ -28,7 +27,7 @@ inline int find(int i) {
 
 inline void join(int a, int b) {
 	if((a = find(a)) == (b = find(b))) return;
-	ct--;
+	cmp--;
 	if(sz[a] < sz[b]) swap(a, b);
 	st[sn++] = b;
 	sz[a] += sz[b];
@@ -36,24 +35,23 @@ inline void join(int a, int b) {
 }
 
 inline void rollback() {
-	ct++;
+	cmp++;
 	int a = st[--sn];
 	sz[S[a]] -= sz[a];
 	S[a] = a;
 }
 
-int a[N], b[N], ans[N], o[N];
-char op[N];
-
 void rec(int l, int r) {
-	if(l == r) return (void) (ans[l] = ct);
+	if(l == r) return (void) (ans[l] = cmp);
 	int m = (l + r) / 2;
 	int C = sn;
+
 	for(int i = m + 1; i <= r; i++)
 		if(op[i] == '-' && o[i] < l)
 			join(a[i], b[i]);
 	rec(l, m);
 	while(sn > C) rollback();
+
 	for(int i = l; i <= m; i++)
 		if(op[i] == '+' && o[i] > r)
 			join(a[i], b[i]);
@@ -61,34 +59,46 @@ void rec(int l, int r) {
 	while(sn > C) rollback();
 }
 
+
+int e[10];
 int main() {
 #ifdef ONLINE_JUDGE
-	freopen("connect.in", "r", stdin);
-	freopen("connect.out", "w", stdout);
+	freopen("disconnected.in", "r", stdin);
+	freopen("disconnected.out", "w", stdout);
 #endif
-	int i, j, n, k;
-	scanf("%d %d", &n, &k);
-	if(k == 0) return 0;
-	map<pii, int> s;
+	int i, j, n, m, k, c, on = 0;
+	scanf("%d %d", &n, &m);
 	for(i = 0; i < n; i++) S[i] = i, sz[i] = 1;
+	cmp = n;
+	for(i = 0; i < m; i++) {
+		scanf("%d %d", &a[i], &b[i]); a[i]--; b[i]--;
+		lst[i] = i;
+		op[on++] = '+';
+	}
+	scanf("%d", &k);
 	for(i = 0; i < k; i++) {
-		scanf(" %c", &op[i]);
-		if(op[i] != '?') scanf("%d %d", &a[i], &b[i]); a[i]--; b[i]--;
-		if(a[i] > b[i]) swap(a[i], b[i]);
-		pii p(a[i], b[i]);
-		if(op[i] == '+') s[p] = i;
-		else if(op[i] == '-') o[i] = s[p], o[s[p]] = i, s.erase(p);
+		scanf("%d", &c);
+		for(j = 0; j < c; j++) {
+			scanf("%d", &e[j]); e[j]--;
+			o[on] = lst[e[j]]; a[on] = a[e[j]]; b[on] = b[e[j]];
+			o[lst[e[j]]] = on;
+			op[on++] = '-';
+		}
+		on++;
+		for(j = 0; j < c; j++) {
+			lst[e[j]] = on;
+			a[on] = a[e[j]]; b[on] = b[e[j]];
+			op[on++] = '+';
+		}
 	}
-	while(!s.empty()) {
-		pii p = s.begin()->fst;
-		o[i] = s[p];
-		o[s[p]] = i;
-		op[i] = '-'; a[i] = p.fst; b[i] = p.snd;
-		s.erase(p); i++;
+	for(i = 0; i < m; i++) {
+		o[on] = lst[i];
+		o[lst[i]] = on;
+		a[on] = a[i]; b[on] = b[i];
+		op[on++] = '-';
 	}
-	ct = n;
-	rec(0, i - 1);
-	for(j = 0; j < i; j++)
-		if(op[j] == '?')
-			printf("%d\n", ans[j]);
+	rec(0, on - 1);
+	for(i = 0; i < on; i++)
+		if(!op[i])
+			puts(ans[i] == 1? "Connected" : "Disconnected");
 }

@@ -6,7 +6,7 @@ typedef unsigned long long ull;
 typedef long long ll;
 typedef pair<int, int> pii;
 #define pb push_back
-const ll modn = 1000000007;
+const ll modn = 1000000009;
 inline ll mod(ll x) { return x % modn; }
 #ifdef ONLINE_JUDGE
 #	define LLD "%I64d"
@@ -31,12 +31,21 @@ ll fexp(ll x, ll p) {
 	return r;
 }
 int g[N];
+int mh[N], ph[N];
+deque<int> pt[N];
 
 inline int anc(int u, int d) {
-	//printf("anc(%d, %d)\n", u, d);
+	if(d == 0) return u;
+	u = lc[u][g[d]];
+	d -= (1 << g[d]);
+	int p = nv[u] - nv[ph[u]] + (pt[ph[u]].size() / 2);
+	return pt[ph[u]][p - d];
+}
+
+inline int anc2(int u, int d) {
 	while(d) {
 		u = lc[u][g[d]];
-		d ^= (1 << g[d]);
+		d -= (1 << g[d]);
 	}
 	return u;
 }
@@ -51,7 +60,21 @@ int lca(int u, int v) {
 	return lc[u][0];
 }
 
-void dfs(int u, int p, ll hs, ll hr, int nv) {
+
+void dfs2(int u, int p) {
+	ph[u] = p;
+	bool any = false;
+	pt[p].pb(u);
+	for(int v : adj[u])
+		if(!any && mh[v] + 1 == mh[u]) dfs2(v, p), any = true;
+		else dfs2(v, v);
+	if(adj[u].empty()) {
+		int sz = pt[p].size();
+		while(sz--) pt[p].push_front(lc[pt[p][0]][0]);
+	}
+}
+
+int dfs(int u, int p, ll hs, ll hr, int nv) {
 	if(u) adj[u].erase(search_n(adj[u].begin(), adj[u].end(), 1, p));
 	::nv[u] = nv;
 	lc[u][0] = p;
@@ -59,19 +82,18 @@ void dfs(int u, int p, ll hs, ll hr, int nv) {
 		lc[u][i] = lc[lc[u][i - 1]][i - 1];
 	hu[u] = hs = mod(hs * b + c[u]);
 	hd[u] = hr = mod(hr + ll(c[u]) * pot[nv]);
-	//debug("dfs(%d, %d): %lld %lld\n", u, p, hs, hr);
+	mh[u] = 0;
 	for(int v : adj[u])
-		dfs(v, u, hs, hr, nv + 1);
+		mh[u] = max(mh[u], dfs(v, u, hs, hr, nv + 1) + 1);
+	return mh[u];
 }
 
 inline ll get_up(int a, int b) {
-	//printf("get_up(%d, %d)\n", a, b);
 	ll h = mod(hd[a] - hd[b] + modn);
 	return mod(h * inv[nv[b]+1]);
 }
 
 inline ll get_down(int a, int b) {
-	//printf("get_down(%d, %d)\n", a, b);
 	return mod(hu[a] - mod(hu[b] * pot[nv[a] - nv[b]]) + modn);
 }
 
@@ -86,32 +108,50 @@ ll get_hash(int a, int b, int ab, int m) {
 		sz = m - pa;
 		s = get_down(anc(b, pa + pb - m), ab);
 	}
-	//debug("(%d, %d, %d) %lld %lld = %lld\n", a, ab, b, f, s, mod(f * pot[sz] + s));
 	return mod(f * pot[sz] + s);
+}
+
+#define gc getchar
+inline int get() {
+	char c;
+	while(isspace(c = gc()));
+	int v = c - '0';
+	while(isdigit(c = gc())) v = (v << 3) + (v << 1) + (c - '0');
+	return v;
+}
+
+#define pc putchar
+
+inline void out(int x) {
+	int sz = 0, v = 0;
+	while(x) v = (v << 3) + (v << 1) + (x % 10), x /= 10, sz++;
+	while(sz--) pc('0' + (v % 10)), v /= 10;
+	putchar('\n');
 }
 
 int main() {
 	srand(time(NULL));
 	int i, j, n, a, b, c, d, q;
-	scanf("%d", &n);
-	for(i = 1; i <= n; i++) scanf(" %c", &::c[i]);
-	for(i = 1; i <= n; i++)
-		if(i & 1) g[i] = 0;
-		else g[i] = g[i >> 1] + 1;
+	n = get();
+	scanf(" %s", ::c + 1);
+	for(i = 2; i <= n; i++)
+		g[i] = g[i >> 1] + 1;
 	int o = (rand() % n) + 1;
 	adj[0].pb(o); adj[o].pb(0);
 	for(i = 0; i < n - 1; i++) {
-		scanf("%d %d", &a, &b);
+		a = get(); b = get();
 		adj[a].pb(b);
 		adj[b].pb(a);
 	}
 	pot[0] = 1;
 	for(i = 1; i < N; i++) pot[i] = mod(pot[i - 1] * ::b);
-	for(i = 0; i < N; i++) inv[i] = fexp(pot[i], modn - 2);
+	inv[N - 1] = fexp(pot[N - 1], modn - 2);
+	for(i = N - 2; i >= 0; i--) inv[i] = mod(inv[i + 1] * ::b);
 	dfs(0, 0, 0, 0, 0);
-	scanf("%d", &q);
+	dfs2(0, 0);
+	q = get();
 	for(i = 0; i < q; i++) {
-		scanf("%d %d %d %d", &a, &b, &c, &d);
+		a = get(); b = get(); c = get(); d = get();
 		if(::c[a] != ::c[c]) { puts("0"); continue; }
 		int ab = lca(a, b), cd = lca(c, d);
 		int l = 1, r = min(nv[a] + nv[b] - 2*nv[ab] + 1, nv[c] + nv[d] - 2*nv[cd] + 1);
@@ -121,6 +161,7 @@ int main() {
 			if(hab == hcd) l = m;
 			else r = m - 1;
 		}
+		//out(l);
 		printf("%d\n", l);
 	}
 }
