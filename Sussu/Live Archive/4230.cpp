@@ -17,9 +17,9 @@ int n, m;
 
 char M[MAXN][MAXN];
 
-ll sum[MAXN], sum2[MAXN];
+ll sum[MAXN*MAXN];
 
-int d[MAXN][MAXN];
+ll d[MAXN][MAXN];
 
 queue<pii> q;
 
@@ -43,6 +43,7 @@ bool valid(int i, int j){
 
 int main (){
 	while(scanf("%d%d", &n, &m) != EOF && n+m != 0){
+		int yi, yj;
 		for(int a=0;a<n;a++){
 			for(int b=0;b<m;b++){
 				scanf(" %c", &M[a][b]);
@@ -52,6 +53,10 @@ int main (){
 				}
 				else{
 					d[a][b] = INT_MAX - 10;
+					if(M[a][b] == 'Y'){
+						yi = a;
+						yj = b;
+					}
 				}
 			}
 		}
@@ -76,22 +81,22 @@ int main (){
 		}
 		sort(v.begin(), v.end(), cmp);
 		sum[0] = 0;
-		sum2[0] = 0;
 		for(int a=0;a<v.size();a++){
 			if(a != 0){
 				sum[a] = sum[a-1];
-				sum2[a] = sum2[a-1];
 			}
 			sum[a] += dis(v[a]);
-			sum2[a] += dis(v[a])*dis(v[a]);
 		}
-
-		double res = DBL_MAX;
+		double res = (double)d[yi][yj];
 		for(int a=0;a<v.size();a++){
 			while(a != v.size()-1 && dis(v[a+1]) == dis(v[a]))
 				a++;
-			res = min(res, 1.0/(a+1.0) + double(sum[a]*sum[a] - sum2[a])/2.0);
+			if(dis(v[a]) == INT_MAX - 10) 
+				continue;
+			res = min(res, ((double)v.size())/(a+1.0) + double(sum[a])/(double(a+1)));
 		}
-		printf("%.10f\n", res);
+		v.clear();
+
+		printf("%.3f\n", res);
 	}	
 }
