@@ -68,16 +68,16 @@ inline int bb(int i, int j, int v){
 
 int main (){
 	tt = 1;
-	for(int a = 1;a<=1000300;a++){
-		for(int b = 1;ll(b)*ll(a)<=1000300ll;b++){
+	for(int a = 1;a<=1001000;a++){
+		for(int b = a;b*a<=1001000;b++){
 			if(digi(a*b, a, b)){
 				s.pb(a*b);
-				//if(a*b > 1000000)
-				//	printf("%d = %d * %d\n", a*b, a, b);
+				printf("%d = %d * %d\n", a*b, a, b);
 			}
 		}
 	}
-	unique(s.begin(), s.end());
+	printf("cabou\n");
+	printf("%d\n", s.size());
 	sort(s.begin(), s.end());
 	while(scanf("%d", &n) != EOF && n != 0){
 		printf("%d\n", s[bb(0, s.size()-1, n)]);
