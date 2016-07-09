@@ -15,41 +15,26 @@ int n;
 
 vector <int> s;
 
-int mrk[11], tem[11], tt;
+int mrk[11];
 
 bool digi(int r, int a, int b){
-	tt++;
+	for(int i=0;i<10;i++)
+		mrk[i] = 0;
+
 	while(r != 0){
-		if(tem[r%10] != tt){
-			tem[r%10] = tt;
-			mrk[r%10] = 0;
-		}
 		mrk[r%10]++;
 		r /= 10;
 	}
-
 	bool ans = true;
 	while(a != 0){
-		if(tem[a%10] != tt){
-			tem[a%10] = tt;
-			mrk[a%10] = 0;
-		}
 		mrk[a%10]--;
 		a /= 10;
 	}
 	while(b != 0){
-		if(tem[b%10] != tt){
-			tem[b%10] = tt;
-			mrk[b%10] = 0;
-		}
 		mrk[b%10]--;
 		b /= 10;
 	}
 	for(int a=0;a<10;a++){
-		if(tem[a] != tt){
-			mrk[a] = 0;
-			tem[a] = tt;
-		}
 		if(mrk[a] != 0)
 			ans = false;
 	}
@@ -67,17 +52,15 @@ inline int bb(int i, int j, int v){
 }
 
 int main (){
-	tt = 1;
-	for(int a = 1;a<=1001000;a++){
-		for(int b = a;b*a<=1001000;b++){
+	for(int a = 1;a<=1000300;a++){
+		for(int b = 1;ll(b)*ll(a)<=1000300ll;b++){
 			if(digi(a*b, a, b)){
 				s.pb(a*b);
-				printf("%d = %d * %d\n", a*b, a, b);
 			}
 		}
 	}
-	printf("cabou\n");
-	printf("%d\n", s.size());
+	unique(s.begin(), s.end());
+	printf("%lu\n", s.size());
 	sort(s.begin(), s.end());
 	while(scanf("%d", &n) != EOF && n != 0){
 		printf("%d\n", s[bb(0, s.size()-1, n)]);
