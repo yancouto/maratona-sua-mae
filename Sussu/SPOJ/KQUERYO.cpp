@@ -1,59 +1,78 @@
 #include <bits/stdc++.h>
-#define mp make_pair
-#define debug(args...) //fprintf(stderr, args)
-#define pb push_back
-#define ff first
-#define ss second
 using namespace std;
+#define fst first
+#define snd second
+typedef unsigned long long ull;
+typedef long long ll;
+typedef pair<int, int> pii;
+#define pb push_back
+#define for_tests(t, tt) int t; scanf("%d", &t); for(int tt = 1; tt <= t; tt++)
+template<typename T> inline T abs(T t) { return t < 0? -t : t; }
+const ll modn = 1000000007;
+inline ll mod(ll x) { return x % modn; }
 
-const int MAXN = 30010;
+const int MAXN = 31234;
 
-vector<int> seg[4*MAXN];
-int arr[MAXN];
+int n, q;
 
-void build(int l, int r, int node) {
-	if(l == r) {
-		seg[node].pb(arr[l]);
-		return;
+int s[MAXN];
+
+vector <int> v[MAXN*4];
+
+void build(int idx, int i, int j){
+	if(i == j){
+		v[idx].pb(s[i]);
+		return ;
 	}
-	int m = (l + r) / 2;
-	build(l, m, 2*node);
-	build(m + 1, r, 2*node + 1);
-	int idxA = 0, idxB = 0;
-	while(idxA < seg[2*node].size() && idxB < seg[2*node + 1].size())
-		if(seg[2*node][idxA] < seg[2*node + 1][idxB])
-			seg[node].pb(seg[2*node][idxA++]);
+
+	int m = (i+j)/2;
+
+	build(idx*2, i, m);
+	build(idx*2+1, m+1, j);
+
+	int i1, i2;
+	int t1 = v[idx*2].size();
+	int t2 = v[idx*2+1].size();
+	i1 = i2 = 0;
+	while(i1 < t1 && i2 < t2){
+		if(v[idx*2][i1] < v[idx*2+1][i2])
+			v[idx].pb(v[idx*2][i1]), i1++;
 		else
-			seg[node].pb(seg[2*node + 1][idxB++]);
-	while(idxA < seg[2*node].size()) seg[node].pb(seg[2*node][idxA++]);
-	while(idxB < seg[2*node + 1].size()) seg[node].pb(seg[2*node + 1][idxB++]);
-}
-
-int query(int l, int r, int node, int i, int j, int k) {
-	if(i > j) return 0;
-	if(l >= i && r <= j)
-		return seg[node].end() - upper_bound(seg[node].begin(), seg[node].end(), k);
-	if(l > j || r < i)
-		return 0;
-	int m = (l + r) / 2;
-	return query(l, m, 2*node, i, j, k) + query(m + 1, r, 2*node + 1, i, j, k);
-}
-
-int main() {
-	int n, q, ans = 0;
-	scanf("%d", &n);
-	for(int i = 0; i < n; i++) scanf("%d", &arr[i]);
-	build(0, n - 1, 1);
-	scanf("%d", &q);
-	while(q--) {
-		int a, b, c;
-		scanf("%d%d%d", &a, &b, &c);
-		int i = a ^ ans;
-		int j = b ^ ans;
-		int k = c ^ ans;
-		i--, j--;
-		debug("QUERY %d %d %d\n", i, j, k);
-		printf("%d\n", ans = query(0, n - 1, 1, max(i, 0), min(j, n - 1), k));
+			v[idx].pb(v[idx*2+1][i2]), i2++;
 	}
-	return 0;
+	while(i1 < t1)
+		v[idx].pb(v[idx*2][i1]), i1++;
+	while(i2 < t2)
+		v[idx].pb(v[idx*2+1][i2]), i2++;
+}
+
+int qry(int idx, int i, int j, int l, int r, int k){
+	if(l > r) return 0;
+	if(i > r || j < l) return 0;
+	if(i >= l && j <= r){
+		return v[idx].end() - upper_bound(v[idx].begin(), v[idx].end(), k);
+	}
+	int m  = (i+j)/2;
+	return qry(idx*2, i, m, l, r, k) +	qry(idx*2+1, m+1, j, l, r, k);
+}
+
+int main (){
+	scanf("%d", &n);
+	for(int a=1;a<=n;a++){
+		scanf("%d", &s[a]);
+	}
+	build(1, 1, n);
+	scanf("%d", &q);
+	int ans = 0;
+	for(int a=0;a<q;a++){
+		int i, j, k;
+		scanf("%d%d%d", &i, &j, &k);
+		i ^= ans;
+		j ^= ans;
+		k ^= ans;
+		i = max(1, i);
+		j = min(j, n);
+		ans = qry(1, 1, n, i, j, k);
+		printf("%d\n", ans);
+	}
 }
