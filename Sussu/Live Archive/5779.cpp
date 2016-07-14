@@ -11,9 +11,10 @@ template<typename T> inline T abs(T t) { return t < 0? -t : t; }
 const ll modn = 1000000007;
 inline ll mod(ll x) { return x % modn; }
 
+
 int n;
 
-vector <int> s;
+vector <ll> s;
 
 int mrk[11];
 
@@ -49,18 +50,18 @@ inline int bb(int i, int j, int v){
 		else
 			j = m;
 	}
+	return i;
 }
 
 int main (){
 	for(int a = 1;a<=1000300;a++){
-		for(int b = 1;ll(b)*ll(a)<=1000300ll;b++){
+		for(int b = a;ll(b)*ll(a)<=1000300ll;b++){
 			if(digi(a*b, a, b)){
 				s.pb(a*b);
 			}
 		}
 	}
 	unique(s.begin(), s.end());
-	printf("%lu\n", s.size());
 	sort(s.begin(), s.end());
 	while(scanf("%d", &n) != EOF && n != 0){
 		printf("%d\n", s[bb(0, s.size()-1, n)]);
