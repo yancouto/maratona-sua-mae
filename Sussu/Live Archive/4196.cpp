@@ -20,13 +20,19 @@ int deg[MAXN], n;
 queue <int> q;
 
 double para(double a, double b){
-	if(a == 0) return b;
-	if(b == 0) return a;
+	if(a == 0.) return b;
+	if(b == 0.) return a;
 	return 1./(1./a + 1./b);
 }
 
 int main (){
 	while(scanf("%d", &n) != EOF && n != 0){
+		for(int a='A';a<='Z';a++){
+			deg[a] = 0;
+			for(int b='A';b<='Z';b++){
+				adj[a][b] = 0;
+			}
+		}
 		for(int a=0;a<n;a++){
 			char i, j;
 			double r;
@@ -43,8 +49,8 @@ int main (){
 			deg[i]++;
 			deg[j]++;
 		}
-		for(int a=0;a<n;a++){
-			if(deg[a] == 2){
+		for(int a='A';a<='Z';a++){
+			if(deg[a] == 2 && a != 'A' && a != 'Z'){
 				q.push(a);	
 			}
 		}
@@ -60,6 +66,7 @@ int main (){
 						j = a;
 				}
 			}
+			if(i == -1 || j == -1) continue;
 			if(adj[i][j] != 0){
 				deg[i]--;
 				deg[j]--;
@@ -68,21 +75,22 @@ int main (){
 			adj[j][i] = adj[i][j];
 			adj[i][u] = adj[u][j] = 0;
 			adj[u][i] = adj[j][u] = 0;
-			if(deg[i] == 2)
+			if(deg[i] == 2 && i != 'A' && i != 'Z')
 				q.push(i);
-			if(deg[j] == 2)
+			if(deg[j] == 2 && j != 'A' && j != 'Z')
 				q.push(j);
 		}
 		int fodeu = 0;
 		for(int a='A';a<='Z';a++){
 			for(int b='A'+1;b<'Z';b++){
-				if(adj[a][b] != 0.)
+				if(adj[a][b] != 0.){
 					fodeu = 1;
+				}
 			}
 		}
 		if(fodeu)
 			puts("-1.000");
 		else
-			printf("%.10f\n", adj['A']['Z']);
+			printf("%.3f\n", adj['A']['Z']);
 	}
 }
