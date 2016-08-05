@@ -20,7 +20,7 @@ int s[MAXN];
 map <int, int> ind;
 
 void printb(int a){
-	int cnt = 12;
+	int cnt = 10;
 	while(cnt != -1){
 		if(a & (1<<cnt))
 			printf("1");
@@ -33,23 +33,20 @@ void printb(int a){
 
 bool test(int bm){
 	ind.clear();
+	int fode = 0;
 	for(int a=0;a<n;a++){
-		/*if(a == n-1){
-				printf("test: ");
+		if(__builtin_popcount(bm) == 4){
 			printb(bm);
-			printf("com   ");
+			printf("&&&&&&&&& %d\n", a);
 			printb(s[a]);
-			printf("dando ");
-			printb(s[a]&bm);
-			printf("\n");
-		}*/
-		if(ind[s[a]&bm] == 1)
-			return false;
-		ind[s[a]&bm] = 1;
+			printf("===========\n");
+			printb((s[a]&bm));
+		}
+		ind[(s[a]&bm)]++;
+		if(ind[(s[a]&bm)] > 1)
+			fode = 1;
 	}
-	printf("deu com ");
-	printb(bm);
-	return true;
+	return !fode;
 }
 
 
@@ -61,18 +58,21 @@ int main (){
 				char i;
 				scanf(" %c", &i);
 				int ii = i - '0';
-				s[a] += ii*(1<<b);
+				s[a] += ii*(1<<(m-1-b));
 			}
 		}
+		
 		int res = INT_MAX;
-		for(int a=0;a<=(1<<(m+1));a++){
-			if(__builtin_popcount(a) > 5) continue;
-			if(test(a)){
+		for(int a=0;a<(1<<m);a++){
+			if(__builtin_popcount(a) == 4){
+				printf("testa com ");
 				printb(a);
-				printf("deu com a %d - %d\n", __builtin_popcount(a), (a >= (1<<m)));
+			}
+			if(test(a)){
 				res = min(res, __builtin_popcount(a));
 			}
 		}
 		printf("%d\n", res);
+		
 	}
 }

@@ -50,34 +50,41 @@ arv junta(arv a, arv b){
 	return ans;
 }
 
+void printt(arv a){
+//	printf("arv > %d %d %d %d\n", a.ne, a.nc, a.lze, a.lzc);
+}
+
 void upd(int idx, int i, int j, int l, int r, int v1, int v2){
+
 	if(l > r) return;
-	if(l > j || r < i) return;
+	if(i > r || j < l) return;
+//	printf("upd %d %d %d %d %d %d %d\n", idx, i, j, l, r, v1, v2);
 	if(tree[idx].lze != 0 || tree[idx].lzc != 0){
 		int a1 = tree[idx].lze;
 		int a2 = tree[idx].lzc;
 		tree[idx].lze = 0;
 		tree[idx].lzc = 0;
 		if( i != j ){
-			int l = idx*2;
-			int r = idx*2+1;
-			tree[l].lze += a1;
-			tree[l].ne += a1;
-			tree[l].lzc += a2;
-			tree[l].nc += a2;
+			int le = idx*2;
+			int ri = idx*2+1;
+			tree[le].lze += a1;
+			tree[le].ne += a1;
+			tree[le].lzc += a2;
+			tree[le].nc += a2;
 
-			tree[r].lze += a1;
-			tree[r].ne += a1;
-			tree[r].lzc += a2;
-			tree[r].nc += a2;
+			tree[ri].lze += a1;
+			tree[ri].ne += a1;
+			tree[ri].lzc += a2;
+			tree[ri].nc += a2;
 		}
-		return ;
 	}
 	if(i >= l && j <= r){
+//		printf("upd %d - %d bota %d %d\n",i, j, v1, v2);
 		tree[idx].lze += v1;
 		tree[idx].ne += v1;
 		tree[idx].lzc += v2;
 		tree[idx].nc += v2;
+		printt(tree[idx]);
 		return ;
 	}
 
@@ -89,15 +96,19 @@ void upd(int idx, int i, int j, int l, int r, int v1, int v2){
 void join(int i, int j){
 	i = raiz(i);
 	j = raiz(j);
+//	printf("do join %d %d\n", i, j);
 	if(i == j)
 		return ;
 	if(sz[i] > sz[j])
 		swap(i, j);
 	p[i] = j;
+//	printf("tira 1 e %d de %d %d\n", sz[i], es[i].mn, es[i].mx-1);
 	upd(1, 0, DEZ, es[i].mn, es[i].mx-1, -1, -sz[i]);
+//	printf("tira 1 e %d de %d %d\n", sz[j], es[j].mn, es[j].mx-1);
 	upd(1, 0, DEZ, es[j].mn, es[j].mx-1, -1, -sz[j]);
 	sz[j] += sz[i];
 	es[j] = junta(es[i], es[j]);
+//	printf("bota 1 e %d de %d %d\n", sz[j], es[j].mn, es[j].mx-1);
 	upd(1, 0, DEZ, es[j].mn, es[j].mx-1, 1, sz[j]);
 }
 
@@ -109,17 +120,17 @@ void qry(int idx, int i, int j, int l){
 		tree[idx].lze = 0;
 		tree[idx].lzc = 0;
 		if( i != j ){
-			int l = idx*2;
-			int r = idx*2+1;
-			tree[l].lze += a1;
-			tree[l].ne += a1;
-			tree[l].lzc += a2;
-			tree[l].nc += a2;
+			int le = idx*2;
+			int ri = idx*2+1;
+			tree[le].lze += a1;
+			tree[le].ne += a1;
+			tree[le].lzc += a2;
+			tree[le].nc += a2;
 
-			tree[r].lze += a1;
-			tree[r].ne += a1;
-			tree[r].lzc += a2;
-			tree[r].nc += a2;
+			tree[ri].lze += a1;
+			tree[ri].ne += a1;
+			tree[ri].lzc += a2;
+			tree[ri].nc += a2;
 		}
 	}
 	if(i == j && i == l){
@@ -140,6 +151,8 @@ void build(int idx, int i, int j){
 	build(idx*2+1, m+1, j);
 }
 
+char com[10];
+
 int main (){
 	for_tests(t, tt){
 		build(1, 0, DEZ);
@@ -154,21 +167,18 @@ int main (){
 		int m;
 		scanf("%d", &m);
 		for(int a=0;a<m;a++){
-			char com[10];
 			scanf(" %s", com);
 			if(com[0] == 'r'){
 				int i, j;
 				scanf("%d %d", &i, &j);
-				printf("road com %d %d\n", i, j);
+//				printf("road com %d %d\n", i, j);
 				join(i, j);
 			}
 			else{
 				int i, j;
-				printf("detecta line\n");
 				scanf("%d.%d", &i, &j);
-				printf("line com %d.5\n", i);
+//				printf("line %d.5\n", i);
 				qry(1, 0, DEZ, i);
-				printf("passei do qry\n");
 			}
 		}
 	}
